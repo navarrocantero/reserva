@@ -1,4 +1,5 @@
-@extends('layout.app')
+
+@extends('layout.oldapp')
 
 @section('content')
 
@@ -22,7 +23,9 @@
             </div>
             <div class="col-1 bg-danger"></div>
         </div>
+
     @endforeach
+
     {{$houses->links()}}
 @endsection
 

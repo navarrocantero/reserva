@@ -9,8 +9,8 @@ class PagesController extends Controller
 {
     protected function index()
     {
-//        $houses = House::all();
-                $houses = House::orderBy('created_at', 'desc')->paginate(10);
+
+        $houses = House::orderBy('created_at', 'desc')->paginate(10);
 
         return view('home', [
                 "houses" => $houses

@@ -13,6 +13,11 @@
 
 // Send data to PagesController, index Function
 Route::get('/', "PagesController@index" );
+Route::get('/home', "PagesController@index" );
 
 Route::get('/auth', "PagesController@auth");
+
+
+Auth::routes();
+
 

@@ -1,8 +1,8 @@
-@extends('layout.app')
+@extends('layout.oldapp')
 
 @section('content')
     <div class="mt-auto mb-auto">
-        <div class="col-sm-6 col-md-4 col-md-offset-4  ml-auto mr-auto mt-5">
+        <div class="col-sm-6 col-md-4 col-md-offset-4  ml-auto mr-auto mt-5 mb-5">
             <h1 class="text-center login-title"></h1>
             <div class="account-wall">
                 <img class="profile-img"
@@ -14,13 +14,9 @@
                     <button class="btn btn-lg btn-primary btn-block" type="submit">
                         Sign in
                     </button>
-                    <label class="checkbox mt-1">
-                        <input type="checkbox" value="remember-me">
-                        Remember me
-                    </label>
                 </form>
             </div>
-            <a href="#" class="text-center new-account">Create an account </a>
+            <a href="{{ route('register') }}" class="text-center new-account">Create an account </a>
         </div>
     </div>
 @endsection
