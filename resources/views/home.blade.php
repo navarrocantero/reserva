@@ -13,11 +13,11 @@
                 </div>
                 <div class="col-4 offset-2 mt-2">
                     <p id="list-item-name">{{$house->name}}</p>
-                    <p id="list-item-name-direction"> Navaluenga , Navaluenga (Ávila)</p>
-                    <p id="list-item-name-location">Ver en mapa</p>
+                    <p id="list-item-name-direction">{{$house->direction}}</p>
+                    <p id="list-item-name-location">{{$house->location}}</p>
                 </div>
                 <div class="col-4   mt-2">
-                    <p id="list-item-name-price">22€</p>
+                    <p id="list-item-name-price">{{$house->price_user_night}}</p>
                     <p>pers/noche</p>
                 </div>
             </div>

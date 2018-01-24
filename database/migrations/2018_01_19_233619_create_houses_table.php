@@ -16,11 +16,17 @@ class CreateHousesTable extends Migration
         Schema::create('houses', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-//            $table->text('location');
-//            $table->string('direction');
-            $table->string('image');
+            $table->text('location');
+            $table->string('direction');
+            $table->string('images');
             $table->string('name');
-//            $table->string('price');
+            $table->double('price_user_night');
+            $table->string('users_comments');
+            $table->double('rating');
+            $table->integer('max_users_house');
+            $table->text('features');
+            $table->text('activities');
+            $table->text('description');
         });
     }
 

@@ -39,8 +39,11 @@
     <div class="flex-center position-ref full-height">
         <div class="navBar">
             <div class="row navbar">
-                <div class="col-2  navbar-left">
+                <div class="col-1  navbar-left">
                     <a href="{{url('/')}}"><h5>Reserving</h5></a>
+                </div>
+                <div class="col-1  navbar-left">
+                    <a href="{{url('/add')}}"><h5>Añadir</h5></a>
                 </div>
                 <div class="col-7  offset-1  navbar-default">
                     <div class="row">
