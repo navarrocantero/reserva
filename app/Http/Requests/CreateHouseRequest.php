@@ -44,6 +44,22 @@ class CreateHouseRequest extends FormRequest
                 'required',
                 'numeric',
             ],
+            'images' => [
+                'required'
+            ],
+            'max_users_house' => [
+                'numeric',
+                'required'
+            ],
+            'features' => [
+                'required',
+            ],
+            'activities' => [
+                'required',
+            ],
+            'description' => [
+                'required'
+            ]
         ];
     }
 
@@ -53,12 +69,14 @@ class CreateHouseRequest extends FormRequest
         error pongase en contacto con nosotros";
         $EMPTY_FIELD = "El campo no puede estar vacio";
         $FIELD_LENGHT_5 = "La logitud minima es 3";
-
+        $ALPHA = "Solo caracteres alfabeticos";
+        $NUMERIC = "Solo caracteres numericos";
+        $REQUIRED = "El campo es requerido";
 
         return [
-            'name.required' => 'El nombre es obligatorio',
+            'name.required' => $REQUIRED,
             'name.min' => 'La longitud minima es 3',
-            'name.alpha' => 'Solo caracteres alfabeticos',
+            'name.alpha' => $ALPHA,
 
             'location.unique' => $REPEATED_FIELD_CONTACT_US,
             'location.min' => $FIELD_LENGHT_5,
@@ -68,9 +86,17 @@ class CreateHouseRequest extends FormRequest
             'direction.min' => $FIELD_LENGHT_5,
             'direction.required' => $EMPTY_FIELD,
 
-            'price_user_night.required'=>$EMPTY_FIELD,
-            'price_user_night.numeric'=> 'Solo caracteres numericos',
+            'price_user_night.required' => $EMPTY_FIELD,
+            'price_user_night.numeric' => $NUMERIC,
 
+            'images.required' => $EMPTY_FIELD,
+
+            'max_users_house.required' => $REQUIRED,
+            'max_users_house.numeric' => $NUMERIC,
+
+            'features.required' => $REQUIRED,
+            'activities.required' => $REQUIRED,
+            'description.required' => $REQUIRED
         ];
     }
 
