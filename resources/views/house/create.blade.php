@@ -82,7 +82,7 @@
             @endif
 
 
-            <div class="form-group @if($errors->has('features'))has-error @endif">
+            <div class="form-group @if($errors->has('images'))has-error @endif">
                 <label for="location">Caracteristicas</label>
                 <input type="text" class="form-control" id="features" name="features">
             </div> @if($errors->has('features'))
