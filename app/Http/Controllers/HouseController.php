@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\House;
+use App\Http\Requests\CreateHouseRequest;
 use Illuminate\Http\Request;
 
 class HouseController extends Controller
@@ -24,7 +25,7 @@ class HouseController extends Controller
      */
     public function create()
     {
-        return view('houses.create');
+        return view('house.create');
     }
 
     /**
@@ -33,16 +34,16 @@ class HouseController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateHouseRequest $request)
     {
         House::create([
             'name' => $request->input('name'),
             'location' => $request->input('location'),
             'direction' => $request->input('direction'),
             'price_user_night' => $request->input('price_user_night'),
-            'users_comments'=> "comments",
+            'users_comments' => "comments",
             'rating' => 2.3,
-            'max_users_house'=> 2,
+            'max_users_house' => 2,
             'features' => "features",
             'activities' => "activities",
             'description' => "description",
@@ -53,52 +54,52 @@ class HouseController extends Controller
     }
 
 
-/**
- * Display the specified resource.
- *
- * @param  \App\House $house
- * @return \Illuminate\Http\Response
- */
-public
-function show(House $house)
-{
-    //
-}
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\House $house
+     * @return \Illuminate\Http\Response
+     */
+    public
+    function show(House $house)
+    {
+        //
+    }
 
-/**
- * Show the form for editing the specified resource.
- *
- * @param  \App\House $house
- * @return \Illuminate\Http\Response
- */
-public
-function edit(House $house)
-{
-    //
-}
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\House $house
+     * @return \Illuminate\Http\Response
+     */
+    public
+    function edit(House $house)
+    {
+        //
+    }
 
-/**
- * Update the specified resource in storage.
- *
- * @param  \Illuminate\Http\Request $request
- * @param  \App\House $house
- * @return \Illuminate\Http\Response
- */
-public
-function update(Request $request, House $house)
-{
-    //
-}
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\House $house
+     * @return \Illuminate\Http\Response
+     */
+    public
+    function update(Request $request, House $house)
+    {
+        //
+    }
 
-/**
- * Remove the specified resource from storage.
- *
- * @param  \App\House $house
- * @return \Illuminate\Http\Response
- */
-public
-function destroy(House $house)
-{
-    //
-}
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\House $house
+     * @return \Illuminate\Http\Response
+     */
+    public
+    function destroy(House $house)
+    {
+        //
+    }
 }

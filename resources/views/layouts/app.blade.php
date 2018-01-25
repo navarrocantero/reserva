@@ -16,7 +16,8 @@
             integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
             crossorigin="anonymous"></script>
 
-    <script src="js/reserva.js" defer></script>
+    <script src="{{ asset('js/reserva.js') }}"></script>
+    <script src="{{ asset('js/validate.js') }}" defer></script>
 
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -26,7 +27,7 @@
           integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
           crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/reserva.css">
+    <link rel="stylesheet" href="{{asset('css/reserva.css')}}">
 
 
     <!-- CSRF Token -->

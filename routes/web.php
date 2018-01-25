@@ -15,10 +15,17 @@
 Route::get('/', "PagesController@index");
 Route::get('/home', "PagesController@index");
 
-Route::get('/auth', "PagesController@auth");
 
+// Create and insert new HOUSE routes
 Route::get('/add', "HouseController@create");
 Route::post('/add', "HouseController@store");
+
+
+// Asynchronus Validation Routes
+Route::match(['get', 'post'],'/register/validar', 'Auth\RegisterController@validar');
+
 Auth::routes();
 
 
+
+//Route::get('/auth', "PagesController@auth");

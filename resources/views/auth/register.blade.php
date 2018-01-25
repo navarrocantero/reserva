@@ -10,7 +10,7 @@
                     <form role="form" method="POST" action="{{ url('/register') }}">
                         {!! csrf_field() !!}
 
-                        <div class="form-group row">
+                        <div class="form-group row {{ $errors->has('name') ? ' has-error' : '' }}">
                             <label class="col-lg-4 col-form-label text-lg-right">Name</label>
 
                             <div class="col-lg-6">
@@ -18,14 +18,16 @@
                                         type="text"
                                         class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
                                         name="name"
+                                        onchange="validarNombre()"
                                         value="{{ old('name') }}"
-                                        required
-                                >
+                                        required>
+                                <div class="error bg-danger">
                                 @if ($errors->has('name'))
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </div>
                                 @endif
+                            </div>
                             </div>
                         </div>
 

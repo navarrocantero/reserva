@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -42,7 +43,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -57,7 +58,7 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \App\User
      */
     protected function create(array $data)
@@ -67,5 +68,47 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    protected function validar(Request $request)
+    {
+        $data = $request->all();
+        $errores = array();
+        $errores["name"] = array();
+        $errores["email"] = array();
+        $errores["name"] = $this->validarNombre(trim($data["name"]));
+
+
+        echo json_encode($errores);
+
+
+    }
+
+    private function validarNombre($nombre)
+    {
+        $errores = array();
+
+        print_r($nombre);
+        if ($nombre !== "") {
+
+            if (strlen($nombre) < 4) {
+                $errores[] = "El nombre debe tener al menos 4 caracteres";
+            }
+            if (!preg_match("/^[A-Za-z]*$/", $nombre)) {
+                $errores[] = "EL nombre sólo puede contener letras";
+            }
+        } else {
+            $errores[] = "EL nombre esta no puede estar vacío";
+        }
+        return $errores;
+    }
+
+    function validarEmail($email)
+    {
+        $errores = array();
+        if (strlen($email) < 6) {
+            $errores[] = "El email debe ser mayo a 6 caracteres";
+        }
+        return $errores;
     }
 }
