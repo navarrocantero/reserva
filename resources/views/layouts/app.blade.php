@@ -22,6 +22,10 @@
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
           integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
@@ -89,7 +93,6 @@
                                             <label for="email" class="  col-form-label text-lg-right">E-Mail </label>
 
 
-
                                             <input id="email" type="email"
                                                    class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
                                                    name="email"
@@ -106,12 +109,14 @@
 
                                         </div>
                                         <div class="form-group row">
-                                            <label for="password" class="  col-form-label text-lg-right">Password</label>
+                                            <label for="password"
+                                                   class="  col-form-label text-lg-right">Password</label>
                                             <input
                                                     id="password"
                                                     type="password"
                                                     class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
                                                     name="password"
+                                                    placeholder="Password"
                                                     required
                                             >
 
@@ -121,14 +126,19 @@
                                                 </div>
                                             @endif
                                         </div>
-
-                                        <button class="btn btn-lg btn-primary btn-block mb-2" type="submit">
-                                            Sign in</button>
-                                        <a href="#" class="pull-right need-help text-dark links-login">Need help? </a><span class="clearfix"></span>
+                                        <div class="form-group row">
+                                            <button class="btn btn-md btn-primary btn-block mb-2" type="submit">
+                                                Login
+                                            </button>
+                                        </div>
+                                        <a href="#"
+                                           class="pull-right need-help text-dark links-login mt-2">Ayuda</a><span
+                                                class="clearfix"></span>
 
                                     </form>
 
-                                    <a href="{{ route('register') }}" class="text-center new-account links-login text-dark">Create an account </a>
+                                    <a href="{{ route('register') }}"
+                                       class="text-center new-account links-login text-dark">Nuevo usuario </a>
                                 </div>
                             </div>
                         @else

@@ -88,7 +88,6 @@ class RegisterController extends Controller
     {
         $errores = array();
 
-        print_r($nombre);
         if ($nombre !== "") {
 
             if (strlen($nombre) < 4) {
