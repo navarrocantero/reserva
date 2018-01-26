@@ -78,7 +78,7 @@ class CreateHouseRequest extends FormRequest
 
             'location.min' => $FIELD_LENGHT_5,
             'location.required' => $EMPTY_FIELD,
- 
+
             'direction.min' => $FIELD_LENGHT_5,
             'direction.required' => $EMPTY_FIELD,
 
