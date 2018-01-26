@@ -33,12 +33,10 @@ class CreateHouseRequest extends FormRequest
             'location' => [
                 'required',
                 'min:5',
-                'unique'
             ],
             'direction' => [
                 'required',
                 'min:5',
-                'unique'
             ],
             'price_user_night' => [
                 'required',
@@ -68,7 +66,7 @@ class CreateHouseRequest extends FormRequest
         $REPEATED_FIELD_CONTACT_US = "El campo introducido es incorrecto, si cree que puede tratarse de un
         error pongase en contacto con nosotros";
         $EMPTY_FIELD = "El campo no puede estar vacio";
-        $FIELD_LENGHT_5 = "La logitud minima es 3";
+        $FIELD_LENGHT_5 = "La logitud minima es 5";
         $ALPHA = "Solo caracteres alfabeticos";
         $NUMERIC = "Solo caracteres numericos";
         $REQUIRED = "El campo es requerido";
@@ -78,11 +76,9 @@ class CreateHouseRequest extends FormRequest
             'name.min' => 'La longitud minima es 3',
             'name.alpha' => $ALPHA,
 
-            'location.unique' => $REPEATED_FIELD_CONTACT_US,
             'location.min' => $FIELD_LENGHT_5,
             'location.required' => $EMPTY_FIELD,
-
-            'direction.unique' => $REPEATED_FIELD_CONTACT_US,
+ 
             'direction.min' => $FIELD_LENGHT_5,
             'direction.required' => $EMPTY_FIELD,
 
