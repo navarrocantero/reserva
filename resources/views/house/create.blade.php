@@ -6,7 +6,7 @@
         {{ csrf_field() }}
         <div class="d-inline-flex bg-dark col-12">
 
-            <div class="col-5 offset-1 mt-4 bg-light">
+            <div class="col-5 offset-1 mt-4 bg-light h-100">
 
                 <div class="form-group @if($errors->has('name'))has-error @endif">
                     <label for="name">Nombre</label>
@@ -44,40 +44,6 @@
                     @endforeach
                 @endif
 
-
-                <div class="form-group @if($errors->has('price_user_night'))has-error @endif">
-                    <label for="price_user_night">Precio Persona/Noche</label>
-                    <div class="col-8 row">
-                        <input type="number" class="form-control col-4" id="price_user_night" name="price_user_night"
-                               value="{{old('price_user_night')}}">
-                        <p class="col-1">€</p>
-                    </div>
-                </div>@if($errors->has('price_user_night'))
-                    @foreach($errors->get('price_user_night') as $message)
-                        <div class="alert alert-danger" role="alert">
-                            {{ $message }}
-                        </div>
-                    @endforeach
-                @endif
-
-
-                <div class="form-group @if($errors->has('max_users_house'))has-error @endif">
-                    <label for="max_users_house">Numero maximo de personas</label>
-                    <div class="col-8 row">
-                        <input type="number" class="form-control col-4" id="max_users_house" name="max_users_house"
-                               value="{{old('max_users_house')}}">
-                    </div>
-                </div>@if($errors->has('max_users_house'))
-                    @foreach($errors->get('max_users_house') as $message)
-                        <div class="alert alert-danger" role="alert">
-                            {{ $message }}
-                        </div>
-                    @endforeach
-                @endif
-
-            </div>
-            <div class="col-5 offset-1 mt-4 bg-light">
-
                 <div class="form-group @if($errors->has('images'))has-error @endif">
                     <label for="images">Imagenes</label>
                     <input type="text" class="form-control" id="images" name="images"
@@ -90,11 +56,47 @@
                     @endforeach
                 @endif
 
+                <div class="col-12 d-inline-flex">
+                    <div class="col-6">
+                    <div class="form-group   @if($errors->has('price_user_night'))has-error @endif">
+                        <label for="price_user_night">Precio Persona/Noche
+                        </label>
+                        <input type="number" class="form-control " id="price_user_night"
+                               name="price_user_night"
+                               value="{{old('price_user_night')}}">
+                    </div>
+                    @if($errors->has('price_user_night'))
+                        @foreach($errors->get('price_user_night') as $message)
+                            <div class="alert alert-danger" role="alert">
+                                {{ $message }}
+                            </div>
+                        @endforeach
+                    @endif
+                    </div>
+                    <div class="col-6">
+                    <div class="form-group  @if($errors->has('max_users_house'))has-error @endif">
+                        <label for="max_users_house">Capacidad maxima</label>
+                        <input type="number" class="form-control" id="max_users_house" name="max_users_house"
+                               value="{{old('max_users_house')}}">
+                    </div>@if($errors->has('max_users_house'))
+                        @foreach($errors->get('max_users_house') as $message)
+                            <div class="alert alert-danger" role="alert">
+                                {{ $message }}
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+                </div>
+            </div>
 
-                <div class="form-group @if($errors->has('images'))has-error @endif">
+            <div class="col-5 offset-1 mt-4 bg-light h-100">
+
+
+                <div class="form-group @if($errors->has('features'))has-error @endif">
                     <label for="features">Caracteristicas</label>
-                    <input type="text" class="form-control" id="features" name="features"
-                           value="{{old('features')}}">
+                    <textarea type="text" class="form-control area" id="features" name="features"
+                    >{{old('features')}}</textarea>
+
                 </div> @if($errors->has('features'))
                     @foreach($errors->get('features') as $message)
                         <div class="alert alert-danger" role="alert">
@@ -105,8 +107,8 @@
 
                 <div class="form-group @if($errors->has('activities'))has-error @endif">
                     <label for="activities">Actividades</label>
-                    <input type="text" class="form-control" id="activities" name="activities"
-                           value="{{old('activities')}}">
+                    <textarea type="text" class="form-control" id="activities" name="activities"
+                    >{{old('activities')}} </textarea>
                 </div> @if($errors->has('activities'))
                     @foreach($errors->get('activities') as $message)
                         <div class="alert alert-danger" role="alert">
@@ -117,8 +119,8 @@
 
                 <div class="form-group @if($errors->has('description'))has-error @endif">
                     <label for="description">Descripcion</label>
-                    <input type="text" class="form-control" id="description" name="description"
-                           value="{{old('description')}}">
+                    <textarea type="text" class="form-control" id="description" name="description"
+                    >{{old('description')}} </textarea>
                 </div> @if($errors->has('description'))
                     @foreach($errors->get('description') as $message)
                         <div class="alert alert-danger" role="alert">
@@ -126,11 +128,12 @@
                         </div>
                     @endforeach
                 @endif
-            </div>
-        </div>
 
-        <div class="col-5">
-            <button type="submit" class="btn btn-primary">Añadir</button>
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary mt-5 ">Añadir</button>
+                </div>
+            </div>
+
         </div>
     </form>
 @endsection

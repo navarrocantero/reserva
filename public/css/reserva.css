@@ -2,6 +2,7 @@
 
 body {
     background-color: gray;
+
 }
 
 a, a:hover, a:visited {
@@ -17,6 +18,8 @@ list-item-img {
     -webkit-border-radius: 50%;
     border-radius: 50%;
 }
+
+
 
 /* GOOGLE LOGIN CSS*/
 
