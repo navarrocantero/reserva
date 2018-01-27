@@ -11,14 +11,14 @@ $factory->define(App\House::class, function (Faker $faker) {
     return [
         'location' => $faker->city,
         'direction' => $faker->streetAddress,
-        'images' => 'http://lorempixel.com/150/150/' . mt_rand(0, 1000),
+        'images' => 'http://lorempixel.com/200/200/' . mt_rand(0, 1000),
         'name' => $faker->streetName,
         'price_user_night' => doubleval( rand(10, 100)),
         'users_comments' => $faker->realText(200),
         'rating' => doubleval( rand(0, 10)),
         'max_users_house' => rand(1, 9),
         'features' => $faker->realText(200),
-        'activities' => $faker->realText(200),
+        'activities' => $faker->realText(500),
         'description' => $faker->realText(200),
         'created_at' => Carbon::createFromTimestamp($date->getTimestamp()),
         'updated_at' => Carbon::createFromTimestamp($faker->dateTimeBetween($date, now())->getTimestamp())
