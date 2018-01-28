@@ -1,4 +1,5 @@
 <?php
+use Faker\Generator as Faker;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,6 +11,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 // Send data to PagesController, index Function
 Route::get('/', "PagesController@index");

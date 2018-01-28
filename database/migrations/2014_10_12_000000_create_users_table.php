@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Support\Facades\Schema;
@@ -17,8 +16,26 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('lastname');
+            $table->string('username')->unique();
             $table->string('email')->unique();
+            $table->string('telephone')->unique()->nullable();
+            $table->string('website')->nullable();
+            $table->string('about')->nullable();
+            $table->string('avatar')->nullable();
+            $table->enum('sex', [
+                'male',
+                'female',
+                'other'
+            ]);
+            $table->string('city')->nullable();
+            $table->string('zip_code')->nullable();
             $table->string('password');
+            $table->enum('status', [
+                'active',
+                'inactive',
+                'other'
+            ]);
             $table->rememberToken();
             $table->timestamps();
         });

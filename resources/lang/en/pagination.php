@@ -15,5 +15,6 @@ return [
 
     'previous' => '&laquo; Previous',
     'next' => 'Next &raquo;',
+    'phone' => 'The :attribute field contains an invalid number.',
 
 ];

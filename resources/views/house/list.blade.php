@@ -44,6 +44,7 @@
     </div>
 
 @endforelse
-<div class="text-center">
-
+<div class="text-center justify-content-end">
+        <div class="col-1 offset-6">
+    {{$houses->links()}}</div>
 </div>
