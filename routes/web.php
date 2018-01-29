@@ -1,4 +1,5 @@
 <?php
+
 use Faker\Generator as Faker;
 
 /*
@@ -19,14 +20,22 @@ Route::get('/home', "PagesController@index");
 
 
 // Create and insert new HOUSE routes
-Route::get('/add', "HouseController@create");
-Route::post('/add', "HouseController@store");
+Route::get('/add', "HouseController@create")->middleware('auth');
+Route::post('/add', "HouseController@store")->middleware('auth');
 
 
 // Asynchronus Validation Routes
-Route::match(['get', 'post'],'/register/validar', 'Auth\RegisterController@validar');
+Route::match(['get', 'post'], '/register/validar', 'Auth\RegisterController@validar');
 
+// Auth Routes
+
+//Route::get('/register',"UserController@create");
+//Route::post('/register',"UserController@store");
 Auth::routes();
+
+
+Route::get('/user/{username}', 'UserController@showPublic');
+Route::get('/profile', 'UserController@showPrivate')->middleware('auth');
 
 
 

@@ -9,7 +9,7 @@ $factory->define(App\House::class, function (Faker $faker) {
 
 
     return [
-        'location' => $faker->city,
+        'location' => ($faker->city. $faker->citySuffix),
         'direction' => $faker->streetAddress,
         'images' => 'http://lorempixel.com/200/200/' . mt_rand(0, 1000),
         'name' => $faker->streetName,

@@ -36,7 +36,10 @@ class HouseController extends Controller
      */
     public function store(CreateHouseRequest $request)
     {
+        $user = $request->user();
+
         House::create([
+            'user_id'=> $user->id,
             'name' => $request->input('name'),
             'location' => $request->input('location'),
             'direction' => $request->input('direction'),

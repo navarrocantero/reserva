@@ -11,29 +11,72 @@
                     <form role="form" method="POST" action="{{ url('/register') }}">
                         {!! csrf_field() !!}
 
-                        <div class="form-group row {{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label class="col-lg-4 col-form-label text-lg-right">Name</label>
+                        <div class="col-12 d-inline-flex">
+                            <div class="col-6 form-group row {{ $errors->has('name') ? ' has-error' : '' }}">
+                                <label class="col-lg-4 col-form-label text-lg-right">Nombre</label>
 
-                            <div class="col-lg-6">
-                                <input
-                                        type="text"
-                                        class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
-                                        name="name"
-                                        onchange="validarNombre()"
-                                        value="{{ old('name') }}"
-                                        required>
-                                <div class="error bg-danger">
-                                @if ($errors->has('name'))
-                                    <div class="invalid-feedback help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                <div class="col-lg-6">
+                                    <input
+                                            type="text"
+                                            class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                            name="name"
+                                            onchange="validarNombre()"
+                                            value="{{ old('name') }}"
+                                            required>
+                                    <div class="error bg-danger">
+                                        @if ($errors->has('name'))
+                                            <div class="invalid-feedback help-block">
+                                                <strong>{{ $errors->first('name') }}</strong>
+                                            </div>
+                                        @endif
                                     </div>
-                                @endif
+                                </div>
+
                             </div>
+                            <div class="col-6 form-group row {{ $errors->has('name') ? ' has-error' : '' }}">
+                                <label class="col-lg-4 col-form-label text-lg-right">Apellido/s</label>
+
+                                <div class="col-lg-6">
+                                    <input
+                                            type="text"
+                                            class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}"
+                                            name="lastname"
+                                            value="{{ old('lastname') }}"
+                                            required>
+                                    <div class="error bg-danger">
+                                        @if ($errors->has('lastname'))
+                                            <div class="invalid-feedback help-block">
+                                                <strong>{{ $errors->first('lastname') }}</strong>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">E-Mail Address</label>
+                            <label class="col-lg-4 col-form-label text-lg-right">Nick</label>
+
+                            <div class="col-lg-6">
+                                <input
+                                        type="text"
+                                        class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}"
+                                        name="username"
+                                        value="{{ old('username') }}"
+                                        required
+                                >
+
+                                @if ($errors->has('username'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('username') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">Correo Electronico</label>
 
                             <div class="col-lg-6">
                                 <input
@@ -53,7 +96,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Password</label>
+                            <label class="col-lg-4 col-form-label text-lg-right">Contraseña</label>
 
                             <div class="col-lg-6">
                                 <input
@@ -71,7 +114,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Confirm Password</label>
+                            <label class="col-lg-4 col-form-label text-lg-right">Confirmar Contraseña</label>
 
                             <div class="col-lg-6">
                                 <input
@@ -100,5 +143,5 @@
             </div>
         </div>
 
-</div>
+    </div>
 @endsection
