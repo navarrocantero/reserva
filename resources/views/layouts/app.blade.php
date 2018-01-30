@@ -56,7 +56,7 @@
                             @if (Auth::guest())
                                 Unete
                             @else
-                                {{ Auth::user()->name }}
+                                {{ Auth::user()->username }}
 
                             @endif
                         </a></h5>
@@ -172,7 +172,6 @@
         crossorigin="anonymous"></script>
 
 <script src="{{ asset('js/reserva.js') }}"></script>
-<script src="{{ asset('js/validacion.js') }}" defer></script>
 
 </body>
 </html>

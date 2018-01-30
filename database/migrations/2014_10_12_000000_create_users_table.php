@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->engine = 'INNODB';
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('lastname')->nullable();
             $table->string('username')->unique();
             $table->string('email')->unique();

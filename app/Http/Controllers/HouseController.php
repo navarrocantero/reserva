@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\House;
 use App\Http\Requests\CreateHouseRequest;
-use App\Http\Requests\HouseAjaxRequest;
+use App\Http\Requests\CreateHouseAjaxRequest;
 use Illuminate\Http\Request;
 
 class HouseController extends Controller
@@ -57,7 +57,7 @@ class HouseController extends Controller
         return redirect('/');
     }
 
-    protected function validateAjax(HouseAjaxRequest $request)
+    protected function validateAjax(CreateHouseAjaxRequest $request)
     {
         //Obtenermos todos los valores y devolvemos un array vacio
         return array();
