@@ -38,7 +38,7 @@ class UserController extends Controller
     {
 
         Uesr::create([
-            'name'=> $request->input('name'),
+            'name' => $request->input('name'),
         ]);
     }
 
@@ -48,56 +48,32 @@ class UserController extends Controller
      * @param  \App\user $user
      * @return \Illuminate\Http\Response
      */
-    public function show(user $user)
+    public function show(Request $request)
     {
-    }
+        $userLogged = ($request->user());
+        $userNameURL = str_replace("user/", "", $request->path());
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\user $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(user $user)
-    {
-        //
-    }
+        if ($userLogged !== $userNameURL && $userNameURL !== "profile") {
+            return $this->showPublic($userNameURL);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\user $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, user $user)
-    {
-    }
+        } else {
+            return $this->showPrivate($userLogged);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\user $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(user $user)
-    {
-        //
     }
 
 //    Public profile info request for ALL users
 
-    public function showPublic(Request $request)
+    public function showPublic(String $userName)
     {
-        $userName = str_replace("user/", "", $request->path());
+
         $user = (User::where('username', $userName)->first());
 
-        if($user == null){
+        if ($user == null) {
             return view('user.error', [
                 "user" => $user
             ]);
-        }
-        else{
+        } else {
             return view('user.profile', [
                 "user" => $user
             ]);
@@ -107,10 +83,10 @@ class UserController extends Controller
 
 //    Private profile info request only AUTH users
 
-    public function showPrivate(Request $request)
+    public function showPrivate(User $user)
     {
         return view('user.profile', [
-            "user" => $request->user()
+            "user" => $user
         ]);
     }
 }

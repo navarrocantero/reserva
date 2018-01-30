@@ -1,7 +1,4 @@
 <?php
-
-use Faker\Generator as Faker;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,30 +10,23 @@ use Faker\Generator as Faker;
 |
 */
 
-
 // Send data to PagesController, index Function
 Route::get('/', "PagesController@index");
 Route::get('/home', "PagesController@index");
-
 
 // Create and insert new HOUSE routes
 Route::get('/add', "HouseController@create")->middleware('auth');
 Route::post('/add', "HouseController@store")->middleware('auth');
 
-
 // Asynchronus Validation Routes
-Route::match(['get', 'post'], '/register/validar', 'Auth\RegisterController@validar');
+Route::post('/add/validate', "HouseController@validateAjax")->middleware('auth');
 
 // Auth Routes
 
-//Route::get('/register',"UserController@create");
-//Route::post('/register',"UserController@store");
 Auth::routes();
 
+// Profile Routes
 
-Route::get('/user/{username}', 'UserController@showPublic');
-Route::get('/profile', 'UserController@showPrivate')->middleware('auth');
-
-
-
-//Route::get('/auth', "PagesController@auth");
+Route::get('/profile', 'UserController@show')->middleware('auth');
+Route::get('/user/{username}', 'UserController@show');
+ 

@@ -24,41 +24,18 @@ class CreateHouseRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => [
-                'required',
-                'min:3',
-                'alpha'
-            ],
-            'location' => [
-                'required',
-                'min:5',
-            ],
-            'direction' => [
-                'required',
-                'min:5',
-            ],
-            'price_user_night' => [
-                'required',
-                'numeric',
-            ],
-            'images' => [
-                'required'
-            ],
-            'max_users_house' => [
-                'numeric',
-                'required'
-            ],
-            'features' => [
-                'required',
-            ],
-            'activities' => [
-                'required',
-            ],
-            'description' => [
-                'required'
-            ]
-        ];
+        $rules['name'] = $this->validateName();
+        $rules['location'] = $this->validateLocation();
+        $rules['direction'] = $this->validateDirection();
+        $rules['price_user_night'] = $this->validatePriceUserNight();
+        $rules['images'] = $this->validateImages();
+        $rules['max_users_house'] = $this->validateMaxUsersHouse();
+        $rules['features'] = $this->validateFeatures();
+        $rules['activities'] = $this->validateActivities();
+        $rules['description'] = $this->validateDescription();
+
+        return $rules;
+
     }
 
     public function messages()
@@ -71,29 +48,136 @@ class CreateHouseRequest extends FormRequest
         $NUMERIC = "Solo caracteres numericos";
         $REQUIRED = "El campo es requerido";
 
-        return [
-            'name.required' => $REQUIRED,
-            'name.min' => 'La longitud minima es 3',
-            'name.alpha' => $ALPHA,
+        $name = $this->messagesName();
+        $location = $this->messagesLocation();
+        $direction = $this->messagesDirection();
+        $price_user_night = $this->messagesPriceUserNight();
+        $images = $this->messagesImage();
+        $max_users_house = $this->messagesMaxUsersHouse();
+        $features = $this->messagesFeatures();
+        $activities = $this->messagesActivities();
+        $description = $this->messagesDescription();
 
-            'location.min' => $FIELD_LENGHT_5,
-            'location.required' => $EMPTY_FIELD,
+        return array_merge($name, $location, $direction, $price_user_night,
+            $images, $max_users_house, $features, $activities, $description);
 
-            'direction.min' => $FIELD_LENGHT_5,
-            'direction.required' => $EMPTY_FIELD,
+    }
 
-            'price_user_night.required' => $EMPTY_FIELD,
-            'price_user_night.numeric' => $NUMERIC,
+    protected function validateName()
+    {
+        return 'required|min:3|alpha';
+    }
 
-            'images.required' => $EMPTY_FIELD,
+    private function validateLocation()
+    {
+        return 'min:5|required';
+    }
 
-            'max_users_house.required' => $REQUIRED,
-            'max_users_house.numeric' => $NUMERIC,
+    private function validateDirection()
+    {
+        return 'min:5|required';
+    }
 
-            'features.required' => $REQUIRED,
-            'activities.required' => $REQUIRED,
-            'description.required' => $REQUIRED
-        ];
+    private function validatePriceUserNight()
+    {
+        return 'numeric|required';
+    }
+
+    private function validateImages()
+    {
+        return 'required';
+    }
+
+    private function validateMaxUsersHouse()
+    {
+        return 'required|numeric|min:1';
+    }
+
+    private function validateActivities()
+    {
+        return 'required';
+    }
+
+    private function validateFeatures()
+    {
+        return 'required';
+    }
+
+    private function validateDescription()
+    {
+        return 'required';
+    }
+
+    private function messagesName()
+    {
+        $messages = array();
+        $messages["name.required"] = "El nombre es requerido";
+        $messages["name.min"] = 'Longitud minima de 3';
+        $messages["name.alpha"] = 'Solo caracteres alfabeticos';
+        return $messages;
+    }
+
+    private function messagesLocation()
+    {
+        $messages = array();
+        $messages["location.min"] = "Longitud minima de 5";
+        $messages["location.required"] = "La localizacion es obligatoria";
+        return $messages;
+    }
+
+    private function messagesDirection()
+    {
+        $messages = array();
+        $messages["direction.numeric"] = "Solo caracteres numericos";
+        $messages["direction.min"] = "La longitud minima es 5";
+        return $messages;
+    }
+
+    private function messagesPriceUserNight()
+    {
+        $messages = array();
+        $messages["price_user_night.numeric"] = "Solo caracteres numericos";
+        $messages["price_user_night.required"] = "La direccion es obligatoria";
+        return $messages;
+    }
+
+    private function messagesImage()
+    {
+        $messages = array();
+        $messages["images.required"] = "La imagen es obligatoria";
+        return $messages;
+    }
+
+    private function messagesMaxUsersHouse()
+    {
+        $messages = array();
+        $messages["max_users_house.required"] = "El maximo de de usuarios es obligatorio";
+        $messages["max_users_house.numeric"] = "Solo caracteres numericos";
+        $messages["max_users_house.min"] = "El minimo es uno";
+
+        return $messages;
+    }
+
+
+    private function messagesFeatures()
+    {
+        $messages = array();
+        $messages["features.required"] = "Las caracteristicas son  bligatorias";
+        return $messages;
+    }
+
+    private function messagesActivities()
+    {
+        $messages = array();
+        $messages["activities.required"] = "Las actividades son  bligatorias";
+        return $messages;
+    }
+
+    private function messagesDescription()
+    {
+        $messages = array();
+        $messages["description.required"] = "La descripcion es  bligatorias";
+        return $messages;
     }
 
 

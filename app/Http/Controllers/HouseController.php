@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\House;
 use App\Http\Requests\CreateHouseRequest;
+use App\Http\Requests\HouseAjaxRequest;
 use Illuminate\Http\Request;
 
 class HouseController extends Controller
@@ -39,7 +40,7 @@ class HouseController extends Controller
         $user = $request->user();
 
         House::create([
-            'user_id'=> $user->id,
+            'user_id' => $user->id,
             'name' => $request->input('name'),
             'location' => $request->input('location'),
             'direction' => $request->input('direction'),
@@ -49,60 +50,16 @@ class HouseController extends Controller
             'max_users_house' => $request->input('max_users_house'),
             'features' => $request->input('features'),
             'activities' => $request->input('activities'),
-            'description' => "$request->input('description')",
+            'description' => $request->input('description'),
             'images' => $request->input('images'),
         ]);
 
         return redirect('/');
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\House $house
-     * @return \Illuminate\Http\Response
-     */
-    public
-    function show(House $house)
+    protected function validateAjax(HouseAjaxRequest $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\House $house
-     * @return \Illuminate\Http\Response
-     */
-    public
-    function edit(House $house)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\House $house
-     * @return \Illuminate\Http\Response
-     */
-    public
-    function update(Request $request, House $house)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\House $house
-     * @return \Illuminate\Http\Response
-     */
-    public
-    function destroy(House $house)
-    {
-        //
+        //Obtenermos todos los valores y devolvemos un array vacio
+        return array();
     }
 }

@@ -172,7 +172,7 @@
         crossorigin="anonymous"></script>
 
 <script src="{{ asset('js/reserva.js') }}"></script>
-<script src="{{ asset('js/validate.js') }}" defer></script>
+<script src="{{ asset('js/validacion.js') }}" defer></script>
 
 </body>
 </html>
