@@ -29,4 +29,3 @@ Auth::routes();
 
 Route::get('/profile', 'UserController@show')->middleware('auth');
 Route::get('/user/{username}', 'UserController@show');
- 

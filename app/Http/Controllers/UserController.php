@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Requests\CreateUserRequet;
 use App\user;
+use App\House;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -34,11 +36,11 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUserRequet $request)
+    public function store(Request $request)
     {
 
         Uesr::create([
-            'name' => $request->input('name'),
+            'username' => $request->input('username'),
         ]);
     }
 
@@ -59,15 +61,15 @@ class UserController extends Controller
         } else {
             return $this->showPrivate($userLogged);
         }
-
     }
 
 //    Public profile info request for ALL users
-
     public function showPublic(String $userName)
     {
 
         $user = (User::where('username', $userName)->first());
+        $houses = House::where('user_id', $user->id)->paginate(10);
+
 
         if ($user == null) {
             return view('user.error', [
@@ -75,14 +77,14 @@ class UserController extends Controller
             ]);
         } else {
             return view('user.profile', [
-                "user" => $user
+                "user" => $user,
+                'houses'=> $houses
             ]);
         }
 
     }
 
 //    Private profile info request only AUTH users
-
     public function showPrivate(User $user)
     {
         return view('user.profile', [

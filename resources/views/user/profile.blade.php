@@ -10,7 +10,7 @@
 
     @endauth
 
-    <p>Nombre {{$user->name}}</p>
-    <p>Apellido {{$user->lastname}}</p>
+    <p>Correo electronico {{$user->email}}</p>
 
+    @include('house.list')
 @endsection

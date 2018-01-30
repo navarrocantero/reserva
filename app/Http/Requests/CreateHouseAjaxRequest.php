@@ -6,7 +6,7 @@ use App\Http\Requests\UserFormRequest;
 use \Illuminate\Validation\ValidationException;
 use Illuminate\Http\JsonResponse;
 
-class HouseAjaxRequest extends CreateHouseRequest
+class CreateHouseAjaxRequest extends CreateHouseRequest
 {
 
     public function rules()
