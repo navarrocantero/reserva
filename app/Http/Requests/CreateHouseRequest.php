@@ -63,52 +63,52 @@ class CreateHouseRequest extends FormRequest
 
     }
 
-    protected function validateName()
+    public function validateName()
     {
         return 'required|min:3|alpha';
     }
 
-    private function validateLocation()
+    protected function validateLocation()
     {
         return 'min:5|required';
     }
 
-    private function validateDirection()
+    protected function validateDirection()
     {
         return 'min:5|required';
     }
 
-    private function validatePriceUserNight()
+    protected function validatePriceUserNight()
     {
-        return 'numeric|required';
+        return 'numeric|required|min:1';
     }
 
-    private function validateImages()
+    protected function validateImages()
     {
         return 'required';
     }
 
-    private function validateMaxUsersHouse()
+    protected function validateMaxUsersHouse()
     {
         return 'required|numeric|min:1';
     }
 
-    private function validateActivities()
+    protected function validateActivities()
     {
         return 'required';
     }
 
-    private function validateFeatures()
+    protected function validateFeatures()
     {
         return 'required';
     }
 
-    private function validateDescription()
+    protected function validateDescription()
     {
         return 'required';
     }
 
-    private function messagesName()
+    protected function messagesName()
     {
         $messages = array();
         $messages["name.required"] = "El nombre es requerido";
@@ -117,7 +117,7 @@ class CreateHouseRequest extends FormRequest
         return $messages;
     }
 
-    private function messagesLocation()
+    protected function messagesLocation()
     {
         $messages = array();
         $messages["location.min"] = "Longitud minima de 5";
@@ -125,7 +125,7 @@ class CreateHouseRequest extends FormRequest
         return $messages;
     }
 
-    private function messagesDirection()
+    protected function messagesDirection()
     {
         $messages = array();
         $messages["direction.numeric"] = "Solo caracteres numericos";
@@ -133,50 +133,50 @@ class CreateHouseRequest extends FormRequest
         return $messages;
     }
 
-    private function messagesPriceUserNight()
+    protected function messagesPriceUserNight()
     {
         $messages = array();
+        $messages["price_user_night.min"] = 'Solo valores positivos';
         $messages["price_user_night.numeric"] = "Solo caracteres numericos";
         $messages["price_user_night.required"] = "La direccion es obligatoria";
         return $messages;
     }
 
-    private function messagesImage()
+    protected function messagesImage()
     {
         $messages = array();
         $messages["images.required"] = "La imagen es obligatoria";
         return $messages;
     }
 
-    private function messagesMaxUsersHouse()
+    protected function messagesMaxUsersHouse()
     {
         $messages = array();
         $messages["max_users_house.required"] = "El maximo de de usuarios es obligatorio";
         $messages["max_users_house.numeric"] = "Solo caracteres numericos";
-        $messages["max_users_house.min"] = "El minimo es uno";
+        $messages["max_users_house.min"] = "Solo valores positivos";
 
         return $messages;
     }
 
-
-    private function messagesFeatures()
+    protected function messagesFeatures()
     {
         $messages = array();
-        $messages["features.required"] = "Las caracteristicas son  bligatorias";
+        $messages["features.required"] = "Las caracteristicas son  obligatorias";
         return $messages;
     }
 
-    private function messagesActivities()
+    protected function messagesActivities()
     {
         $messages = array();
-        $messages["activities.required"] = "Las actividades son  bligatorias";
+        $messages["activities.required"] = "Las actividades son  obligatorias";
         return $messages;
     }
 
-    private function messagesDescription()
+    protected function messagesDescription()
     {
         $messages = array();
-        $messages["description.required"] = "La descripcion es  bligatorias";
+        $messages["description.required"] = "La descripcion es  obligatorias";
         return $messages;
     }
 
