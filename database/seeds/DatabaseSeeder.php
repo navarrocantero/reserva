@@ -11,9 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 20)->create()->each(function (App\User $user) {
+        factory(App\User::class, 30)->create()->each(function (App\User $user) {
 
-            factory(\App\House::class, 10)->create(['user_id' => $user->id]);
+            factory(\App\House::class, 20)->create(['user_id' => $user->id]);
 
         });
     }

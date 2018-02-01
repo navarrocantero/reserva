@@ -1,12 +1,9 @@
 /* WEB CSS */
 
-body {
-    background-color: gray;
-
-}
-
-a, a:hover, a:visited {
-    color: white;
+@media (min-width: 700px) {
+    body {
+        background-color: lightblue;
+    }
 }
 
 list-item-img {
@@ -19,15 +16,13 @@ list-item-img {
     border-radius: 50%;
 }
 
-
-
 /* GOOGLE LOGIN CSS*/
 
 .form-signin {
     max-width: 330px;
     padding: 15px;
     margin: 0 auto;
-    color:black;
+    color: black;
 }
 
 .form-signin .form-signin-heading, .form-signin .checkbox {
@@ -98,7 +93,7 @@ list-item-img {
     margin-top: 10px;
 }
 
-.links-login{
+.links-login {
 
     color: black;
 }

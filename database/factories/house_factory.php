@@ -11,7 +11,7 @@ $factory->define(App\House::class, function (Faker $faker) {
     return [
         'location' => ($faker->city. $faker->citySuffix),
         'direction' => $faker->streetAddress,
-        'images' => 'http://lorempixel.com/200/200/' . mt_rand(0, 1000),
+        'images' => 'https://picsum.photos/200/200/?image=' . mt_rand(0, 100),
         'name' => $faker->streetName,
         'price_user_night' => doubleval( rand(10, 100)),
         'users_comments' => $faker->realText(200),

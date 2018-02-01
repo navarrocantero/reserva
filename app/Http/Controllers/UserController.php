@@ -10,15 +10,6 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -68,7 +59,6 @@ class UserController extends Controller
     {
 
         $user = (User::where('username', $userName)->first());
-        $houses = House::where('user_id', $user->id)->paginate(10);
 
 
         if ($user == null) {
@@ -76,9 +66,11 @@ class UserController extends Controller
                 "user" => $user
             ]);
         } else {
+            $houses = House::where('user_id', $user->id)->paginate(10);
+
             return view('user.profile', [
                 "user" => $user,
-                'houses'=> $houses
+                'houses' => $houses
             ]);
         }
 
