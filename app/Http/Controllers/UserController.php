@@ -79,8 +79,10 @@ class UserController extends Controller
 //    Private profile info request only AUTH users
     public function showPrivate(User $user)
     {
+        $houses = House::where('user_id', $user->id)->paginate(9);
         return view('user.profile', [
-            "user" => $user
+            "user" => $user,
+            'houses' => $houses
         ]);
     }
 }
