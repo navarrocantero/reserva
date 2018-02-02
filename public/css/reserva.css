@@ -1,9 +1,22 @@
 /* WEB CSS */
 
-@media (min-width: 700px) {
+body {
+    padding-top: 54px;
+}
+
+li a{
+    size: 200000cm;
+    font-size: 16px;
+}
+
+@media (min-width: 992px) {
     body {
-        background-color: lightblue;
+        padding-top: 56px;
     }
+}
+
+.card {
+    height: 100%;
 }
 
 list-item-img {
@@ -101,15 +114,11 @@ list-item-img {
 /* NAVBAR CSS */
 
 .navbar {
-    background-color: #2874f0;
-    color: #FFFFFF;
     padding: 0.5rem;
     text-align: justify;
 
 }
 
 .navbar-collapse {
-    background-color: #2874f0;
-    color: #FFFFFF;
     text-align: justify;
 }

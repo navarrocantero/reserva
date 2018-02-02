@@ -22,6 +22,7 @@ class CreateHousesTable extends Migration
             $table->string('direction')->unique();
             $table->string('images')->nullable();
             $table->string('name');
+            $table->string('slugname')->nullable();
             $table->double('price_user_night');
             $table->string('users_comments')->nullable();
             $table->double('rating')->nullable();

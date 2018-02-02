@@ -27,6 +27,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'name' => $name,
         'lastname' => $lastName,
         'username' => $username,
+        'slugname' => str_slug($username),
         'email' => $email,
         'sex' => 'other',
         'telephone' => $phone,

@@ -47,11 +47,12 @@
 
 html {
     font-family: sans-serif;
-    line-height: 1.15;
+    line-height: 1.50;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     -ms-overflow-style: scrollbar;
     -webkit-tap-highlight-color: transparent;
+    font-size: large;
 }
 
 @-ms-viewport {
@@ -75,8 +76,8 @@ section {
 body {
     margin: 0;
     font-family: "Raleway", sans-serif;
-    font-size: 0.875rem;
-    font-weight: 400;
+    font-size: 1rem;
+    font-weight: 500;
     line-height: 1.6;
     color: #212529;
     text-align: justify;
@@ -603,6 +604,7 @@ pre code {
 }
 
 @media (min-width: 992px) {
+
     .container {
         max-width: 960px;
     }
