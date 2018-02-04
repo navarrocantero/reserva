@@ -45,7 +45,7 @@ function validateFetch(parameter) {
 
 function gestionarErrores(input, errores) {
     var hayErrores = false;
-    var divErrores = (input.parent().next());
+    var divErrores = (input.next());
     divErrores.html("");
     input.removeClass("is-valid is-invalid");
     if (errores.length === 0) {
@@ -80,8 +80,6 @@ function gestionarErrores(input, errores) {
     }
     return hayErrores;
 }
-
-
 
 function validarFormularioFetch() {
     event.preventDefault();
@@ -128,13 +126,6 @@ $(function () {
     $("#description").on("change", validateFetch);
     // $("#Create-house-submit").on("click", validarFormularioFetch);
 });
-
-
-
-
-
-
-
 
 function incluirSpinner(input) {
     if (input.parent().next().length === 0) {

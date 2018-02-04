@@ -41,7 +41,7 @@ class UserController extends Controller
      * @param  \App\user $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function index(Request $request)
     {
         $userLogged = ($request->user());
         $userNameURL = str_replace("user/", "", $request->path());
@@ -66,7 +66,7 @@ class UserController extends Controller
                 "user" => $user
             ]);
         } else {
-            $houses = House::where('user_id', $user->id)->paginate(10);
+            $houses = House::where('user_id', $user->id)->paginate(9);
 
             return view('user.profile', [
                 "user" => $user,
@@ -79,8 +79,10 @@ class UserController extends Controller
 //    Private profile info request only AUTH users
     public function showPrivate(User $user)
     {
+        $houses = House::where('user_id', $user->id)->paginate(9);
         return view('user.profile', [
-            "user" => $user
+            "user" => $user,
+            'houses' => $houses
         ]);
     }
 }

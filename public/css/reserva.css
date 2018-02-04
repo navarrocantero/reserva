@@ -1,21 +1,8 @@
 /* WEB CSS */
 
-@media (min-width: 700px) {
-    body {
-        background-color: lightblue;
-    }
+body {
+    padding-top: 54px;
 }
-
-list-item-img {
-    width: 96px;
-    height: 96px;
-    margin: 0 auto 10px;
-    display: block;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-}
-
 /* GOOGLE LOGIN CSS*/
 
 .form-signin {
@@ -101,15 +88,13 @@ list-item-img {
 /* NAVBAR CSS */
 
 .navbar {
-    background-color: #2874f0;
-    color: #FFFFFF;
     padding: 0.5rem;
     text-align: justify;
 
 }
 
 .navbar-collapse {
-    background-color: #2874f0;
-    color: #FFFFFF;
     text-align: justify;
 }
+
+

@@ -15,13 +15,13 @@ class CreateHousesTable extends Migration
     {
         Schema::create('houses', function (Blueprint $table) {
             $table->engine = 'INNODB';
-
             $table->increments('id');
             $table->timestamps();
             $table->string('location')->unique();
             $table->string('direction')->unique();
             $table->string('images')->nullable();
             $table->string('name');
+            $table->string('slugname')->nullable();
             $table->double('price_user_night');
             $table->string('users_comments')->nullable();
             $table->double('rating')->nullable();
