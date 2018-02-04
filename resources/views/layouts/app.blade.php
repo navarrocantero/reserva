@@ -139,7 +139,39 @@
 
 
 </div>
+<!-- Modal structure -->
+<div id="modal" > <!-- data-iziModal-title="Welcome"  data-iziModal-subtitle="Subtitle"  data-iziModal-icon="icon-home" -->
+    <div class="iziModal-content" style="padding: 0px;">
+        <button data-izimodal-close="" class="icon-close"></button>
+        <header>
+            <a href="" id="signin">Sign in</a>
+            <a href="" class="active">New Account</a>
+        </header>
+        <div class="sections">
+            <section class="hide">
+                <input type="text" placeholder="Username">
+                <input type="password" placeholder="Password">
+                <footer>
+                    <button data-izimodal-close="">Cancel</button>
+                    <button class="submit">Log in</button>
+                </footer>
+            </section>
+            <section>
+                <input type="text" placeholder="Username">
+                <input type="text" placeholder="Email">
+                <input type="password" placeholder="Password">
+                <label for="check"><input type="checkbox" name="checkbox" id="check" value="1"> I agree to the <u>Terms</u>.</label>
+                <footer>
+                    <button data-izimodal-close="" data-izimodal-transitionout="bounceOutDown">Cancel</button>
+                    <button class="submit">Create Account</button>
+                </footer>
+            </section>
+        </div>
+    </div>
+</div>
 
+<!-- Trigger to open Modal -->
+<a href="#" data-izimodal-open="#modal" data-izimodal-transitionin="fadeInDown">Modal</a>
 <footer class="py-5 bg-dark">
     <div class="container-fluid">
         <p class="m-0 text-center text-white">Copyright &copy; Reserving 2018</p>

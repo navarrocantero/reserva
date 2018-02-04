@@ -11,6 +11,6 @@
       integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
       crossorigin="anonymous">
 
-{{--<link rel="stylesheet" href="{{asset('css/app.css')}}">--}}
-
+<link rel="stylesheet" href="{{asset('css/iziModal.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/css/iziModal.min.css">
 
