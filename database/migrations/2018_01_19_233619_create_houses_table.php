@@ -15,7 +15,6 @@ class CreateHousesTable extends Migration
     {
         Schema::create('houses', function (Blueprint $table) {
             $table->engine = 'INNODB';
-
             $table->increments('id');
             $table->timestamps();
             $table->string('location')->unique();

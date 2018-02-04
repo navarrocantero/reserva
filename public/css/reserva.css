@@ -3,32 +3,6 @@
 body {
     padding-top: 54px;
 }
-
-li a{
-    size: 200000cm;
-    font-size: 16px;
-}
-
-@media (min-width: 992px) {
-    body {
-        padding-top: 56px;
-    }
-}
-
-.card {
-    height: 100%;
-}
-
-list-item-img {
-    width: 96px;
-    height: 96px;
-    margin: 0 auto 10px;
-    display: block;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-}
-
 /* GOOGLE LOGIN CSS*/
 
 .form-signin {
@@ -122,3 +96,5 @@ list-item-img {
 .navbar-collapse {
     text-align: justify;
 }
+
+

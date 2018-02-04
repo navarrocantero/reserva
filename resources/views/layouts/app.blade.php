@@ -8,14 +8,13 @@
 
 @include('layouts.scripts')
 
-<!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 </head>
 
 <body>
-
+<!-- Navbar structure -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
         <a class="navbar-brand" href="{{url('/')}}">Reserving</a>
@@ -28,7 +27,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="javascript:void(0)" id="unete-id">
+                    <a class="nav-link trigger" href="javascript:void(0)" id="unete-id">
                         @if (Auth::guest())
                             Unete
                         @else
@@ -50,11 +49,22 @@
 </nav>
 
 
-<div class="row">
-    <div class="col-12">
-        <div class="row  collapse navbar-collapse" id="nav-bar-menu-id">
+<div class="container-fluid">
+
+    <div class="row">
+
+        @yield('sidebar')
+        @yield('content')
+    </div>
+
+
+</div>
+
+<!-- Modal structure -->
+<div class="modal" id="modal-login" >
+    <div class="container h-100">
             @if (Auth::guest())
-                <div class="col-sm-6 col-md-5 col-md-offset-4  ml-auto mr-auto p-5">
+                <div class=" ">
                     <div class="account-wall">
                         <img class="profile-img"
                              src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
@@ -124,54 +134,10 @@
                     {{ csrf_field() }}
                 </form>
             @endif
-        </div>
-    </div>
-</div>
-
-
-<div class="container-fluid">
-
-    <div class="row">
-
-        @yield('sidebar')
-        @yield('content')
     </div>
 
-
-</div>
-<!-- Modal structure -->
-<div id="modal" > <!-- data-iziModal-title="Welcome"  data-iziModal-subtitle="Subtitle"  data-iziModal-icon="icon-home" -->
-    <div class="iziModal-content" style="padding: 0px;">
-        <button data-izimodal-close="" class="icon-close"></button>
-        <header>
-            <a href="" id="signin">Sign in</a>
-            <a href="" class="active">New Account</a>
-        </header>
-        <div class="sections">
-            <section class="hide">
-                <input type="text" placeholder="Username">
-                <input type="password" placeholder="Password">
-                <footer>
-                    <button data-izimodal-close="">Cancel</button>
-                    <button class="submit">Log in</button>
-                </footer>
-            </section>
-            <section>
-                <input type="text" placeholder="Username">
-                <input type="text" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <label for="check"><input type="checkbox" name="checkbox" id="check" value="1"> I agree to the <u>Terms</u>.</label>
-                <footer>
-                    <button data-izimodal-close="" data-izimodal-transitionout="bounceOutDown">Cancel</button>
-                    <button class="submit">Create Account</button>
-                </footer>
-            </section>
-        </div>
-    </div>
 </div>
 
-<!-- Trigger to open Modal -->
-<a href="#" data-izimodal-open="#modal" data-izimodal-transitionin="fadeInDown">Modal</a>
 <footer class="py-5 bg-dark">
     <div class="container-fluid">
         <p class="m-0 text-center text-white">Copyright &copy; Reserving 2018</p>

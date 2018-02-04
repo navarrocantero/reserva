@@ -142,47 +142,6 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 pb-3">
-                    <label for="exampleAccount">Color</label>
-                    <div class="form-group">
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                                       value="option1"> Blue
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                       value="option2"> Red
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline disabled">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3"
-                                       value="option3" disabled=""> Green
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                       value="option4"> Yellow
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                       value="option5"> Black
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                       value="option6"> Orange
-                            </label>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-sm-5 pb-3">
                     <label for="max_users_house">Capacidad maxima</label>
                     <input type="number" class="form-control" id="max_users_house" name="max_users_house"

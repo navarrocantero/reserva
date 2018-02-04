@@ -29,6 +29,16 @@ class HouseController extends Controller
         return view('house.create');
     }
 
+    public function show(Request $request)
+    {
+        $houseSlugNameUrl = str_replace("house/", "", $request->path());
+        $house = (House::where('slugname', $houseSlugNameUrl)->first());
+
+        return view('house.show', [
+            "house" => $house
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

@@ -12,5 +12,4 @@
       crossorigin="anonymous">
 
 <link rel="stylesheet" href="{{asset('css/iziModal.css')}}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/css/iziModal.min.css">
 

@@ -41,7 +41,7 @@ class UserController extends Controller
      * @param  \App\user $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function index(Request $request)
     {
         $userLogged = ($request->user());
         $userNameURL = str_replace("user/", "", $request->path());
