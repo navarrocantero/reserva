@@ -17,7 +17,7 @@ class CreateHouseCommentsTable extends Migration
             $table->timestamps();
             $table->integer('user_id')->unsigned();
             $table->integer('house_id')->unsigned();
-            $table->text('content');
+            $table->text('comment');
 
             $table->primary(['house_id', 'user_id']);
 

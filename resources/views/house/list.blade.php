@@ -19,10 +19,11 @@
 
                 <div class="col-lg-4 col-md-6 mb-4 mt-2">
                     <div class="card h-100">
-                        <a href="/house/{{$house->slugname}}" ><img class="card-img-top" src="{{$house->images}}" alt="{{$house->slugname}}"></a>
+                        <a href="/house/{{$house->slugname}}"><img class="card-img-top" src="{{$house->images}}"
+                                                                   alt="{{$house->slugname}}"></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a class="card-title"  href="/house/{{$house->slugname}}">{{$house->name}}</a>
+                                <a class="card-title" href="/house/{{$house->slugname}}">{{$house->name}}</a>
                             </h4>
 
                             <p class="card-text">{{$house->description}}</p>
@@ -45,7 +46,6 @@
             @endforelse
 
             <div class="col-4  offset-5 text-center p-5">
-
                 {{$houses->links()}}
             </div>
 

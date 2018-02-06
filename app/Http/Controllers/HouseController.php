@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\House;
 use App\Http\Requests\CreateHouseRequest;
 use App\Http\Requests\CreateHouseAjaxRequest;
+use App\User;
 use Illuminate\Http\Request;
 
 class HouseController extends Controller
@@ -34,8 +36,24 @@ class HouseController extends Controller
         $houseSlugNameUrl = str_replace("house/", "", $request->path());
         $house = (House::where('slugname', $houseSlugNameUrl)->first());
 
+        $comments = Comment::where('house_id', $house->id)->get();
+        $commentsCustom = [];
+
+        $i = 0;
+        foreach ($comments as $comment) {
+            $i++;
+            $name = (User::where('id', $comment->user_id)->first())->slugname;
+            $singleComment = [
+                'user' => $name,
+                'comment' => $comment->comment,
+            ];
+            $commentsCustom [$i] = $singleComment;
+        }
+
+
         return view('house.show', [
-            "house" => $house
+            "house" => $house,
+            "comments" => $commentsCustom
         ]);
     }
 
@@ -52,6 +70,7 @@ class HouseController extends Controller
         House::create([
             'user_id' => $user->id,
             'name' => $request->input('name'),
+            'slugname' => str_slug($request->input('name')),
             'location' => $request->input('location'),
             'direction' => $request->input('direction'),
             'price_user_night' => $request->input('price_user_night'),
@@ -69,6 +88,7 @@ class HouseController extends Controller
 
     protected function validateAjax(CreateHouseAjaxRequest $request)
     {
+
         //Obtenermos todos los valores y devolvemos un array vacio
         return array();
     }

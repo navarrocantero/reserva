@@ -9,13 +9,13 @@
         <div class="col-md-10 offset-md-1">
             <span class="anchor" id="formComplex"></span>
             <hr class="my-5">
-            <h3>Añadir nueva casa </h3>
+            <h3>Complex Form Example </h3>
 
             <!-- form complex example -->
             <div class="row mt-4">
                 <div class="col-sm-5 pb-3">
                     <label for="name">Nombre</label>
-                    <input type="text" class="form-control valid-item" id="name" name="name" value="{{old('name')}}">
+                    <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}">
                     <div class="mt-2">
                         @if($errors->has('name'))
                             @foreach($errors->get('name') as $message)
@@ -30,7 +30,7 @@
 
                 <div class="col-sm-3 pb-3">
                     <label for="location">Localizacion</label>
-                    <input type="text" class="form-control valid-item" id="location" name="location" value="{{old('location')}}">
+                    <input type="text" class="form-control" id="location" name="location" value="{{old('location')}}">
 
                     <div class="mt-2">
                         @if($errors->has('location'))
@@ -45,7 +45,7 @@
 
                 <div class="col-sm-4 pb-3">
                     <label for="location">Direccion</label>
-                    <input type="text" class="form-control valid-item" id="direction" name="direction"
+                    <input type="text" class="form-control" id="direction" name="direction"
                            value="{{old('direction')}}">
 
                     <div class="mt-2">
@@ -61,7 +61,7 @@
 
                 <div class="col-sm-6 pb-3">
                     <label for="images">Imagenes</label>
-                    <input type="text" class="form-control valid-item" id="images" name="images"
+                    <input type="text" class="form-control" id="images" name="images"
                            value="{{old('images')}}">
 
                     <div class="mt-2">
@@ -78,7 +78,7 @@
                 <div class="col-sm-6 pb-3">
                     <label for="price_user_night">Precio Persona/Noche
                     </label>
-                    <input type="number" class="form-control valid-item" id="price_user_night"
+                    <input type="number" class="form-control " id="price_user_night"
                            name="price_user_night"
                            value="{{old('price_user_night')}}">
 
@@ -96,7 +96,7 @@
 
                 <div class="col-sm-3 pb-3">
                     <label for="features">Caracteristicas</label>
-                    <textarea type="text" class="form-control area valid-item" id="features" name="features"
+                    <textarea type="text" class="form-control area" id="features" name="features"
                     >{{old('features')}}</textarea>
 
 
@@ -113,7 +113,7 @@
 
                 <div class="col-md-6 pb-3">
                     <label for="description">Descripcion</label>
-                    <textarea type="text" rows="4" class="form-control valid-item" id="description" name="description"
+                    <textarea type="text" class="form-control" id="description" name="description"
                     >{{old('description')}} </textarea>
 
                     <div class="mt-2">
@@ -128,7 +128,7 @@
                 </div>
                 <div class="col-sm-3 pb-3">
                     <label for="activities">Actividades</label>
-                    <textarea type="text" class="form-control valid-item" id="activities" name="activities"
+                    <textarea type="text" class="form-control" id="activities" name="activities"
                     >{{old('activities')}} </textarea>
 
                     <div class="mt-2">
@@ -144,7 +144,7 @@
 
                 <div class="col-sm-5 pb-3">
                     <label for="max_users_house">Capacidad maxima</label>
-                    <input type="number" class="form-control valid-item" id="max_users_house" name="max_users_house"
+                    <input type="number" class="form-control" id="max_users_house" name="max_users_house"
                            value="{{old('max_users_house')}}">
 
                     <div class="mt-2">
@@ -164,7 +164,7 @@
         </div>
 
         <div class="text-right mt-5">
-            <button type="submit" class="btn btn-primary mt-5  submit-button" id="Create-house-submit">Añadir</button>
+            <button type="submit" class="btn btn-primary mt-5 " id="Create-house-submit">Añadir</button>
 
 
         </div>
