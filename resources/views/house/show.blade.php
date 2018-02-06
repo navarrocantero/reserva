@@ -13,6 +13,12 @@
 
             <p class="card-text">{{$house->description}}</p>
         </div>
+        <div class="card-columns">
+            @foreach($features as $feature)
+                <p class="card-text"><a href="">{{$feature->slugname}}</a></p>
+            @endforeach
+        </div>
+
         <div class="card-footer content">
             <small class="text-muted ">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
             <div class="d-inline-flex  offset-11">
@@ -20,10 +26,9 @@
                 <i class="fa fa-eur ml-2" aria-hidden="true"></i>
             </div>
         </div>
-
-
     </div>
 
+    {{--Comentarios--}}
     <div class="col-lg-3 col-md-2 h-100 bg-light card-group ">
         @foreach($comments as $comment)
 
@@ -68,8 +73,11 @@
                 </form>
             </div>
 
-            @endif
+        @endif
     </div>
+
+
+
     <script src="{{ asset('js/validate.js') }}" defer></script>
 
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Feature;
 use App\House;
 use App\Http\Requests\CreateHouseRequest;
 use App\Http\Requests\CreateHouseAjaxRequest;
@@ -34,14 +35,15 @@ class HouseController extends Controller
     public function show(Request $request)
     {
         $houseSlugNameUrl = str_replace("house/", "", $request->path());
+
+
         $house = (House::where('slugname', $houseSlugNameUrl)->first());
+        $features = $house->features()->get();
+
 
         $comments = Comment::where('house_id', $house->id)->get();
         $commentsCustom = [];
-
         $loggedUserId = $request->user()->id;
-        $loggedUserSlugName = $request->user()->slugName;
-
         $commented = false;
 
         $i = 0;
@@ -67,6 +69,7 @@ class HouseController extends Controller
         return view('house.show', [
             "house" => $house,
             "comments" => $commentsCustom,
+            "features" => $features,
             "commented" => $commented
         ]);
     }
