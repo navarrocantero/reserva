@@ -39,21 +39,35 @@ class HouseController extends Controller
         $comments = Comment::where('house_id', $house->id)->get();
         $commentsCustom = [];
 
+        $loggedUserId = $request->user()->id;
+        $loggedUserSlugName = $request->user()->slugName;
+
+        $commented = false;
+
         $i = 0;
         foreach ($comments as $comment) {
             $i++;
-            $name = (User::where('id', $comment->user_id)->first())->slugname;
+            $user = (User::where('id', $comment->user_id)->first());
+
+            if ($user->id === $loggedUserId) {
+                $commented = true;
+            }
+
             $singleComment = [
-                'user' => $name,
+                'user' => $user->slugname,
                 'comment' => $comment->comment,
             ];
+
             $commentsCustom [$i] = $singleComment;
         }
 
 
+
+
         return view('house.show', [
             "house" => $house,
-            "comments" => $commentsCustom
+            "comments" => $commentsCustom,
+            "commented" => $commented
         ]);
     }
 
@@ -91,5 +105,10 @@ class HouseController extends Controller
 
         //Obtenermos todos los valores y devolvemos un array vacio
         return array();
+    }
+
+    public function isCommented()
+    {
+
     }
 }

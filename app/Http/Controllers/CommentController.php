@@ -22,7 +22,7 @@ class CommentController extends Controller
         return view('comment.create');
     }
 
-    public function store(Request $request)
+    public function store(CreateCommentRequest $request)
     {
         $userId = $request->user()->id;
         $houseSlugNameUrl = str_replace(["house/","/comment" ], "", $request->path());

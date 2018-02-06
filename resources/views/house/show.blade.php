@@ -39,34 +39,36 @@
         @endforeach
 
 
-        <div class="m-5">
-            <form action="/house/{{$house->slugname}}/comment" method="post">
-                {{ csrf_field() }}
+        @if(!$commented)
+            <div class="m-5">
+                <form action="/house/{{$house->slugname}}/comment" method="post">
+                    {{ csrf_field() }}
 
-                <div class="form-group">
-                    <div class="row mb-1">
+                    <div class="form-group">
+                        <div class="row mb-1">
                             <textarea type="text" rows="4" class="form-control valid-item" id="comment" name="comment"
                             ></textarea>
 
-                        <div class="mt-2">
-                            @if($errors->has('comment'))
-                                @foreach($errors->get('comment') as $message)
-                                    <div class="alert alert-danger" role="alert">
-                                        {{ $message }}
-                                    </div>
-                                @endforeach
-                            @endif
+                            <div class="mt-2">
+                                @if($errors->has('comment'))
+                                    @foreach($errors->get('comment') as $message)
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ $message }}
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                        </div>
+                        <div class="text-right mt-5">
+                            <button type="submit" class="btn btn-primary mt-5  submit-button"
+                                    id="Create-comment-submit">Añadir
+                            </button>
                         </div>
                     </div>
-                    <div class="text-right mt-5">
-                        <button type="submit" class="btn btn-primary mt-5  submit-button"
-                                id="Create-comment-submit">Añadir
-                        </button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
 
-        </div>
+            @endif
     </div>
     <script src="{{ asset('js/validate.js') }}" defer></script>
 

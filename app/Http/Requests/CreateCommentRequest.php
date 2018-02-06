@@ -23,15 +23,15 @@ class CreateCommentRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            $rules['comment'] = $this->validateAddComment()];
+        $rules['comment'] = $this->validateAddComment();
+        return $rules;
     }
 
     public function messages()
     {
         $addComment = $this->messagesAddComment();
 
-        return $addComment;
+        return array_merge($addComment);
     }
 
 
