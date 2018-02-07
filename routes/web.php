@@ -13,20 +13,24 @@
 // Send data to PagesController, index Function
 Route::get('/', "PagesController@index");
 
-// Create and insert new HOUSE routes
-Route::get('/add', "HouseController@create")->middleware('auth');
-Route::post('/add', "HouseController@store")->middleware('auth');
 
-Route::get('house/{slugname}', "HouseController@show")->middleware('auth');
+// COMMENTS routes
+Route::post('/house/{slugname}/validate', "CommentController@validateAjax")->middleware('auth');
+Route::post('/house/{slugname}/comment', "CommentController@store")->middleware('auth');
 
 // Asynchronus Validation Routes
 Route::post('/add/validate', "HouseController@validateAjax")->middleware('auth');
 
-// Auth Routes
 
+
+// HOUSE routes
+Route::get('/add', "HouseController@create")->middleware('auth');
+Route::post('/add', "HouseController@store")->middleware('auth');
+Route::get('house/{slugname}', "HouseController@show")->middleware('auth');
+
+// Auth Routes
 Auth::routes();
 
 // Profile Routes
-
 Route::get('/profile', 'UserController@index')->middleware('auth');
-Route::get('/user/{username}', 'UserController@index');
+Route::get('/user/{slugname}', 'UserController@index');

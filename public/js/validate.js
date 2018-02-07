@@ -1,17 +1,3 @@
-function objetoXHR() {
-    if (window.XMLHttpRequest) {
-        return new XMLHttpRequest();
-    } else if (window.ActiveXObject) {
-        var versionesIE = new Array('MsXML2.XMLHTTP.5.0', 'MsXML2.XMLHTTP.4.0', 'MsXML2.XMLHTTP.3.0', 'MsXML2.XMLHTTP', 'Microsoft.XMLHTTP');
-        for (var i = 0; i < versionesIE.length; i++) {
-            try {
-                return new ActiveXObject(versionesIE[i]);
-            } catch (errorControlado) {
-            }
-        }
-    }
-    throw new Error("No se pudo crear el objeto XMLHTTPRequest");
-}
 
 function validateFetch(parameter) {
     var myHeaders = new Headers();
@@ -27,10 +13,13 @@ function validateFetch(parameter) {
         body: form,
         credentials: "same-origin"
     };
+    let urlName = window.location.href + "/validate"
 
-    fetch("/add/validate", configuracion).then(function (response) {
+    fetch(urlName, configuracion).then(function (response) {
+
         return response.json();
     }).then(function (data) {
+
         let errors = data[inputTargetName]
 
         if (data.length === 0) {
@@ -48,8 +37,21 @@ function gestionarErrores(input, errores) {
     var divErrores = (input.next());
     divErrores.html("");
     input.removeClass("is-valid is-invalid");
+
+    // Si array errores es igual se añade la clase correspondiente
     if (errores.length === 0) {
         input.addClass("is-valid");
+
+
+        // Se comprueba si todos los elementos del formulario estan validados
+        let validationItems = $(".valid-item")
+        let validatedItem = $(".is-valid");
+        let submitButton = $(".submit-button");
+
+        if (validationItems.length === validatedItem.length) {
+            submitButton.removeClass("disabled");
+        }
+
     } else {
         hayErrores = true;
         input.addClass("is-invalid");
@@ -81,8 +83,7 @@ function gestionarErrores(input, errores) {
     return hayErrores;
 }
 
-function validarFormularioFetch() {
-    event.preventDefault();
+function validarFormularioFetch(parameter) {
     var myHeaders = new Headers();
     myHeaders.append("X-CSRF-TOKEN", $('meta[name="csrf-token"]').attr('content'));
     var form = new FormData();
@@ -96,8 +97,10 @@ function validarFormularioFetch() {
         body: form,
         credentials: "same-origin"
     };
+    let urlName = window.location.href + "/validate"
 
-    fetch("/add/validate", configuracion).then(function (response) {
+
+    fetch(urlName, configuracion).then(function (response) {
         return response.json();
     }).then(function (errores) {
         let errors = data[inputTargetName]
@@ -106,7 +109,6 @@ function validarFormularioFetch() {
             var formulario = $("#formulario");
             formulario.submit();
         } else {
-            // gestionarErrores($("#name"), errores.name);
             console.log("nononono")
         }
     }).catch(function (err) {
@@ -114,7 +116,8 @@ function validarFormularioFetch() {
     });
 }
 
-$(function () {
+$(function  () {
+    // Create house
     $("#name").on("change", validateFetch);
     $("#location").on("change", validateFetch);
     $("#direction").on("change", validateFetch);
@@ -124,7 +127,12 @@ $(function () {
     $("#features").on("change", validateFetch);
     $("#activities").on("change", validateFetch);
     $("#description").on("change", validateFetch);
-    // $("#Create-house-submit").on("click", validarFormularioFetch);
+
+    // Add comment
+    $("#comment").on("change", validateFetch)
+
+    // General
+    // $(".submit-button").on("click", validarFormularioFetch);
 });
 
 function incluirSpinner(input) {

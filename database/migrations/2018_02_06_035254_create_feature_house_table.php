@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHouseCommentsTable extends Migration
+class CreateFeatureHouseTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateHouseCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('house_comments', function (Blueprint $table) {
-            $table->timestamps();
-            $table->integer('user_id')->unsigned();
+        Schema::create('feature_house', function (Blueprint $table) {
             $table->integer('house_id')->unsigned();
-            $table->text('comment');
-
-            $table->primary(['house_id', 'user_id']);
+            $table->integer('feature_id')->unsigned();
+            $table->primary(['house_id', 'feature_id']);
 
             $table->foreign('house_id')->references('id')->on('houses');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('feature_id')->references('id')->on('features');
+
         });
     }
 
@@ -33,6 +31,6 @@ class CreateHouseCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('house_comments');
+        Schema::dropIfExists('feature_house');
     }
 }

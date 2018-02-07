@@ -55,10 +55,9 @@ class UserController extends Controller
     }
 
 //    Public profile info request for ALL users
-    public function showPublic(String $userName)
+    public function showPublic(String $slugname)
     {
-
-        $user = (User::where('username', $userName)->first());
+        $user = (User::where('slugname', $slugname)->first());
 
 
         if ($user == null) {
