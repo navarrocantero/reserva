@@ -40,7 +40,7 @@
                 </div>
             @empty
                 <div class="row">
-                    <p>Error no se han cargado datos</p>
+                    <p>No hay datos para mostrar !</p>
                 </div>
 
             @endforelse

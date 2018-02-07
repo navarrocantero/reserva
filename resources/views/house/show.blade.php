@@ -7,6 +7,10 @@
 
         <a href="/"><img class="card-img-top" src="{{$house->images}}" alt=""></a>
         <div class="card-body">
+            <div class="d-inline-flex col-md-push-12  ">
+                <p class="col-4 card ">Entrada: <input type="text" class="datepicker" id="entryDate"></p>
+                <p class="col-4 offset-4 card mt-1 ">Salida: <input type="text" class="datepicker  " id="exitDate" disabled></p>
+            </div>
             <h4 class="card-title">
                 <a class="card-title" href="/">{{$house->name}}</a>
             </h4>
@@ -28,7 +32,6 @@
         </div>
     </div>
 
-    {{--Comentarios--}}
     <div class="col-lg-3 col-md-2 h-100 bg-light card-group ">
         @foreach($comments as $comment)
 
@@ -52,6 +55,7 @@
                     <div class="form-group">
                         <div class="row mb-1">
                             <textarea type="text" rows="4" class="form-control valid-item" id="comment" name="comment"
+
                             ></textarea>
 
                             <div class="mt-2">
@@ -64,7 +68,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="text-right mt-5">
+                        <div>
                             <button type="submit" class="btn btn-primary mt-5  submit-button"
                                     id="Create-comment-submit">Añadir
                             </button>
@@ -77,9 +81,10 @@
     </div>
 
 
-
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="{{ asset('js/validate.js') }}" defer></script>
-
+    <script src="{{ asset('js/reserveHouse.js') }}" defer></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @endsection
 
 
