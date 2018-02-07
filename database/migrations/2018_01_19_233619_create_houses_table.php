@@ -26,7 +26,6 @@ class CreateHousesTable extends Migration
             $table->string('users_comments')->nullable();
             $table->double('rating')->nullable();
             $table->integer('max_users_house');
-            $table->text('features')->nullable();
             $table->text('activities')->nullable();
             $table->text('description')->nullable();
         });

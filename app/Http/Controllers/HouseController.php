@@ -64,8 +64,6 @@ class HouseController extends Controller
         }
 
 
-
-
         return view('house.show', [
             "house" => $house,
             "comments" => $commentsCustom,
@@ -83,8 +81,9 @@ class HouseController extends Controller
     public function store(CreateHouseRequest $request)
     {
         $user = $request->user();
+        $feature = $request->input('features');
 
-        House::create([
+        $house = House::create([
             'user_id' => $user->id,
             'name' => $request->input('name'),
             'slugname' => str_slug($request->input('name')),
@@ -94,11 +93,19 @@ class HouseController extends Controller
             'users_comments' => $request->input('users_comments'),
             'rating' => $request->input('rating'),
             'max_users_house' => $request->input('max_users_house'),
-            'features' => $request->input('features'),
             'activities' => $request->input('activities'),
             'description' => $request->input('description'),
             'images' => $request->input('images'),
         ]);
+
+        $feature = Feature::create([
+            'slugname' => $feature,
+            'user_id' => $house->user_id,
+            'house_id' => $house->id
+        ]);
+
+        $house->features()->sync($feature);
+
 
         return redirect('/');
     }
