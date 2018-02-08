@@ -30,17 +30,16 @@
                         </div>
 
                         <div class="card-footer content">
-                            <small class="text-muted ">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            <div class="d-inline-flex  offset-11">
+                            <div class="d-inline-flex  offset-10">
                                 <h5>{{$house->price_user_night}}</h5>
-                                <i class="fa fa-eur ml-2" aria-hidden="true"></i>
+                                <i class="fa fa-eur ml-1" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             @empty
                 <div class="row">
-                    <p>Error no se han cargado datos</p>
+                    <p>No hay datos para mostrar !</p>
                 </div>
 
             @endforelse

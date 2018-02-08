@@ -40,7 +40,6 @@ class HouseController extends Controller
         $house = (House::where('slugname', $houseSlugNameUrl)->first());
         $features = $house->features()->get();
 
-
         $comments = Comment::where('house_id', $house->id)->get();
         $commentsCustom = [];
         $loggedUserId = $request->user()->id;

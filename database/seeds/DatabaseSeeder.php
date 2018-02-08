@@ -29,8 +29,14 @@ class DatabaseSeeder extends Seeder
             if (mt_rand(1, 400) % 3 !== 1) {
                 $ramdonHouse = ($houses[mt_rand(1, (sizeof($houses) - 1))]);
                 foreach ($ramdonHouse as $house) {
+
+                    // Si no es la propia casa del usuario se crea el comentario y la reserva
                     if ($house->user_id !== $users[$i]->id) {
                         factory(\App\Comment::class, 1)->create([
+                            'user_id' => $users[$i]->id,
+                            'house_id' => $house->id
+                        ]);
+                        factory(\App\Reserve::class,1)->create([
                             'user_id' => $users[$i]->id,
                             'house_id' => $house->id
                         ]);

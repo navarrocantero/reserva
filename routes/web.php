@@ -22,11 +22,15 @@ Route::post('/house/{slugname}/comment', "CommentController@store")->middleware(
 Route::post('/add/validate', "HouseController@validateAjax")->middleware('auth');
 
 
+// RESERVE routes
+Route::post('house/{slugname}/reserve', "ReserveController@validateAjax")->middleware('auth');
+Route::post('house/{slugname}/confirm', "ReserveController@store")->middleware('auth');
 
 // HOUSE routes
 Route::get('/add', "HouseController@create")->middleware('auth');
 Route::post('/add', "HouseController@store")->middleware('auth');
 Route::get('house/{slugname}', "HouseController@show")->middleware('auth');
+
 
 // Auth Routes
 Auth::routes();
