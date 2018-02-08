@@ -7,14 +7,19 @@
 
         <a href="/"><img class="card-img-top" src="{{$house->images}}" alt=""></a>
         <div class="card-body">
-            <div class="d-inline-flex col-md-push-12  ">
-                <p class="col-4 card ">Entrada: <input type="text" class="datepicker" id="entryDate"></p>
-                <p class="col-4 offset-4 card mt-1 ">Salida: <input type="text" class="datepicker  " id="exitDate" disabled></p>
-            </div>
+            <form action="{{ url('/') }}/house/{{$house->slugname}}/confirm " method="post">
+                {{ csrf_field() }}
+                <div class="d-inline-flex col-md-push-12 card-group justify-content-around  ">
+                    <p class="col-4    ">Entrada: <input type="text" class="datepicker" id="entryDate" name="entryDate"></p>
+                    <p class="col-4  ">Salida: <input type="text" class="datepicker  " id="exitDate" name="exitDate"disabled></p>
+                    <button type="submit" class="btn   h-100 submit-button mt-3"
+                            id="Create-reserve-submit" disabled>Reservar!
+                    </button>
+                </div>
+            </form>
             <h4 class="card-title">
                 <a class="card-title" href="/">{{$house->name}}</a>
             </h4>
-
             <p class="card-text">{{$house->description}}</p>
         </div>
         <div class="card-columns">
@@ -24,7 +29,6 @@
         </div>
 
         <div class="card-footer content">
-            <small class="text-muted ">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
             <div class="d-inline-flex  offset-11">
                 <h5>{{$house->price_user_night}}</h5>
                 <i class="fa fa-eur ml-2" aria-hidden="true"></i>

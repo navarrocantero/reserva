@@ -17,4 +17,9 @@ class House extends Model
     public function features(){
         return $this->belongsToMany(Feature::class);
     }
+
+    public function reserves(){
+        return $this->hasMany(Reserve::class);
+    }
+
 }
