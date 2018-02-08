@@ -1,5 +1,7 @@
 let entryDate;
 let exitDate;
+let entry;
+let exit;
 let reserveButton = $('#Create-reserve-submit');
 $(function () {
 
@@ -10,11 +12,12 @@ $(function () {
     });
 
 
-    let entry = $("#entryDate").datepicker();
-    let exit = $("#exitDate").datepicker();
+    let entry = $("#entryDate").datepicker({ minDate: 0, maxDate: "+1M +10D" });;
+    let exit = $("#exitDate").datepicker({ minDate: 1, maxDate: "+1M +10D" });;
+
 
     entry.on("change", function () {
-        entryDate = entry.datepicker("getDate");
+        entryDate = entry.datepicker("getDate"); 
 
         entryDate = dateForm(entryDate, entry, exit)
     });

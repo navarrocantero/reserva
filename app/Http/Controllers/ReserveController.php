@@ -17,7 +17,7 @@ class ReserveController extends Controller
         $user = $request->user();
         $houseNameUrl = str_replace(["house/", "/confirm"], "", $request->path());
         $house = House::where('slugname', $houseNameUrl)->first();
- 
+
 
          Reserve::create([
              'user_id'=> $user->id,
@@ -27,6 +27,7 @@ class ReserveController extends Controller
          ]);
          return back();
     }
+
     /**Coje el nombre de la casa por la URL y comprueba que no este ocupada entre las fechas introducidas por el
      * usuario
      * @param Request $request
