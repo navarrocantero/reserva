@@ -17,7 +17,7 @@ $(function () {
 
 
     entry.on("change", function () {
-        entryDate = entry.datepicker("getDate"); 
+        entryDate = entry.datepicker("getDate");
 
         entryDate = dateForm(entryDate, entry, exit)
     });

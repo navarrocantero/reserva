@@ -138,9 +138,11 @@
 
 </div>
 
-<footer class="py-5 bg-dark">
-    <div class="container-fluid">
-        <p class="m-0 text-center text-white">Copyright &copy; Reserving 2018</p>
+
+
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">Reserving  &copy; 2018</span>
     </div>
 </footer>
 </body>

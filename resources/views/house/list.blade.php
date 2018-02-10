@@ -45,7 +45,7 @@
             @endforelse
 
             <div class="col-4  offset-5 text-center p-5">
-                {{$houses->links()}}
+                {{$houses->links('pagination')}}
             </div>
 
         </div>
