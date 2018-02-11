@@ -6,17 +6,19 @@
     <div class="col-lg-9 col-md-10 mt-2 ">
 
         <a href="/"><img class="card-img-top" src="{{$house->images}}" alt=""></a>
+
         <div class="card-body">
             <form action="{{ url('/') }}/house/{{$house->slugname}}/confirm " method="post">
                 {{ csrf_field() }}
                 <div class="d-inline-flex col-md-push-12 card-group justify-content-around  ">
                     <p class="col-4    ">Entrada: <input type="text" class="datepicker" id="entryDate" name="entryDate"></p>
-                    <p class="col-4  ">Salida: <input type="text" class="datepicker  " id="exitDate" name="exitDate"disabled></p>
+                    <p class="col-4  ">Salida: <input type="text" class="datepicker" id="exitDate" name="exitDate"  disabled></p>
                     <button type="submit" class="btn   h-100 submit-button mt-3"
                             id="Create-reserve-submit" disabled>Reservar!
                     </button>
                 </div>
             </form>
+
             <h4 class="card-title">
                 <a class="card-title" href="/">{{$house->name}}</a>
             </h4>
@@ -24,7 +26,7 @@
         </div>
         <div class="card-columns">
             @foreach($features as $feature)
-                <p class="card-text"><a href="">{{$feature->slugname}}</a></p>
+                <p class="card-text"><a href="/feature/{{$feature->slugname}}">{{$feature->slugname}}</a></p>
             @endforeach
         </div>
 
@@ -36,18 +38,19 @@
         </div>
     </div>
 
-    <div class="col-lg-3 col-md-2 h-100 bg-light card-group ">
+    <div class="col-lg-3 col-md-2 h-100 bg-light " data-spy="scroll" id="comments">
         @foreach($comments as $comment)
-
+    <div class="card">
             @foreach($comment as $value)
 
                 @if ($loop -> first)
-                    <h5 class="h5 mt-2"><a href={{url('/user/'.$value)}}>{{$value}} </a></h5>
+                    <h5 class="h5 mt-2 card-header"><a href={{url('/user/'.$value)}}>{{$value}} </a></h5>
                 @else
-                    <span class="mt-5 mb-2">{{$value}} </span>
+                    <span class="mt-5 mb-2 text-justify card-body text-wrap">{{$value}} </span>
                 @endif
 
             @endforeach
+    </div>
         @endforeach
 
 
@@ -83,6 +86,8 @@
 
         @endif
     </div>
+
+
 
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

@@ -12,12 +12,13 @@ $(function () {
     });
 
 
-    let entry = $("#entryDate").datepicker({ minDate: 0, maxDate: "+1M +10D" });;
-    let exit = $("#exitDate").datepicker({ minDate: 1, maxDate: "+1M +10D" });;
+    let entry = $("#entryDate").datepicker({minDate: 0, maxDate: "+1M +10D"});
+    let exit = $("#exitDate").datepicker({minDate: 1, maxDate: "+1M +10D"});
 
 
     entry.on("change", function () {
         entryDate = entry.datepicker("getDate");
+
 
         entryDate = dateForm(entryDate, entry, exit)
     });
@@ -26,17 +27,19 @@ $(function () {
 
         exitDate = exit.datepicker("getDate");
         exitDate = dateForm(exitDate, exit, entry)
-
+        exit.prop("disabled",false);
         validateReserve(entryDate, exitDate)
     });
 
 });
 
 function dateForm(date, inputToDisable, inputToEnable) {
+
+    date = $.datepicker.formatDate("yy-mm-dd", date);
     if (date !== null) {
         inputToDisable.prop("disabled", true);
         inputToEnable.prop("disabled", false);
-        return $.datepicker.formatDate("yy-mm-dd", date);
+        return date;
     }
 }
 
@@ -45,6 +48,7 @@ function validateReserve(entryDate, exitDate) {
     var myHeaders = new Headers();
     myHeaders.append("X-CSRF-TOKEN", $('meta[name="csrf-token"]').attr('content'));
     var form = new FormData();
+
     let dataDiff = exitDate - entryDate;
     form.append("entryDate", entryDate);
     form.append("exitDate", exitDate);
@@ -62,11 +66,11 @@ function validateReserve(entryDate, exitDate) {
         return response.json();
     }).then(function (data) {
         reserveButton.removeClass("btn-success btn-danger")
-        console.log(data);
+
         if (data.length === 0) {
-                reserveButton.prop("disabled", false);
-                reserveButton.addClass("btn-success");
-        }else{
+            reserveButton.prop("disabled", false);
+            reserveButton.addClass("btn-success");
+        } else {
             reserveButton.prop("disabled", true);
             reserveButton.addClass("btn-danger");
         }

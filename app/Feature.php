@@ -8,7 +8,7 @@ class Feature extends Model
 {
     protected $fillable = ['slugname'];
 
-    public function Houses()
+    public function houses()
     {
         return $this->belongsToMany(House::class);
     }
