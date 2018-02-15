@@ -17,6 +17,7 @@ class ReserveController extends Controller
         $user = $request->user();
         $houseNameUrl = str_replace(["house/", "/confirm"], "", $request->path());
         $house = House::where('slugname', $houseNameUrl)->first();
+
          Reserve::create([
              'user_id'=> $user->id,
              'house_id'=> $house->id,

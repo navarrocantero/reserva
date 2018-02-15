@@ -3,13 +3,78 @@ let exitDate;
 let entry;
 let exit;
 let reserveButton = $('#Create-reserve-submit');
+
 $(function () {
 
     $.datepicker.setDefaults({
-
         format: "yy/mm/dd",
-
     });
+
+    $(".modal").iziModal({
+        title: '',
+        subtitle: '',
+        headerColor: '#21b911',
+        background: '#b92734',
+        theme: '',  // light
+        icon: null,
+        iconText: null,
+        iconColor: '',
+        rtl: false,
+        width: 200,
+        top: true,
+        bottom: 1,
+        borderBottom: true,
+        padding: 0,
+        radius: 100,
+        zindex: 999,
+        iframe: false,
+        iframeHeight: 400,
+        iframeURL: null,
+        focusInput: true,
+        group: '',
+        loop: false,
+        arrowKeys: true,
+        navigateCaption: true,
+        navigateArrows: true, // Boolean, 'closeToModal', 'closeScreenEdge'
+        history: false,
+        restoreDefaultContent: false,
+        autoOpen: 0, // Boolean, Number
+        bodyOverflow: false,
+        fullscreen: false,
+        openFullscreen: false,
+        closeOnEscape: true,
+        closeButton: true,
+        appendTo: 'body', // or false
+        appendToOverlay: 'body', // or false
+        overlay: true,
+        overlayClose: true,
+        overlayColor: 'rgba(0, 0, 0, 0.4)',
+        timeout: 5000,
+        timeoutProgressbar: true,
+        pauseOnHover: false,
+        timeoutProgressbarColor: 'rgba(255,255,255,0.5)',
+        transitionIn: 'comingIn',
+        transitionOut: 'comingOut',
+        transitionInOverlay: 'fadeIn',
+        transitionOutOverlay: 'fadeOut',
+        onFullscreen: function () {
+        },
+        onResize: function () {
+        },
+        onOpening: function () {
+        },
+        onOpened: function () {
+        },
+        onClosing: function () {
+        },
+        onClosed: function () {
+        },
+        afterRender: function () {
+        }
+    });
+
+
+    $("#modal-reserve-fail").iziModal();
 
 
     let entry = $("#entryDate").datepicker({minDate: 0, maxDate: "+1M +10D"});
@@ -18,8 +83,6 @@ $(function () {
 
     entry.on("change", function () {
         entryDate = entry.datepicker("getDate");
-
-
         entryDate = dateForm(entryDate, entry, exit)
     });
 
@@ -27,7 +90,7 @@ $(function () {
 
         exitDate = exit.datepicker("getDate");
         exitDate = dateForm(exitDate, exit, entry)
-        exit.prop("disabled",false);
+        exit.prop("disabled", false);
         validateReserve(entryDate, exitDate)
     });
 
@@ -73,6 +136,7 @@ function validateReserve(entryDate, exitDate) {
         } else {
             reserveButton.prop("disabled", true);
             reserveButton.addClass("btn-danger");
+            $('#modal-reserve-fail').iziModal('open');
         }
 
     }).catch(function (err) {

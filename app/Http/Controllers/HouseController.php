@@ -80,7 +80,9 @@ class HouseController extends Controller
     public function store(CreateHouseRequest $request)
     {
         $user = $request->user();
+        $noImageUrl = "http://www.hotelsandholiday.com/wp-content/themes/hotel-holiday/images/no-image.jpg";
         $feature = $request->input('features');
+        $image = ($request->input('images') ?? $noImageUrl);
 
         $house = House::create([
             'user_id' => $user->id,
@@ -94,7 +96,7 @@ class HouseController extends Controller
             'max_users_house' => $request->input('max_users_house'),
             'activities' => $request->input('activities'),
             'description' => $request->input('description'),
-            'images' => $request->input('images'),
+            'images' => $image,
         ]);
 
         $feature = Feature::create([

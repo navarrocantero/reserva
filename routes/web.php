@@ -17,8 +17,6 @@ Route::get('/', "PagesController@index");
 Route::get('/feature/{slugname}', "FeatureController@index");
 
 
-
-
 // COMMENTS routes
 Route::post('/house/{slugname}/validate', "CommentController@validateAjax")->middleware('auth');
 Route::post('/house/{slugname}/comment', "CommentController@store")->middleware('auth');

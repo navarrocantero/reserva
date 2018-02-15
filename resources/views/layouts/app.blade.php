@@ -40,7 +40,7 @@
 
                 <li class="nav-item">
                     @auth
-                        <a class="nav-link" href="{{url('/add')}}"><span>Añadir</span></a>
+                        <a class="nav-link" href="{{url('/add')}}"><span>Alquila tu casa!</span></a>
                     @endauth
                 </li>
             </ul>
