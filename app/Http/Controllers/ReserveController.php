@@ -18,7 +18,6 @@ class ReserveController extends Controller
         $houseNameUrl = str_replace(["house/", "/confirm"], "", $request->path());
         $house = House::where('slugname', $houseNameUrl)->first();
 
-
          Reserve::create([
              'user_id'=> $user->id,
              'house_id'=> $house->id,
@@ -35,10 +34,12 @@ class ReserveController extends Controller
      */
     public function validateAjax(Request $request)
     {
+
         $houseNameUrl = str_replace(["house/", "/reserve"], "", $request->path());
         $house = House::where('slugname', $houseNameUrl)->first();
         $entryDate = ($_POST['entryDate']);
         $exitDate = ($_POST['exitDate']);
+
         $checkActualReserve = $house->reserves()->whereBetween('entry_date', array($entryDate, $exitDate))->get();
         if (sizeof($checkActualReserve) !== 0) {
             return array("invalid");

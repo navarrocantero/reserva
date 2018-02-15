@@ -11,6 +11,9 @@
         integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
         crossorigin="anonymous"></script>
 
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+
 
 <script src="{{ asset('js/reserva.js') }}" defer></script>
 

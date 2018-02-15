@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $users = factory(App\User::class, mt_rand(0, 400))->create()->each(function (App\User $user) {
+        $users = factory(App\User::class, mt_rand(0, 1000))->create()->each(function (App\User $user) {
         });
 
 

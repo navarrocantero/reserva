@@ -28,7 +28,6 @@ class CreateHouseRequest extends FormRequest
         $rules['location'] = $this->validateLocation();
         $rules['direction'] = $this->validateDirection();
         $rules['price_user_night'] = $this->validatePriceUserNight();
-        $rules['images'] = $this->validateImages();
         $rules['max_users_house'] = $this->validateMaxUsersHouse();
         $rules['features'] = $this->validateFeatures();
         $rules['activities'] = $this->validateActivities();
@@ -40,72 +39,60 @@ class CreateHouseRequest extends FormRequest
 
     public function messages()
     {
-        $REPEATED_FIELD_CONTACT_US = "El campo introducido es incorrecto, si cree que puede tratarse de un
-        error pongase en contacto con nosotros";
-        $EMPTY_FIELD = "El campo no puede estar vacio";
-        $FIELD_LENGHT_5 = "La logitud minima es 5";
-        $ALPHA = "Solo caracteres alfabeticos";
-        $NUMERIC = "Solo caracteres numericos";
-        $REQUIRED = "El campo es requerido";
+
 
         $name = $this->messagesName();
         $location = $this->messagesLocation();
         $direction = $this->messagesDirection();
         $price_user_night = $this->messagesPriceUserNight();
-        $images = $this->messagesImage();
         $max_users_house = $this->messagesMaxUsersHouse();
         $features = $this->messagesFeatures();
         $activities = $this->messagesActivities();
         $description = $this->messagesDescription();
 
         return array_merge($name, $location, $direction, $price_user_night,
-            $images, $max_users_house, $features, $activities, $description);
+            $max_users_house, $features, $activities, $description);
 
     }
 
     public function validateName()
     {
-        return 'required|min:3|alpha';
+        return 'required|min:3|alpha|max:100';
     }
 
     protected function validateLocation()
     {
-        return 'min:5|required';
+        return 'min:5|required|max:100';
     }
 
     protected function validateDirection()
     {
-        return 'min:5|required';
+        return 'min:5|required|max:100';
     }
 
     protected function validatePriceUserNight()
     {
-        return 'numeric|required|min:1';
-    }
-
-    protected function validateImages()
-    {
-        return 'required';
+        return 'numeric|required|min:1|max:1000';
     }
 
     protected function validateMaxUsersHouse()
     {
-        return 'required|numeric|min:1';
+        return 'required|numeric|min:1|max:10';
     }
 
     protected function validateActivities()
     {
-        return 'required';
+        return 'required|min:50|max:300';
     }
 
     protected function validateFeatures()
     {
-        return 'required';
+        return 'required|min:50|max:300';
     }
 
     protected function validateDescription()
     {
-        return 'required';
+        return 'required|min:50|max:300';
     }
 
     protected function messagesName()
@@ -113,6 +100,7 @@ class CreateHouseRequest extends FormRequest
         $messages = array();
         $messages["name.required"] = "El nombre es requerido";
         $messages["name.min"] = 'Longitud minima de 3';
+        $messages["name.max"] = 'Longitud minima de 100';
         $messages["name.alpha"] = 'Solo caracteres alfabeticos';
         return $messages;
     }
@@ -121,6 +109,7 @@ class CreateHouseRequest extends FormRequest
     {
         $messages = array();
         $messages["location.min"] = "Longitud minima de 5";
+        $messages["location.max"] = "Longitud maxima de 100";
         $messages["location.required"] = "La localizacion es obligatoria";
         return $messages;
     }
@@ -129,32 +118,31 @@ class CreateHouseRequest extends FormRequest
     {
         $messages = array();
         $messages["direction.numeric"] = "Solo caracteres numericos";
-        $messages["direction.min"] = "La longitud minima es 5";
+        $messages["direction.required"] = "La direccion es obligatoria";
+        $messages["direction.max"] = "Longitud maxima de 100";
+        $messages["direction.min"] = "Longitud minima de 5";
         return $messages;
     }
 
     protected function messagesPriceUserNight()
     {
         $messages = array();
-        $messages["price_user_night.min"] = 'Solo valores positivos';
+        $messages["price_user_night.min"] = 'El minimo es 1';
+        $messages["price_user_night.max"] = 'El maximo es 1000';
         $messages["price_user_night.numeric"] = "Solo caracteres numericos";
         $messages["price_user_night.required"] = "La direccion es obligatoria";
         return $messages;
     }
 
-    protected function messagesImage()
-    {
-        $messages = array();
-        $messages["images.required"] = "La imagen es obligatoria";
-        return $messages;
-    }
+
 
     protected function messagesMaxUsersHouse()
     {
         $messages = array();
         $messages["max_users_house.required"] = "El maximo de de usuarios es obligatorio";
         $messages["max_users_house.numeric"] = "Solo caracteres numericos";
-        $messages["max_users_house.min"] = "Solo valores positivos";
+        $messages["max_users_house.min"] = "El minimo es 1";
+        $messages["max_users_house.max"] = "El maximo es 10";
 
         return $messages;
     }
@@ -163,6 +151,8 @@ class CreateHouseRequest extends FormRequest
     {
         $messages = array();
         $messages["features.required"] = "Las caracteristicas son  obligatorias";
+        $messages["features.min"] = "Longitud minima de 50";
+        $messages["features.max"] = "Longitud maxima de 300";
         return $messages;
     }
 
@@ -170,6 +160,8 @@ class CreateHouseRequest extends FormRequest
     {
         $messages = array();
         $messages["activities.required"] = "Las actividades son  obligatorias";
+        $messages["activities.min"] = "Longitud minima de 50";
+        $messages["activities.max"] = "Longitud maxima de 300";
         return $messages;
     }
 
@@ -177,6 +169,8 @@ class CreateHouseRequest extends FormRequest
     {
         $messages = array();
         $messages["description.required"] = "La descripcion es  obligatorias";
+        $messages["description.max"] = "Longitud  maxima de 300";
+        $messages["description.min"] = "Longitud minima de 50";
         return $messages;
     }
 

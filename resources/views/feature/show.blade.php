@@ -1,15 +1,14 @@
+
+@extends('layouts.app')
+
 @section('sidebar')
 
     <div class="col-lg-3 mt-2">
-
-
         <div class="card">
-            <h3  class="card-title text-center">Categorias</h3>
-            @foreach ($features as $feature)
-                <div class="card-text">
-                <a  href="/feature/{{$feature->slugname}}"class="list-group-item"><p>{{$feature->slugname}}</p></a>
-                </div>
-                @endforeach
+        <h3  class="card-title text-center">Categoria</h3>
+        <div class="card-text">
+                <a  href="/feature/{{$features->slugname}}" class="list-group-item">{{$features->slugname}}</a>
+        </div>
         </div>
     </div>
 @endsection
@@ -46,11 +45,6 @@
                 </div>
 
             @endforelse
-
-            <div class="col-12 text-center p-5">
-                {{$houses->links('pagination')}}
-            </div>
-
         </div>
 
     </div>

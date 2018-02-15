@@ -1,3 +1,28 @@
+let paneOneValues = ['name', 'location', 'direction', 'description'];
+let paneTwo = ['activities', 'features', 'max_users_house', 'price_user_night'];
+let ACTIVE = "active"
+let INVALID = "invalid"
+
+
+$(function () {
+    // Create house
+    $("#name").on("change", validateFetch);
+    $("#location").on("change", validateFetch);
+    $("#direction").on("change", validateFetch);
+    $("#price_user_night").on("change", validateFetch);
+    $("#max_users_house").on("change", validateFetch);
+    $("#features").on("change", validateFetch);
+    $("#activities").on("change", validateFetch);
+    $("#description").on("change", validateFetch);
+
+    // Add comment
+    $("#comment").on("change", validateFetch)
+    checkErrorClass()
+    $('.list-group-item-action').on("click",checkErrorClass);
+
+    // General
+    // $(".submit-button").on("click", validarFormularioFetch);
+});
 
 function validateFetch(parameter) {
     var myHeaders = new Headers();
@@ -41,6 +66,7 @@ function gestionarErrores(input, errores) {
     // Si array errores es igual se añade la clase correspondiente
     if (errores.length === 0) {
         input.addClass("is-valid");
+        checkErrorClass();
 
 
         // Se comprueba si todos los elementos del formulario estan validados
@@ -58,6 +84,8 @@ function gestionarErrores(input, errores) {
         var _iteratorNormalCompletion = true;
         var _didIteratorError = false;
         var _iteratorError = undefined;
+        checkErrorClass();
+
 
         try {
             for (var _iterator = errores[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
@@ -65,6 +93,7 @@ function gestionarErrores(input, errores) {
 
                 divErrores.append("<div class=\"alert alert-danger\" role=\"alert\" >" + error + "</div>");
             }
+
         } catch (err) {
             _didIteratorError = true;
             _iteratorError = err;
@@ -116,29 +145,47 @@ function validarFormularioFetch(parameter) {
     });
 }
 
-$(function  () {
-    // Create house
-    $("#name").on("change", validateFetch);
-    $("#location").on("change", validateFetch);
-    $("#direction").on("change", validateFetch);
-    $("#images").on("change", validateFetch);
-    $("#price_user_night").on("change", validateFetch);
-    $("#max_users_house").on("change", validateFetch);
-    $("#features").on("change", validateFetch);
-    $("#activities").on("change", validateFetch);
-    $("#description").on("change", validateFetch);
+function checkErrorClass() {
 
-    // Add comment
-    $("#comment").on("change", validateFetch)
 
-    // General
-    // $(".submit-button").on("click", validarFormularioFetch);
-});
+    let paneOne = $('.pane-one');
+    let paneTwo = $('.pane-two');
+    let paneOneBadge = $('.pane-one-badge');
+    let paneTwoBadge = $('.pane-two-badge');
+    let tabPaneTwo = $('.tab-pane-two');
+    let PaneOneButton = $('#list-data-list');
+    let PaneTwoButton = $('#list-features-list');
+    let PaneSelectedButton;
+    let errors;
 
-function incluirSpinner(input) {
-    if (input.parent().next().length === 0) {
-        var spin = $(".spinner").first().clone(true);
-        input.parent().after(spin);
-        spin.show();
+
+    if ((PaneTwoButton.attr('class')).search(ACTIVE) !== -1) {
+        paneTwoBadge.text("");
+        paneOneBadge.text("");
+        errors = findErrorsInPane(paneOne);
+        paneOneBadge.text(errors !== 0 ? errors : "")
+    } else if ((PaneOneButton.attr('class')).search(ACTIVE) !== -1) {
+        paneOneBadge.text("");
+        paneTwoBadge.text("");
+        errors = findErrorsInPane(paneTwo);
+        console.log(errors)
+        paneTwoBadge.text(errors !== 0 ? errors : "")
     }
+
+
+}
+
+
+function findErrorsInPane(pane) {
+    let errors = [];
+    for (let i = 0; i < pane.length; i++) {
+        let item = $(pane[i]);
+        let itemClass = item.attr('class')
+        if (itemClass.search(INVALID) !== -1) {
+            errors.push(item);
+
+        }
+    }
+
+    return errors.length;
 }

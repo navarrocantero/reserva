@@ -13,6 +13,9 @@
 // Send data to PagesController, index Function
 Route::get('/', "PagesController@index");
 
+// FEATURES routes
+Route::get('/feature/{slugname}', "FeatureController@index");
+
 
 // COMMENTS routes
 Route::post('/house/{slugname}/validate', "CommentController@validateAjax")->middleware('auth');
