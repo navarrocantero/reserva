@@ -35,7 +35,7 @@
                         <div class="card-footer content">
                             <div class="d-inline-flex  offset-10">
                                 <h5>{{$house->price_user_night}}</h5>
-                                <i class="fa fa-eur ml-1" aria-hidden="true"></i>
+                                <i class="fa fa-euro-sign ml-1" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>
