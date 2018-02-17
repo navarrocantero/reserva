@@ -191,7 +191,7 @@
                               @if($errors->get('price_user_night'))
                                         is-invalid
                                         @endif"
-                                      id="price_user_night"
+                                       id="price_user_night"
                                        name="price_user_night"
                                        min="1"
                                        max="100"
@@ -233,7 +233,7 @@
 
             </div>
             <div class="text-right mb-5">
-                <button type="submit" class="btn btn-primary mt-5 mb-5 submit-button" id="Create-house-submit">Añadir
+                <button type="submit" class="btn btn-primary mt-5 mb-5 submit-button" id="Create-house-submit" disabled>Añadir
                 </button>
             </div>
         </form>

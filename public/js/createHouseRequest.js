@@ -2,10 +2,14 @@ let paneOneValues = ['name', 'location', 'direction', 'description'];
 let paneTwo = ['activities', 'features', 'max_users_house', 'price_user_night'];
 let ACTIVE = "active"
 let INVALID = "invalid"
+let VALID = "is-valid"
 
 
 $(function () {
-    // Create house
+    // Cada ves que se clikee sobre un elemento de la lista  se comprobara si hay errores
+    $('a[data-toggle="list"]').on('shown.bs.tab', checkErrorClass)
+
+    // A todos los elementos de validacion se le incluye la funcion AJAX
     $("#name").on("change", validateFetch);
     $("#location").on("change", validateFetch);
     $("#direction").on("change", validateFetch);
@@ -14,14 +18,11 @@ $(function () {
     $("#features").on("change", validateFetch);
     $("#activities").on("change", validateFetch);
     $("#description").on("change", validateFetch);
-
-    // Add comment
     $("#comment").on("change", validateFetch)
-    checkErrorClass()
-    $('.list-group-item-action').on("click",checkErrorClass);
 
-    // General
-    // $(".submit-button").on("click", validarFormularioFetch);
+    // Llamada a la funcion de comprobacion de errores para la respuesta del POST
+    checkErrorClass()
+
 });
 
 function validateFetch(parameter) {
@@ -147,16 +148,19 @@ function validarFormularioFetch(parameter) {
 
 function checkErrorClass() {
 
-
+    // Elementos para la busqueda de numero de erroes para los BADGETS
     let paneOne = $('.pane-one');
     let paneTwo = $('.pane-two');
     let paneOneBadge = $('.pane-one-badge');
     let paneTwoBadge = $('.pane-two-badge');
-    let tabPaneTwo = $('.tab-pane-two');
     let PaneOneButton = $('#list-data-list');
     let PaneTwoButton = $('#list-features-list');
-    let PaneSelectedButton;
     let errors;
+
+    // Elementos para validar el formulario y habilitar el envio POST
+    let success = $(".is-valid");
+    let validItems = $(".valid-item");
+    let formButton = $("#Create-house-submit");
 
 
     if ((PaneTwoButton.attr('class')).search(ACTIVE) !== -1) {
@@ -168,13 +172,15 @@ function checkErrorClass() {
         paneOneBadge.text("");
         paneTwoBadge.text("");
         errors = findErrorsInPane(paneTwo);
-        console.log(errors)
         paneTwoBadge.text(errors !== 0 ? errors : "")
     }
 
+    if(success.length === validItems.length){
+        formButton.attr('disabled',false)
+        formButton.addClass('btn-success')
+    }
 
 }
-
 
 function findErrorsInPane(pane) {
     let errors = [];

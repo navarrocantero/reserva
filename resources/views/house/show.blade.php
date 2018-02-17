@@ -35,7 +35,7 @@
         <div class="card-footer content">
             <div class="d-inline-flex  offset-11">
                 <h5>{{$house->price_user_night}}</h5>
-                <i class="fa fa-eur ml-2" aria-hidden="true"></i>
+                <i class="fa fa-euro-sign ml-2" aria-hidden="true"></i>
             </div>
         </div>
     </div>
@@ -103,7 +103,6 @@
 
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="{{ asset('js/createHouseRequest.js') }}" defer></script>
     <script src="{{ asset('js/reserveHouse.js') }}" defer></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @endsection
