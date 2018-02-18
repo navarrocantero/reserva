@@ -168,16 +168,21 @@ function checkErrorClass() {
         paneOneBadge.text("");
         errors = findErrorsInPane(paneOne);
         paneOneBadge.text(errors !== 0 ? errors : "")
-    } else if ((PaneOneButton.attr('class')).search(ACTIVE) !== -1) {
+    }
+    else if ((PaneOneButton.attr('class')).search(ACTIVE) !== -1) {
         paneOneBadge.text("");
         paneTwoBadge.text("");
         errors = findErrorsInPane(paneTwo);
         paneTwoBadge.text(errors !== 0 ? errors : "")
     }
 
-    if(success.length === validItems.length){
-        formButton.attr('disabled',false)
+    if (success.length === validItems.length) {
+        formButton.attr('disabled', false)
         formButton.addClass('btn-success')
+    }else{
+        formButton.attr('disabled', true)
+        formButton.removeClass('btn-success')
+        formButton.addClass('btn-primary')
     }
 
 }

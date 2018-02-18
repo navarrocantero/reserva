@@ -18,7 +18,7 @@ $factory->define(App\User::class, function (Faker $faker) {
     $name = str_replace(' ', '', $faker->firstName);
     $lastName = trim($faker->lastName);
     $emailSufix = $faker->freeEmailDomain;
-    $email = $name . "." . $lastName . "@" . $emailSufix;
+    $email = (str_slug($name . "." . $lastName)) . "@" . $emailSufix;
     $username = $name . (rand(0, 100) . trim($faker->jobTitle));
     $phone = (string) PhoneNumber::make($faker->e164PhoneNumber)->ofCountry('ES');
 
