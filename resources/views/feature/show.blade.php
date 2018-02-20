@@ -1,14 +1,13 @@
-
 @extends('layouts.app')
 
 @section('sidebar')
 
     <div class="col-lg-3 mt-2">
         <div class="card">
-        <h3  class="card-title text-center">Categoria</h3>
-        <div class="card-text">
-                <a  href="/feature/{{$features->slugname}}" class="list-group-item">{{$features->slugname}}</a>
-        </div>
+            <h3 class="card-title text-center">Categoria</h3>
+            <div class="card-text">
+                <a href="/feature/{{$features->slugname}}" class="list-group-item">{{$features->slugname}}</a>
+            </div>
         </div>
     </div>
 @endsection
@@ -48,4 +47,14 @@
         </div>
 
     </div>
+
+    <script src="{{ asset('js/createHouseRequest.js') }}" defer></script>
+
+    <script src="{{ asset('js/jquery-ui.js') }}" ></script>
+    <script src="{{ asset('js/reserveHouse.js') }}" ></script>
+    <link rel="stylesheet" href="{{asset('css/iziModal.css')}}">
+
 @endsection
+
+
+

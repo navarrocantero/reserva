@@ -152,10 +152,8 @@ function checkErrorClass() {
     let paneTwo = $('.pane-two');
     let paneOneBadge = $('.pane-one-badge');
     let paneTwoBadge = $('.pane-two-badge');
-    let tabPaneTwo = $('.tab-pane-two');
     let PaneOneButton = $('#list-data-list');
     let PaneTwoButton = $('#list-features-list');
-    let PaneSelectedButton;
     let errors;
 
 

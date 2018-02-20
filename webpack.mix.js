@@ -16,6 +16,6 @@ mix.js('resources/assets/js/app.js', 'public/js')
     // .js('resources/assets/js/createHouseRequest.js', 'public/js')
     // .js('resources/assets/js/iziModal.js', 'public/js')
     // .js('resources/assets/js/pagination.js', 'public/js')
-    // .js('resources/assets/js/reserva.js', 'public/js')
+    //
     // .js('resources/assets/js/reserveHouse.js', 'public/js')
 

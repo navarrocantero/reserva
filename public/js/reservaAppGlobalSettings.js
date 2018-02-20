@@ -1,4 +1,3 @@
-// Login modal
 
 $("#modal-login").iziModal();
 $("#unete-id").on("click", function () {

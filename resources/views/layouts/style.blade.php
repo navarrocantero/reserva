@@ -12,4 +12,3 @@
       crossorigin="anonymous">
 
 <link rel="stylesheet" href="{{asset('css/iziModal.css')}}">
-

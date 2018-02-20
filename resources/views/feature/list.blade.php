@@ -9,3 +9,4 @@
             @endforeach
         @endif
     </div>
+    <script src="{{ asset('js/pagination.js') }}"></script>
