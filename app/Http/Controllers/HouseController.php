@@ -118,8 +118,5 @@ class HouseController extends Controller
         return array();
     }
 
-    public function isCommented()
-    {
 
-    }
 }

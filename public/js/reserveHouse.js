@@ -9,7 +9,6 @@ $(function () {
     $.datepicker.setDefaults({
         format: "yy/mm/dd",
     });
-
     $(".modal").iziModal({
         title: '',
         subtitle: '',
@@ -72,28 +71,24 @@ $(function () {
         afterRender: function () {
         }
     });
-
-
     $("#modal-reserve-fail").iziModal();
 
 
     let entry = $("#entryDate").datepicker({minDate: 0, maxDate: "+1M +10D"});
-    let exit = $("#exitDate").datepicker({minDate: 1, maxDate: "+1M +10D"});
-
+    let exit = $("#exitDate").datepicker({minDate: 1, maxDate: "+3M"});
 
     entry.on("change", function () {
         entryDate = entry.datepicker("getDate");
         entryDate = dateForm(entryDate, entry, exit)
+
     });
 
     exit.on("change", function () {
-
         exitDate = exit.datepicker("getDate");
         exitDate = dateForm(exitDate, exit, entry)
         exit.prop("disabled", false);
         validateReserve(entryDate, exitDate)
     });
-
 });
 
 function dateForm(date, inputToDisable, inputToEnable) {

@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
         $houses = [];
 
         for ($i = 0; $i < sizeof($users); $i++) {
-            $houses[$i] = factory(App\House::class, mt_rand(0, 2))->create(['user_id' => $users[$i]->id])->each(function (App\House $house) {
+            $houses[$i] = factory(App\House::class, mt_rand(0, 2))->create(['user_id' => $users[$i]->id])
+                ->each(function (App\House $house) {
                 $house->features()->sync(factory(App\Feature::class, mt_rand(1,4))->create());
             });
         }

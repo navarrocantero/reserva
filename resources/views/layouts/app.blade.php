@@ -125,7 +125,9 @@
                     </div>
                 </div>
             @else
-                <a href="{{ route('logout') }}" class="dropdown-item"
+                <div class="w-100 text-center">
+            <a href="/profile" class="dropdown-item mb-2">Mi perfil</a>
+                <a href="{{ route('logout') }}" class="dropdown-item mt-2"
                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                     Logout
                 </a>
@@ -133,6 +135,7 @@
                       style="display: none;">
                     {{ csrf_field() }}
                 </form>
+                </div>
             @endif
     </div>
 

@@ -10,7 +10,7 @@ $factory->define(App\House::class, function (Faker $faker) {
 
 
     return [
-        'location' => ($faker->city . $faker->citySuffix),
+        'location' => ($faker->city . $faker->citySuffix. $faker->countryCode),
         'direction' => $faker->streetAddress,
         'images' => 'https://picsum.photos/700/400/?image=' . mt_rand(0, 100),
         'name' => $streetName,

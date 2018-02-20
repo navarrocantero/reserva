@@ -10,34 +10,40 @@
 |
 */
 
-// Send data to PagesController, index Function
+// HOME route
 Route::get('/', "PagesController@index");
+
+Route::get('/asyncLoad', 'PagesController@asyncLoad');
+
 
 // FEATURES routes
 Route::get('/feature/{slugname}', "FeatureController@index");
 
-
-// COMMENTS routes
-Route::post('/house/{slugname}/validate', "CommentController@validateAjax")->middleware('auth');
-Route::post('/house/{slugname}/comment', "CommentController@store")->middleware('auth');
-
-// Asynchronus Validation Routes
-Route::post('/add/validate', "HouseController@validateAjax")->middleware('auth');
-
-
-// RESERVE routes
-Route::post('house/{slugname}/reserve', "ReserveController@validateAjax")->middleware('auth');
-Route::post('house/{slugname}/confirm', "ReserveController@store")->middleware('auth');
-
-// HOUSE routes
-Route::get('/add', "HouseController@create")->middleware('auth');
-Route::post('/add', "HouseController@store")->middleware('auth');
-Route::get('house/{slugname}', "HouseController@show")->middleware('auth');
+// Profile Routes
+Route::get('/user/{slugname}', 'UserController@index');
 
 
 // Auth Routes
 Auth::routes();
 
-// Profile Routes
-Route::get('/profile', 'UserController@index')->middleware('auth');
-Route::get('/user/{slugname}', 'UserController@index');
+Route::group(['middleware' => 'auth'], function () {
+
+    // Profile Routes
+    Route::get('/profile', 'UserController@index');
+
+    // HOUSE routes
+    Route::get('/add', "HouseController@create");
+    Route::post('/add', "HouseController@store");
+    Route::get('house/{slugname}', "HouseController@show");
+
+    // RESERVE routes
+    Route::post('house/{slugname}/reserve', "ReserveController@validateAjax");
+    Route::post('house/{slugname}/confirm', "ReserveController@store");
+
+    // COMMENTS routes
+    Route::post('/house/{slugname}/validate', "CommentController@validateAjax");
+    Route::post('/house/{slugname}/comment', "CommentController@store");
+
+    // Asynchronus Validation Routes
+    Route::post('/add/validate', "HouseController@validateAjax");
+});
