@@ -1,8 +1,8 @@
  let ACTIVE = "active"
 let INVALID = "invalid"
  jQuery(function($){
-     $("#price_user_night").mask("1000");
-     $("#max_users_house").mask("10");
+     $("#price_user_night").mask("0001");
+     $("#max_users_house").mask("01");
 
  });
 

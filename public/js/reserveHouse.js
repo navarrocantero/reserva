@@ -8,7 +8,7 @@ let minDate = 0;
 
 $(function () {
     getBlackOutDates()
-
+    setMap();
     $(".modal").iziModal({
         title: '',
         subtitle: '',
@@ -291,5 +291,34 @@ function isThisDayAvalible(date) {
         }
     }
     return [true, ''];
+
+}
+
+function setMap() {
+    let location = ($('#location').text())
+    var n = location.indexOf("/")
+    let latitud = ""
+    let longitud = ""
+
+    for (let i = 0; i < n; i++) {
+        latitud += location[i]
+    }
+    if (isNaN(latitud)) {
+        latitud = 0
+    }
+
+    for (let i = (n + 1); i < location.length; i++) {
+        longitud += location[i]
+    }
+    if (isNaN(longitud)) {
+        longitud = 0
+    }
+
+    var map = new GMaps({
+        el: '#map',
+        lat: latitud,
+        lng: longitud
+    });
+
 
 }

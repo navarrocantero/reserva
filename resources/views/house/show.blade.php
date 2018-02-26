@@ -15,9 +15,14 @@
                     </p>
                     <p class="col-4  ">Salida: <input type="text" class="datepicker" id="exitDate" name="exitDate"
                                                       disabled></p>
+                    <p type="hidden" id="location" hidden>{{$house->location}}</p>
+
                     <button type="submit" class="btn   h-100 submit-button mt-3"
                             id="Create-reserve-submit" disabled>Reservar!
                     </button>
+
+                    <div id="map"  class="col-12">
+                    </div>
                 </div>
             </form>
 
@@ -120,6 +125,11 @@
 
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ asset('js/gmaps.js') }}" ></script>
+    <script src="http://maps.google.com/maps/api/js?key=
+"></script>
+
+
     <script src="{{ asset('js/reserveHouse.js') }}" defer></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @endsection
