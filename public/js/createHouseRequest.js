@@ -1,6 +1,10 @@
  let ACTIVE = "active"
 let INVALID = "invalid"
+ jQuery(function($){
+     $("#price_user_night").mask("1000");
+     $("#max_users_house").mask("10");
 
+ });
 
 $(function () {
     // Create house
@@ -11,7 +15,6 @@ $(function () {
     $("#max_users_house").on("change", validateFetch);
     $("#features").on("change", validateFetch);
     $("#description").on("change", validateFetch);
-
     // Add comment
     $("#comment").on("change", validateFetch)
     checkErrorClass()
