@@ -143,26 +143,6 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 pb-3">
-                                <label for="activities">Actividades</label>
-                                <textarea type="text" class="form-control valid-item pane-two
-                                    @if($errors->get('activities'))
-                                        is-invalid
-                                        @endif
-                                        " id="activities"
-                                          name="activities"
-                                >{{old('activities')}} </textarea>
-
-                                <div class="mt-2">
-                                    @if($errors->has('activities'))
-                                        @foreach($errors->get('activities') as $message)
-                                            <div class="alert alert-danger" role="alert">
-                                                {{ $message }}
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                </div>
-                            </div>
 
                             <div class="col-sm-12 pb-3">
                                 <label for="max_users_house">Capacidad maxima</label>

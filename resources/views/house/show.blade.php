@@ -32,17 +32,30 @@
             @endforeach
         </div>
 
-        <div class="card-footer content">
-            <div class="d-inline-flex  offset-11">
-                <h5>{{$house->price_user_night}}</h5>
-                <i class="fa fa-euro-sign ml-2" aria-hidden="true"></i>
+        <div class="card-footer content justify-content-between">
+            <div class="d-inline-flex   ">
+                <span class="mr-2">Capacidad Maxima</span>
+                <h5 class="text-nowrap">{{$house->max_users_house}}</h5>
+
             </div>
+
+            <div class="d-inline-flex offset-5">
+                <span class="mr-2"> Precio por persona/noche</span>
+                <h5 class="text-nowrap">{{$house->price_user_night}}</h5>
+                <i class="fa fa-euro-sign ml-2" aria-hidden="true"></i>
+
+            </div>
+
         </div>
     </div>
 
-    <div class="col-lg-3 col-md-2 h-100 bg-light " data-spy="scroll" id="comments">
-        @foreach($comments as $comment)
+    <div class="col-lg-3 col-md-2 h-100 bg-light mt-2 card" data-spy="scroll" id="comments">
+        <div class="card-title">
+            <h4 class="text-center">Comentarios</h4>
+        </div>
+        @forelse($comments as $comment)
             <div class="card">
+
                 @foreach($comment as $value)
 
                     @if ($loop -> first)
@@ -53,9 +66,17 @@
 
                 @endforeach
             </div>
-        @endforeach
+        @empty
+            <div class="card">
+                <h5 class="h5 mt-2 card-header">Ups esta vacio!</h5>
+                <span class="mt-5 mb-2  card-body text-wrap">
+                        Dejanos tu comentario !</span>
+
+            </div>
+        @endforelse
 
         @if(!$commented)
+
             <div class="m-5">
                 <form action="/house/{{$house->slugname}}/comment" method="post">
                     {{ csrf_field() }}
@@ -87,17 +108,13 @@
 
         @endif
 
-
-            <div class="modal iziModal iziModal-content" id="modal-reserve-suceess">
-                <p class="" >Your message has been sent successfully</p>
+        <div class="modal iziModal iziModal-header  text-white text-center" id="modal-reserve-fail">
+            <div class="iziModal-progressbar">
+                <div style="background-color: rgba(255, 255, 255, 0.5); width: 75.1%;"></div>
             </div>
-
-            <div class="modal iziModal iziModal-header  text-white text-center" id="modal-reserve-fail">
-                <div class="iziModal-progressbar">
-                    <div style="background-color: rgba(255, 255, 255, 0.5); width: 75.1%;"></div></div>
-                <p class="iziModal-content izimodal " >Fecha no disponible</p>
-                <p class="iziModal-content izimodal " >Lo sentimos!</p>
-            </div>
+            <p class="iziModal-content izimodal ">Fecha no disponible</p>
+            <p class="iziModal-content izimodal ">Lo sentimos!</p>
+        </div>
     </div>
 
 
@@ -106,6 +123,3 @@
     <script src="{{ asset('js/reserveHouse.js') }}" defer></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @endsection
-
-
-

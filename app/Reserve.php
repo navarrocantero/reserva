@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reserve extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['entry_date','exit_date', 'user_id', 'house_id'];
-
+    protected $fillable = ['entry_date', 'exit_date', 'user_id', 'house_id'];
 
     public function House()
     {
@@ -20,5 +19,8 @@ class Reserve extends Model
         return $this->belongsTo(User::class);
     }
 
-
+    public static function houseReserves(int $id)
+    {
+        return Reserve::where(['house_id' => $id])->get();
+    }
 }

@@ -33,7 +33,7 @@
                         <div class="card-footer content">
                             <div class="d-inline-flex  offset-10">
                                 <h5>{{$house->price_user_night}}</h5>
-                                <i class="fa fa-eur ml-1" aria-hidden="true"></i>
+                                <i class="fa fa-euro-sign ml-1" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>
@@ -47,12 +47,6 @@
         </div>
 
     </div>
-
-    <script src="{{ asset('js/createHouseRequest.js') }}" defer></script>
-
-    <script src="{{ asset('js/jquery-ui.js') }}" ></script>
-    <script src="{{ asset('js/reserveHouse.js') }}" ></script>
-    <link rel="stylesheet" href="{{asset('css/iziModal.css')}}">
 
 @endsection
 

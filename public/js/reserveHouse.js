@@ -3,12 +3,12 @@ let exitDate;
 let entry;
 let exit;
 let reserveButton = $('#Create-reserve-submit');
+let dates = [];
+let minDate = 0;
 
-$(document).ready(function(){
+$(function () {
+    getBlackOutDates()
 
-    $.datepicker.setDefaults({
-        format: "yy/mm/dd",
-    });
     $(".modal").iziModal({
         title: '',
         subtitle: '',
@@ -73,16 +73,28 @@ $(document).ready(function(){
     });
     $("#modal-reserve-fail").iziModal();
 
-    // Add comment
+    // Validacion asincrona de añadir comentario
     $("#comment").on("change", validateFetch)
 
-    let entry = $("#entryDate").datepicker({minDate: 0, maxDate: "+1M +10D"});
-    let exit = $("#exitDate").datepicker({minDate: 1, maxDate: "+3M"});
+    //Opciones generales de Datepicker
+    let datePickerOptions = {
+        minDate: minDate,
+        maxDate: "+100D",
+        beforeShowDay: isThisDayAvalible,
+        dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
+        dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+        monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+        monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec"],
+    };
+    let entry = $("#entryDate").datepicker(datePickerOptions);
+    let exit = $("#exitDate").datepicker(datePickerOptions);
 
     entry.on("change", function () {
         entryDate = entry.datepicker("getDate");
         entryDate = dateForm(entryDate, entry, exit)
-
+        let entryDateUnixStamp = convertMs(new Date(entryDate))
+        minDate = entryDateUnixStamp - convertMs(new Date())
+        exit.datepicker("option", "minDate", (minDate + 1));
     });
 
     exit.on("change", function () {
@@ -91,6 +103,8 @@ $(document).ready(function(){
         exit.prop("disabled", false);
         validateReserve(entryDate, exitDate)
     });
+
+
 });
 
 function dateForm(date, inputToDisable, inputToEnable) {
@@ -103,13 +117,11 @@ function dateForm(date, inputToDisable, inputToEnable) {
     }
 }
 
-
 function validateReserve(entryDate, exitDate) {
     var myHeaders = new Headers();
     myHeaders.append("X-CSRF-TOKEN", $('meta[name="csrf-token"]').attr('content'));
     var form = new FormData();
 
-    let dataDiff = exitDate - entryDate;
     form.append("entryDate", entryDate);
     form.append("exitDate", exitDate);
 
@@ -209,7 +221,7 @@ function gestionarErrores(input, errores) {
         let submitButton = $(".submit-button");
 
         if (validationItems.length === validatedItem.length) {
-            submitButton.removeClass("disabled");
+            submitButton.prop("disabled");
         }
 
     } else {
@@ -243,4 +255,41 @@ function gestionarErrores(input, errores) {
         }
     }
     return hayErrores;
+}
+
+function getBlackOutDates() {
+    let urlPath = (window.location.pathname).toString()
+    let houseId = urlPath.replace("/house/", "")
+    let urlName = "/api/reserves?houseId=" + houseId;
+    axios.get(urlName)
+        .then(function (response) {
+            for (let i = 0; i < response.data.length; i++) {
+                dates.push({
+                    "entry_date": convertMs(new Date(response.data[i]['entry_date'])),
+                    "exit_date": convertMs(new Date(response.data[i]['exit_date'])),
+                    "reserve_id": response.data[i]['id'],
+                    "days": (Math.floor((Date.parse(new Date(response.data[i]['exit_date'])) -
+                        Date.parse(new Date(response.data[i]['entry_date']))) / 86400000)),
+                })
+            }
+        }).catch(function (error) {
+        console.log(error);
+    })
+
+
+}
+
+function isThisDayAvalible(date) {
+
+    date = convertMs(date)
+
+
+    for (let i = 0; i < dates.length; i++) {
+
+        if (date >= dates[i].entry_date && date < dates[i].exit_date) {
+            return [false, 'bg-danger'];
+        }
+    }
+    return [true, ''];
+
 }

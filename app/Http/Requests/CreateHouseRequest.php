@@ -30,7 +30,6 @@ class CreateHouseRequest extends FormRequest
         $rules['price_user_night'] = $this->validatePriceUserNight();
         $rules['max_users_house'] = $this->validateMaxUsersHouse();
         $rules['features'] = $this->validateFeatures();
-        $rules['activities'] = $this->validateActivities();
         $rules['description'] = $this->validateDescription();
 
         return $rules;
@@ -47,11 +46,10 @@ class CreateHouseRequest extends FormRequest
         $price_user_night = $this->messagesPriceUserNight();
         $max_users_house = $this->messagesMaxUsersHouse();
         $features = $this->messagesFeatures();
-        $activities = $this->messagesActivities();
         $description = $this->messagesDescription();
 
         return array_merge($name, $location, $direction, $price_user_night,
-            $max_users_house, $features, $activities, $description);
+            $max_users_house, $features,  $description);
 
     }
 
@@ -153,15 +151,6 @@ class CreateHouseRequest extends FormRequest
         $messages["features.required"] = "Las caracteristicas son  obligatorias";
         $messages["features.min"] = "Longitud minima de 50";
         $messages["features.max"] = "Longitud maxima de 300";
-        return $messages;
-    }
-
-    protected function messagesActivities()
-    {
-        $messages = array();
-        $messages["activities.required"] = "Las actividades son  obligatorias";
-        $messages["activities.min"] = "Longitud minima de 50";
-        $messages["activities.max"] = "Longitud maxima de 300";
         return $messages;
     }
 

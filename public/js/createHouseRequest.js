@@ -1,6 +1,4 @@
-let paneOneValues = ['name', 'location', 'direction', 'description'];
-let paneTwo = ['activities', 'features', 'max_users_house', 'price_user_night'];
-let ACTIVE = "active"
+ let ACTIVE = "active"
 let INVALID = "invalid"
 
 
@@ -12,13 +10,12 @@ $(function () {
     $("#price_user_night").on("change", validateFetch);
     $("#max_users_house").on("change", validateFetch);
     $("#features").on("change", validateFetch);
-    $("#activities").on("change", validateFetch);
     $("#description").on("change", validateFetch);
 
     // Add comment
     $("#comment").on("change", validateFetch)
     checkErrorClass()
-    $('.list-group-item-action').on("click",checkErrorClass);
+    $('a[data-toggle="list"]').on('shown.bs.tab', checkErrorClass);
 
     // General
     // $(".submit-button").on("click", validarFormularioFetch);
@@ -75,7 +72,7 @@ function gestionarErrores(input, errores) {
         let submitButton = $(".submit-button");
 
         if (validationItems.length === validatedItem.length) {
-            submitButton.removeClass("disabled");
+            submitButton.prop("disabled",false);
         }
 
     } else {
@@ -112,39 +109,6 @@ function gestionarErrores(input, errores) {
     return hayErrores;
 }
 
-function validarFormularioFetch(parameter) {
-    var myHeaders = new Headers();
-    myHeaders.append("X-CSRF-TOKEN", $('meta[name="csrf-token"]').attr('content'));
-    var form = new FormData();
-    let inputTargetName = parameter.currentTarget.name;
-    let finaInputTargetName = $("#" + inputTargetName)
-    form.append(inputTargetName, finaInputTargetName.val());
-    form.append("type", inputTargetName);
-    var configuracion = {
-        method: 'POST',
-        headers: myHeaders,
-        body: form,
-        credentials: "same-origin"
-    };
-    let urlName = window.location.href + "/validate"
-
-
-    fetch(urlName, configuracion).then(function (response) {
-        return response.json();
-    }).then(function (errores) {
-        let errors = data[inputTargetName]
-        console.log(errors)
-        if (errores.length === 0) {
-            var formulario = $("#formulario");
-            formulario.submit();
-        } else {
-            console.log("nononono")
-        }
-    }).catch(function (err) {
-        console.log("error" + err);
-    });
-}
-
 function checkErrorClass() {
 
 
@@ -166,7 +130,6 @@ function checkErrorClass() {
         paneOneBadge.text("");
         paneTwoBadge.text("");
         errors = findErrorsInPane(paneTwo);
-        console.log(errors)
         paneTwoBadge.text(errors !== 0 ? errors : "")
     }
 

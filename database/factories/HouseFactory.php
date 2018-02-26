@@ -19,7 +19,6 @@ $factory->define(App\House::class, function (Faker $faker) {
         'users_comments' => $faker->realText(200),
         'rating' => doubleval(rand(0, 10)),
         'max_users_house' => rand(1, 9),
-        'activities' => $faker->realText(500),
         'description' => $faker->realText(200),
         'created_at' => Carbon::createFromTimestamp($date->getTimestamp()),
         'updated_at' => Carbon::createFromTimestamp($faker->dateTimeBetween($date, now())->getTimestamp())

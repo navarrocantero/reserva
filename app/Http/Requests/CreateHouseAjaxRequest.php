@@ -45,9 +45,6 @@ class CreateHouseAjaxRequest extends CreateHouseRequest
                 $rules['features'] = $this->validateFeatures();
                 return $rules;
 
-            case 'activities':
-                $rules['activities'] = $this->validateActivities();
-                return $rules;
 
             case 'description':
                 $rules['description'] = $this->validateDescription();

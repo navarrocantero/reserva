@@ -94,7 +94,6 @@ class HouseController extends Controller
             'users_comments' => $request->input('users_comments'),
             'rating' => $request->input('rating'),
             'max_users_house' => $request->input('max_users_house'),
-            'activities' => $request->input('activities'),
             'description' => $request->input('description'),
             'images' => $image,
         ]);
