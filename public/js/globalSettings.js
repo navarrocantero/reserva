@@ -60,45 +60,29 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 40);
+/******/ 	return __webpack_require__(__webpack_require__.s = 44);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 40:
+/***/ 44:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(41);
+module.exports = __webpack_require__(45);
 
 
 /***/ }),
 
-/***/ 41:
+/***/ 45:
 /***/ (function(module, exports) {
 
-$(function () {
-    asociarEventoAsincrono();
+
+
+loadProgressBar();
+$("#modal-login").iziModal();
+$("#unete-id").on("click", function () {
+    $('#modal-login').iziModal('open');
 });
-
-function validateAxio() {
-    event.preventDefault();
-
-    var enlace = $(event.target);
-    var valor = parseInt(enlace.text());
-
-    $(event.target).addClass("active");
-    axios.get('/asyncLoad?page=' + valor).then(function (response) {
-        $("#housePaginationAjaxList").html(response.data);
-        asociarEventoAsincrono();
-    }).catch(function (error) {
-        console.log(error);
-    });
-    window.scrollTo(0, 0);
-}
-
-function asociarEventoAsincrono() {
-    $(".pagination > li > a").on("click", validateAxio);
-}
 
 /***/ })
 

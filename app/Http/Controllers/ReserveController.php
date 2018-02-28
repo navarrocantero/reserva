@@ -1,10 +1,13 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\House;
 use App\Http\Requests\CreateReserveRequest;
 use App\Reserve;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+
 class ReserveController extends Controller
 {
     public function store(Request $request)
@@ -20,6 +23,7 @@ class ReserveController extends Controller
         ]);
         return back();
     }
+
     /**Coje el nombre de la casa por la URL y comprueba que no este ocupada entre las fechas introducidas por el
      * usuario
      * @param Request $request
@@ -32,17 +36,30 @@ class ReserveController extends Controller
         $entryDate = ($_POST['entryDate']);
         $exitDate = ($_POST['exitDate']);
         $checkActualReserve = $house->reserves()->where('entry_date', '>=', $entryDate)
-            ->where('entry_date', '<', $exitDate) ->get();
+            ->where('entry_date', '<', $exitDate)->get();
         if (sizeof($checkActualReserve) !== 0) {
             return array("invalid");
         } else {
             return array();
         }
     }
+
     public function api()
     {
         $houseId = $_GET['houseId'];
         $house = House::where(['slugname' => $houseId])->first();
         return json_encode(Reserve::houseReserves($house->id));
+    }
+
+    public function profile(Request $request)
+    {
+        $user = $request->user();
+        $reserves = Reserve::where('user_id', $user->id)->get();
+        return view('user.profile',
+            [
+                'reserves' => $reserves,
+                'user' => $user
+            ]
+        );
     }
 }

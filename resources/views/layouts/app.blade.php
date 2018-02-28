@@ -2,13 +2,15 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="{{ asset('images/ico.png') }}"/>
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @include('layouts.style')
 
-@include('layouts.scripts')
+    @include('layouts.scripts')
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -53,7 +55,9 @@
 
 <div class="container">
 
-    <div class="row">
+    <div class="row mt-3">
+
+
 
         @yield('sidebar')
         @yield('content')
@@ -63,72 +67,71 @@
 </div>
 
 <!-- Modal structure -->
-<div class="modal" id="modal-login" >
+<div class="modal" id="modal-login">
     <div class="container h-100">
-            @if (Auth::guest())
-                <div class=" ">
-                    <div class="account-wall">
-                        <img class="profile-img"
-                             src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
-                             alt="">
+        @if (Auth::guest())
+            <div class=" ">
+                <div class="account-wall">
+                    <img class="profile-img"
+                         src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                         alt="">
 
-                        <form class="form-horizontal form-signin" method="POST" action="{{route('login')}}">
-                            {{ csrf_field() }}
-                            <div class="form-group row">
-                                <label for="email" class="  col-form-label text-lg-right">E-Mail </label>
+                    <form class="form-horizontal form-signin" method="POST" action="{{route('login')}}">
+                        {{ csrf_field() }}
+                        <div class="form-group row">
+                            <label for="email" class="  col-form-label text-lg-right">E-Mail </label>
 
 
-                                <input id="email" type="email"
-                                       class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                       name="email"
-                                       value="{{ old('email') }}"
-                                       placeholder="Email"
-                                       required
-                                       autofocus>
+                            <input id="email" type="email"
+                                   class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                   name="email"
+                                   value="{{ old('email') }}"
+                                   placeholder="Email"
+                                   required
+                                   autofocus>
 
-                                @if ($errors->has('email'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </div>
-                                @endif
+                            @if ($errors->has('email'))
+                                <div class="invalid-feedback">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </div>
+                            @endif
 
-                            </div>
-                            <div class="form-group row">
-                                <label for="password"
-                                       class="  col-form-label text-lg-right">Password</label>
-                                <input
-                                        id="password"
-                                        type="password"
-                                        class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                        name="password"
-                                        placeholder="Password"
-                                        required
-                                >
+                        </div>
+                        <div class="form-group row">
+                            <label for="password"
+                                   class="  col-form-label text-lg-right">Password</label>
+                            <input
+                                    id="password"
+                                    type="password"
+                                    class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                    name="password"
+                                    placeholder="Password"
+                                    required>
 
-                                @if ($errors->has('password'))
-                                    <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="form-group row">
-                                <button class="btn btn-md btn-primary btn-block mb-2" type="submit">
-                                    Login
-                                </button>
-                            </div>
-                            <a href="#"
-                               class="pull-right need-help text-dark links-login mt-2">Ayuda</a><span
-                                    class="clearfix"></span>
+                            @if ($errors->has('password'))
+                                <div class="invalid-feedback">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-group row">
+                            <button class="btn btn-md btn-primary btn-block mb-2" type="submit">
+                                Login
+                            </button>
+                        </div>
+                        <a href="#"
+                           class="pull-right need-help text-dark links-login mt-2">Ayuda</a><span
+                                class="clearfix"></span>
 
-                        </form>
+                    </form>
 
-                        <a href="{{ route('register') }}"
-                           class="text-center new-account links-login text-dark">Nuevo usuario </a>
-                    </div>
+                    <a href="{{ route('register') }}"
+                       class="text-center new-account links-login text-dark">Nuevo usuario </a>
                 </div>
-            @else
-                <div class="w-100 text-center">
-            <a href="/profile" class="dropdown-item mb-2">Mi perfil</a>
+            </div>
+        @else
+            <div class="w-100 text-center">
+                <a href="/profile" class="dropdown-item mb-2">Mi perfil</a>
                 <a href="{{ route('logout') }}" class="dropdown-item mt-2"
                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                     Logout
@@ -137,12 +140,11 @@
                       style="display: none;">
                     {{ csrf_field() }}
                 </form>
-                </div>
-            @endif
+            </div>
+        @endif
     </div>
 
 </div>
-
 
 
 <footer class="footer">

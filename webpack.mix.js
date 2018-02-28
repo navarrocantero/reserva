@@ -13,9 +13,11 @@ let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/bootstrap.js', 'public/js')
-    // .js('resources/assets/js/createHouseRequest.js', 'public/js')
-    // .js('resources/assets/js/iziModal.js', 'public/js')
-    // .js('resources/assets/js/pagination.js', 'public/js')
-    //
-    // .js('resources/assets/js/reserveHouse.js', 'public/js')
+    .js('resources/assets/js/createHouseRequest.js', 'public/js')
+    .js('resources/assets/js/pagination.js', 'public/js')
+    .js('resources/assets/js/reserveHouse.js', 'public/js')
+    .js('resources/assets/js/globalSettings.js', 'public/js')
 
+
+mix.babel('node_modules/izimodal/js/iziModal.js', 'public/js/iziModal.js')
+   .babel('resources/assets/js/gmaps.js', 'public/js/gmaps.js')

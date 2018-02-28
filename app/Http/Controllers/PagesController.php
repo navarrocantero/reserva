@@ -22,6 +22,10 @@ class PagesController extends Controller
         );
     }
 
+    protected function home(){
+        return view('title');
+    }
+
     protected function auth()
     {
         return view('auth');
