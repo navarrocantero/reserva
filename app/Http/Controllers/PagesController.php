@@ -15,6 +15,7 @@ class PagesController extends Controller
 
         $houses = House::orderBy('created_at', 'desc')->paginate(9);
 
+
         return view('home', [
                 "houses" => $houses,
                 "features" => $features

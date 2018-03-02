@@ -8,7 +8,7 @@ class HouseImage extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['content','house_id'];
+    protected $fillable = ['image_id','image_url','house_id'];
 
 
     public function house(){

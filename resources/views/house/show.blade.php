@@ -75,8 +75,29 @@
 
     <div class="col-lg-9 col-md-10 mt-2 ">
 
-        <a href="/"><img class="card-img-top" src="{{$house->images}}" alt=""></a>
+        {{--<a href="/"><img class="card-img-top" src="{{$house->images}}" alt=""></a>--}}
 
+
+
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+
+                <div class="carousel-inner" role="listbox">
+                    @foreach($images as $image)
+                        <div class="carousel-item @if($loop->first) active @endif">
+                            <img class="d-block img-fluid" src="{{$image->image_url}}" >
+                        </div>
+                    @endforeach
+
+
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
         <div class="card-body">
             <form action="{{ url('/') }}/house/{{$house->slugname}}/confirm " method="post">
                 {{ csrf_field() }}

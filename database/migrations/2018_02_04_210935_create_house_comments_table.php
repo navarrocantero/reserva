@@ -14,13 +14,12 @@ class CreateHouseCommentsTable extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->timestamps();
+            $table->increments('id');
+
             $table->integer('user_id')->unsigned();
             $table->integer('house_id')->unsigned();
             $table->text('comment');
-
-            $table->primary(['house_id', 'user_id']);
-
+            $table->timestamps();
             $table->foreign('house_id')->references('id')->on('houses');
             $table->foreign('user_id')->references('id')->on('users');
         });

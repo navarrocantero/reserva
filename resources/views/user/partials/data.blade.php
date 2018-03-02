@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header align-items-center ">
-        <img class="imagen " src="{{ asset('images/avatar.png') }}">
+        <img class="imagen " src="{{$avatar}}">
 
     </div>
     <div class="card-body">

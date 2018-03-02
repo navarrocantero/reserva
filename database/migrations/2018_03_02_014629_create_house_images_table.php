@@ -16,7 +16,8 @@ class CreateHouseImagesTable extends Migration
         Schema::create('house_images', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('house_id')->unsigned();
-            $table->text('content');
+            $table->string('image_id');
+            $table->string('image_url');
             $table->foreign('house_id')->references('id')->on('houses');
 
 

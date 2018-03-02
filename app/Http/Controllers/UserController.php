@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\user;
+Use Imgur\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UpdateUserRequest;
@@ -14,17 +15,35 @@ class UserController extends Controller
 {
 
     private $user;
- 
+    private $imgur;
+
     public function __construct()
     {
+        $this->imgur = new \Imgur\Client();
+        $this->imgur->setOption('client_id', '62dd16fbdeacb6c');
+        $this->imgur->setOption('client_secret', '1e9272a28bfac0ba0ebc604b19add6f952ae8a4d');
+
+
         $this->middleware(function ($request, $next) {
 
             $this->user = auth()->user();
             return $next($request);
         });
+
+        if (isset($_SESSION['token'])) {
+            $this->setAccessToken($_SESSION['token']);
+
+            if ($this->imgur->checkAccessTokenExpired()) {
+                $this->imgur->refreshToken();
+            }
+        } elseif (isset($_GET['code'])) {
+
+            $this->imgur->requestAccessToken($_GET['code']);
+            $_SESSION['token'] = $this->imgur->getAccessToken();
+        }
         $this->user = auth()->user();
     }
-  
+
     /**
      * Show the form for creating a new resource.
      *
@@ -126,10 +145,19 @@ class UserController extends Controller
 //    Private profile info request only AUTH users
     public function showPrivate(User $user)
     {
+        $avatar = $user->image()->first()['image_url'];
+        $imageData = [
+            'image' => $avatar,
+            'type' => 'url',
+        ];
+
+        $uploadImg = $this->imgur->api('image')->upload($imageData);
+        dd($uploadImg);
         $houses = House::where('user_id', $user->id)->paginate(9);
         return view('user.profile', [
             "user" => $user,
-            'houses' => $houses
+            'houses' => $houses,
+            'avatar' => $avatar
         ]);
     }
 

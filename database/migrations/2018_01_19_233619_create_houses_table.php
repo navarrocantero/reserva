@@ -19,13 +19,11 @@ class CreateHousesTable extends Migration
             $table->timestamps();
             $table->string('location')->unique();
             $table->string('direction')->unique();
-            $table->string('images')->nullable();
             $table->string('name');
             $table->string('slugname')->nullable();
             $table->double('price_user_night');
-            $table->string('users_comments')->nullable();
-            $table->double('rating')->nullable();
-            $table->integer('max_users_house');
+            $table->tinyInteger('rating')->nullable();
+            $table->tinyInteger('max_users_house');
             $table->text('description')->nullable();
         });
     }

@@ -39,12 +39,11 @@ class HouseController extends Controller
 
         $house = (House::where('slugname', $houseSlugNameUrl)->firstOrFail());
         $features = $house->features()->get();
-
+        $images = $house->images()->get();
         $comments = Comment::where('house_id', $house->id)->get();
         $commentsCustom = [];
         $loggedUserId = $request->user()->id;
         $commented = false;
-
         $i = 0;
         foreach ($comments as $comment) {
             $i++;
@@ -65,6 +64,7 @@ class HouseController extends Controller
 
         return view('house.show', [
             "house" => $house,
+            "images" => $images,
             "comments" => $commentsCustom,
             "features" => $features,
             "commented" => $commented
@@ -91,11 +91,9 @@ class HouseController extends Controller
             'location' => $request->input('location'),
             'direction' => $request->input('direction'),
             'price_user_night' => $request->input('price_user_night'),
-            'users_comments' => $request->input('users_comments'),
             'rating' => $request->input('rating'),
             'max_users_house' => $request->input('max_users_house'),
             'description' => $request->input('description'),
-            'images' => $image,
         ]);
 
         $feature = Feature::create([

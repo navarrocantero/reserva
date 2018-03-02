@@ -14,7 +14,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Reserving') }}</title>
 </head>
 
 <body>
@@ -56,9 +56,9 @@
 <div class="container">
 
     <div class="row mt-3">
- 
-        @yield('content')
         @yield('sidebar')
+        @yield('content')
+
 
     </div>
 
