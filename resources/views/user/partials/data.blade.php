@@ -8,8 +8,8 @@
         {{--class="{{ $errors->has('email') ? 'is-invalid-input' : ''}}">--}}
 
         <form action="{{ url('/profile')}}" method="POST">
-            {{ csrf_field() }}
             {{--{{ method_field('PUT') }}--}}
+            {{ csrf_field() }}
 
             @if( $errors->has('username') )
                 <div class="mb-2">
