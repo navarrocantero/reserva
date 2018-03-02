@@ -98,7 +98,7 @@ class CreateHouseRequest extends FormRequest
         $messages = array();
         $messages["name.required"] = "El nombre es requerido";
         $messages["name.min"] = 'Longitud minima de 3';
-        $messages["name.max"] = 'Longitud minima de 100';
+        $messages["name.max"] = 'Longitud mmaxima de 100';
         $messages["name.alpha"] = 'Solo caracteres alfabeticos';
         return $messages;
     }

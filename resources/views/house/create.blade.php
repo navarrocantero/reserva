@@ -218,6 +218,8 @@
             </div>
         </form>
     </div>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.js" type="text/javascript"></script>
 
     <script src="{{ asset('js/createHouseRequest.js') }}" defer></script>
