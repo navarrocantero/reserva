@@ -22,4 +22,8 @@ class House extends Model
         return $this->hasMany(Reserve::class);
     }
 
+    public function images(){
+        return $this->hasMany(HouseImage::class);
+    }
+
 }

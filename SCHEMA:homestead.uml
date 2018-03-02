@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>7975aab8-aa65-4209-8718-c2f3d9a8ae67.SCHEMA:homestead</OriginalElement>
+  <nodes>
+    <node x="472.0" y="899.5">7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.feature_house</node>
+    <node x="231.55193128120754" y="928.6570182319069">7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.house_comments</node>
+    <node x="129.27136581469648" y="-7.579872204472792">7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.users</node>
+    <node x="786.25" y="0.0">7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.migrations</node>
+    <node x="793.3832335329342" y="133.55688622754474">7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.password_resets</node>
+    <node x="540.25" y="587.0">7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.features</node>
+    <node x="150.6882987220448" y="460.091054313099">7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.houses</node>
+    <node x="-73.86447552179987" y="910.3864188555794">7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.reserves</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.house_comments" target="7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.users">
+      <point x="54.00000000000006" y="-70.5" />
+      <point x="438.23162939297134" y="949.202875399361" />
+      <point x="440.6739217252397" y="845.4169329073483" />
+      <point x="447.087659744409" y="452.5830670926518" />
+      <point x="447.8203541001064" y="417.0159744408946" />
+      <point x="97.33333333333326" y="213.5" />
+    </edge>
+    <edge source="7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.house_comments" target="7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.houses">
+      <point x="-53.99999999999994" y="-70.5" />
+      <point x="246.85303514377" y="947.4536741214057" />
+      <point x="248.4502795527158" y="770.2012779552715" />
+      <point x="0.0" y="169.5" />
+    </edge>
+    <edge source="7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.feature_house" target="7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.features">
+      <point x="56.25" y="-37.0" />
+      <point x="0.0" y="59.5" />
+    </edge>
+    <edge source="7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.reserves" target="7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.houses">
+      <point x="54.0" y="-70.5" />
+      <point x="92.0319488817891" y="918.3003194888176" />
+      <point x="93.78704691256496" y="798.4782862390232" />
+      <point x="-82.66666666666669" y="169.5" />
+    </edge>
+    <edge source="7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.feature_house" target="7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.houses">
+      <point x="-56.25" y="-37.0" />
+      <point x="528.25" y="732.2140575079873" />
+      <point x="392.3389909478169" y="733.3801916932907" />
+      <point x="82.66666666666669" y="169.5" />
+    </edge>
+    <edge source="7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.houses" target="7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.users">
+      <point x="0.0" y="-169.5" />
+      <point x="0.0" y="213.5" />
+    </edge>
+    <edge source="7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.reserves" target="7975aab8-aa65-4209-8718-c2f3d9a8ae67.TABLE:homestead.users">
+      <point x="-54.0" y="-70.5" />
+      <point x="42.92172523961665" y="927.6293929712459" />
+      <point x="44.27908679446216" y="829.6741214057508" />
+      <point x="62.35416666666663" y="452.0" />
+      <point x="62.49074813631535" y="416.4329073482429" />
+      <point x="-97.33333333333331" y="213.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.7150684931506857" x="253.18051118210838" y="672.5399361022363" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+

@@ -14,16 +14,17 @@ class UserController extends Controller
 {
 
     private $user;
-
+ 
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
+
             $this->user = auth()->user();
             return $next($request);
         });
         $this->user = auth()->user();
     }
-
+  
     /**
      * Show the form for creating a new resource.
      *

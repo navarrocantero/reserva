@@ -12,8 +12,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $users = factory(App\User::class, mt_rand(0, 1000))->create()->each(function (App\User $user) {
-        });
 
+        });
+//        $houseImages = factory(\App\HouseImage::class, 1)->create()->each(function (App\HouseImage $houseImage) {
+//        });;
 
 
         $houses = [];
@@ -21,8 +23,10 @@ class DatabaseSeeder extends Seeder
         for ($i = 0; $i < sizeof($users); $i++) {
             $houses[$i] = factory(App\House::class, mt_rand(0, 2))->create(['user_id' => $users[$i]->id])
                 ->each(function (App\House $house) {
-                $house->features()->sync(factory(App\Feature::class, mt_rand(1,4))->create());
-            });
+                    $house->features()->sync(factory(App\Feature::class, mt_rand(1, 4))->create());
+                    factory(\App\HouseImage::class, 1)->create(['house_id' => $house->id]);
+
+                });
         }
 
         // Aleatoriedad para crear comentarios
@@ -37,7 +41,7 @@ class DatabaseSeeder extends Seeder
                             'user_id' => $users[$i]->id,
                             'house_id' => $house->id
                         ]);
-                        factory(\App\Reserve::class,1)->create([
+                        factory(\App\Reserve::class, 1)->create([
                             'user_id' => $users[$i]->id,
                             'house_id' => $house->id
                         ]);
@@ -46,7 +50,6 @@ class DatabaseSeeder extends Seeder
 
             }
         }
-
 
 
     }

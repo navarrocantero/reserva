@@ -13,7 +13,7 @@ use App\House;
 class Comment extends Model
 {
 
-    protected $table = "house_comments";
+    protected $table = "comments";
     protected $fillable = ['comment','user_id','house_id'];
 
     public function user()

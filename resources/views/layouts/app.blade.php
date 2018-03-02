@@ -56,11 +56,10 @@
 <div class="container">
 
     <div class="row mt-3">
-
-
-
-        @yield('sidebar')
+ 
         @yield('content')
+        @yield('sidebar')
+
     </div>
 
 
