@@ -11,7 +11,7 @@ class FeatureController extends Controller
    public function index(Request $request){
 
        $featureSlugNameUrl = str_replace("feature/", "", $request->path());
-       $feature = (Feature::where('slugname', $featureSlugNameUrl)->first()) ;
+       $feature = (Feature::where('slugname', $featureSlugNameUrl)->firstOrFail()) ;
        $houses = $feature->houses()->get();
 
        return view('feature.show', [

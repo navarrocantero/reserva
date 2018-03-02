@@ -9,12 +9,12 @@ class Reserve extends Model
     public $timestamps = false;
     protected $fillable = ['entry_date', 'exit_date', 'user_id', 'house_id'];
 
-    public function House()
+    public function house()
     {
         return $this->hasMany(House::class);
     }
 
-    public function User()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

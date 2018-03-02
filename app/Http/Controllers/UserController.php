@@ -11,6 +11,15 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
+    private $user;
+    public function __construct()
+    {
+        $this->middleware( function($request, $next){
+            $this->user = auth()->user();
+            return $next($request);
+        });
+        $this->user = auth()->user();
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -57,7 +66,7 @@ class UserController extends Controller
 //    Public profile info request for ALL users
     public function showPublic(String $slugname)
     {
-        $user = (User::where('slugname', $slugname)->first());
+        $user = (User::where('slugname', $slugname)->firstOrFail());
 
 
         if ($user == null) {

@@ -1,98 +1,20 @@
-/******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 42);
-/******/ })
-/************************************************************************/
-/******/ ({
-
-/***/ 42:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(43);
-
-
-/***/ }),
-
-/***/ 43:
-/***/ (function(module, exports) {
-
-var entryDate = void 0;
-var exitDate = void 0;
-var entry = void 0;
-var exit = void 0;
-var reserveButton = $('#Create-reserve-submit');
-var dates = [];
-var minDate = 0;
+let entryDate;
+let exitDate;
+let entry;
+let exit;
+let reserveButton = $('#Create-reserve-submit');
+let dates = [];
+let minDate = 0;
 
 $(function () {
-    getBlackOutDates();
+    getBlackOutDates()
     setMap();
     $(".modal").iziModal({
         title: '',
         subtitle: '',
         headerColor: '#21b911',
         background: '#b92734',
-        theme: '', // light
+        theme: '',  // light
         icon: null,
         iconText: null,
         iconColor: '',
@@ -134,46 +56,55 @@ $(function () {
         transitionOut: 'comingOut',
         transitionInOverlay: 'fadeIn',
         transitionOutOverlay: 'fadeOut',
-        onFullscreen: function onFullscreen() {},
-        onResize: function onResize() {},
-        onOpening: function onOpening() {},
-        onOpened: function onOpened() {},
-        onClosing: function onClosing() {},
-        onClosed: function onClosed() {},
-        afterRender: function afterRender() {}
+        onFullscreen: function () {
+        },
+        onResize: function () {
+        },
+        onOpening: function () {
+        },
+        onOpened: function () {
+        },
+        onClosing: function () {
+        },
+        onClosed: function () {
+        },
+        afterRender: function () {
+        }
     });
     $("#modal-reserve-fail").iziModal();
 
     // Validacion asincrona de añadir comentario
-    $("#comment").on("change", validateFetch);
+    $("#comment").on("change", validateFetch)
 
     //Opciones generales de Datepicker
-    var datePickerOptions = {
+    let datePickerOptions = {
         minDate: minDate,
         maxDate: "+100D",
         beforeShowDay: isThisDayAvalible,
         dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
         dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
         monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-        monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec"]
+        monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec"],
     };
-    var entry = $("#entryDate").datepicker(datePickerOptions);
-    var exit = $("#exitDate").datepicker(datePickerOptions);
+    let entry = $("#entryDate").datepicker(datePickerOptions);
+    let exit = $("#exitDate").datepicker(datePickerOptions);
 
     entry.on("change", function () {
         entryDate = entry.datepicker("getDate");
-        entryDate = dateForm(entryDate, entry, exit);
-        var entryDateUnixStamp = convertMs(new Date(entryDate));
-        minDate = entryDateUnixStamp - convertMs(new Date());
-        exit.datepicker("option", "minDate", minDate + 1);
+        entryDate = dateForm(entryDate, entry, exit)
+        let entryDateUnixStamp = convertMs(new Date(entryDate))
+        minDate = entryDateUnixStamp - convertMs(new Date())
+        exit.datepicker("option", "minDate", (minDate + 1));
     });
 
     exit.on("change", function () {
         exitDate = exit.datepicker("getDate");
-        exitDate = dateForm(exitDate, exit, entry);
+        exitDate = dateForm(exitDate, exit, entry)
         exit.prop("disabled", false);
-        validateReserve(entryDate, exitDate);
+        validateReserve(entryDate, exitDate)
     });
+
+
 });
 
 function dateForm(date, inputToDisable, inputToEnable) {
@@ -200,12 +131,13 @@ function validateReserve(entryDate, exitDate) {
         body: form,
         credentials: "same-origin"
     };
-    var urlName = window.location.href + "/reserve";
+    let urlName = window.location.href + "/reserve"
     fetch(urlName, configuracion).then(function (response) {
+
 
         return response.json();
     }).then(function (data) {
-        reserveButton.removeClass("btn-success btn-danger");
+        reserveButton.removeClass("btn-success btn-danger")
 
         if (data.length === 0) {
             reserveButton.prop("disabled", false);
@@ -215,6 +147,7 @@ function validateReserve(entryDate, exitDate) {
             reserveButton.addClass("btn-danger");
             $('#modal-reserve-fail').iziModal('open');
         }
+
     }).catch(function (err) {
         console.log("error" + err);
     });
@@ -242,8 +175,8 @@ function validateFetch(parameter) {
     var myHeaders = new Headers();
     myHeaders.append("X-CSRF-TOKEN", $('meta[name="csrf-token"]').attr('content'));
     var form = new FormData();
-    var inputTargetName = parameter.currentTarget.name;
-    var finaInputTargetName = $("#" + inputTargetName);
+    let inputTargetName = parameter.currentTarget.name;
+    let finaInputTargetName = $("#" + inputTargetName)
     form.append(inputTargetName, finaInputTargetName.val());
     form.append("type", inputTargetName);
     var configuracion = {
@@ -252,14 +185,14 @@ function validateFetch(parameter) {
         body: form,
         credentials: "same-origin"
     };
-    var urlName = window.location.href + "/validate";
+    let urlName = window.location.href + "/validate"
 
     fetch(urlName, configuracion).then(function (response) {
 
         return response.json();
     }).then(function (data) {
 
-        var errors = data[inputTargetName];
+        let errors = data[inputTargetName]
 
         if (data.length === 0) {
             errors = [];
@@ -273,7 +206,7 @@ function validateFetch(parameter) {
 
 function gestionarErrores(input, errores) {
     var hayErrores = false;
-    var divErrores = input.next();
+    var divErrores = (input.next());
     divErrores.html("");
     input.removeClass("is-valid is-invalid");
 
@@ -281,14 +214,16 @@ function gestionarErrores(input, errores) {
     if (errores.length === 0) {
         input.addClass("is-valid");
 
+
         // Se comprueba si todos los elementos del formulario estan validados
-        var validationItems = $(".valid-item");
-        var validatedItem = $(".is-valid");
-        var submitButton = $(".submit-button");
+        let validationItems = $(".valid-item")
+        let validatedItem = $(".is-valid");
+        let submitButton = $(".submit-button");
 
         if (validationItems.length === validatedItem.length) {
             submitButton.prop("disabled");
         }
+
     } else {
         hayErrores = true;
         input.addClass("is-invalid");
@@ -296,12 +231,14 @@ function gestionarErrores(input, errores) {
         var _didIteratorError = false;
         var _iteratorError = undefined;
 
+
         try {
             for (var _iterator = errores[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                 var error = _step.value;
 
                 divErrores.append("<div class=\"alert alert-danger\" role=\"alert\" >" + error + "</div>");
             }
+
         } catch (err) {
             _didIteratorError = true;
             _iteratorError = err;
@@ -321,54 +258,60 @@ function gestionarErrores(input, errores) {
 }
 
 function getBlackOutDates() {
-    var urlPath = window.location.pathname.toString();
-    var houseId = urlPath.replace("/house/", "");
-    var urlName = "/api/reserves?houseId=" + houseId;
-    axios.get(urlName).then(function (response) {
-        for (var i = 0; i < response.data.length; i++) {
-            dates.push({
-                "entry_date": convertMs(new Date(response.data[i]['entry_date'])),
-                "exit_date": convertMs(new Date(response.data[i]['exit_date'])),
-                "reserve_id": response.data[i]['id'],
-                "days": Math.floor((Date.parse(new Date(response.data[i]['exit_date'])) - Date.parse(new Date(response.data[i]['entry_date']))) / 86400000)
-            });
-        }
-    }).catch(function (error) {
+    let urlPath = (window.location.pathname).toString()
+    let houseId = urlPath.replace("/house/", "")
+    let urlName = "/api/reserves?houseId=" + houseId;
+    axios.get(urlName)
+        .then(function (response) {
+            for (let i = 0; i < response.data.length; i++) {
+                dates.push({
+                    "entry_date": convertMs(new Date(response.data[i]['entry_date'])),
+                    "exit_date": convertMs(new Date(response.data[i]['exit_date'])),
+                    "reserve_id": response.data[i]['id'],
+                    "days": (Math.floor((Date.parse(new Date(response.data[i]['exit_date'])) -
+                        Date.parse(new Date(response.data[i]['entry_date']))) / 86400000)),
+                })
+            }
+        }).catch(function (error) {
         console.log(error);
-    });
+    })
+
+
 }
 
 function isThisDayAvalible(date) {
 
-    date = convertMs(date);
+    date = convertMs(date)
 
-    for (var i = 0; i < dates.length; i++) {
+
+    for (let i = 0; i < dates.length; i++) {
 
         if (date >= dates[i].entry_date && date < dates[i].exit_date) {
             return [false, 'bg-danger'];
         }
     }
     return [true, ''];
+
 }
 
 function setMap() {
-    var location = $('#location').text();
-    var n = location.indexOf("/");
-    var latitud = "";
-    var longitud = "";
+    let location = ($('#location').text())
+    var n = location.indexOf("/")
+    let latitud = ""
+    let longitud = ""
 
-    for (var i = 0; i < n; i++) {
-        latitud += location[i];
+    for (let i = 0; i < n; i++) {
+        latitud += location[i]
     }
     if (isNaN(latitud)) {
-        latitud = 0;
+        latitud = 0
     }
 
-    for (var _i = n + 1; _i < location.length; _i++) {
-        longitud += location[_i];
+    for (let i = (n + 1); i < location.length; i++) {
+        longitud += location[i]
     }
     if (isNaN(longitud)) {
-        longitud = 0;
+        longitud = 0
     }
 
     var map = new GMaps({
@@ -376,8 +319,6 @@ function setMap() {
         lat: latitud,
         lng: longitud
     });
+
+
 }
-
-/***/ })
-
-/******/ });

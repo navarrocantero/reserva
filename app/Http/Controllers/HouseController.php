@@ -37,7 +37,7 @@ class HouseController extends Controller
         $houseSlugNameUrl = str_replace("house/", "", $request->path());
 
 
-        $house = (House::where('slugname', $houseSlugNameUrl)->first());
+        $house = (House::where('slugname', $houseSlugNameUrl)->firstOrFail());
         $features = $house->features()->get();
 
         $comments = Comment::where('house_id', $house->id)->get();
