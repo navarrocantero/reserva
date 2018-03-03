@@ -5,6 +5,8 @@
     "/js/pagination.js": "/js/pagination.js",
     "/js/globalSettings.js": "/js/globalSettings.js",
     "/js/createHouseRequest.js": "/js/createHouseRequest.js",
+    "/js/createHouse.js": "/js/createHouse.js",
     "/js/iziModal.js": "/js/iziModal.js",
-    "/js/gmaps.js": "/js/gmaps.js"
+    "/js/gmaps.js": "/js/gmaps.js",
+    "/js/dropzone.js": "/js/dropzone.js"
 }

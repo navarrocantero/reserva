@@ -6,7 +6,8 @@
         <h3 class="mt-1">Añadir nueva casa </h3>
     </div>
     <div class="col-md-12  form-group-sm">
-        <form action="{{ url('/') }}/add" method="post">
+
+        <form action="{{ url('/') }}/add" method="post" class="">
             {{ csrf_field() }}
 
 
@@ -194,8 +195,10 @@
                         <div class="tab-pane fade  w-100" id="list-images">
                             <div class="col-sm-12 pb-3">
                                 <label for="images">Imagenes</label>
-                                <input type="text" class="form-control" id="images" name="images"
-                                       value="{{old('images')}}">
+                                {{--<input type="text" class="form-control" id="images" name="images"--}}
+                                       {{--value="{{old('images')}}">--}}
+
+                                <div id="images" class="dropzone"></div>
 
                                 <div class="mt-2">
                                     @if($errors->has('images'))
@@ -209,6 +212,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
 
             </div>
@@ -220,7 +224,7 @@
     </div>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.js" type="text/javascript"></script>
+    <script src="{{ asset('js/dropzone.js') }}" ></script>
 
     <script src="{{ asset('js/createHouseRequest.js') }}" defer></script>
 @endsection

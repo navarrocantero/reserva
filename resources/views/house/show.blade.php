@@ -1,32 +1,55 @@
 @extends('layouts.app')
 
 @section('sidebar')
-    <div class="col-lg-3  col-md-12 h-100 bg-light mt-2 card"   id="comments">
+
+
+    <div class="col-12 col-sm-12 col-lg-4  bg-light mt-2 card    order-last order-sm-last order-lg-first h-100" id="comments">
+
+        <div id="map" class=" col-11 offset-1 mt-4">
+
+        </div>
+        <form class="mt-5" action="{{ url('/') }}/house/{{$house->slugname}}/confirm " method="post">
+            {{ csrf_field() }}
+            <div class="">Entrada: <input type="text" class="datepicker input-group" id="entryDate" name="entryDate">
+            </div>
+            <div class=" ">Salida: <input type="text" class="datepicker input-group" id="exitDate" name="exitDate"
+                                          disabled></div>
+
+            <p type="hidden" id="location" hidden>{{$house->location}}</p>
+
+
+            <button type="submit" class="btn   offset-1 submit-button mt-3"
+                    id="Create-reserve-submit" disabled>Reserva ya!
+            </button>
+
+
+        </form>
         <div class="card-title">
             <h4 class="text-center">Comentarios</h4>
         </div>
+        <div class="card">
         @forelse($comments as $comment)
-            <div class="card">
+
 
                 @foreach($comment as $value)
 
                     @if ($loop -> first)
                         <h5 class="h5 mt-2 card-header"><a href={{url('/user/'.$value)}}>{{$value}} </a></h5>
                     @else
-                        <span class="mt-5 mb-2 text-justify card-body text-wrap">{{$value}} </span>
+                        <span class="mb-2 text-justify card-body text-wrap mb-5">{{$value}} </span>
                     @endif
 
                 @endforeach
-            </div>
+
         @empty
-            <div class="card">
-                <h5 class="h5 mt-2 card-header">Ups esta vacio!</h5>
+
+                <span class="h5 mt-2 card-header">Ups esta vacio!</span>
                 <span class="mt-5 mb-2  card-body text-wrap">
                         Dejanos tu comentario !</span>
 
-            </div>
-        @endforelse
 
+        @endforelse
+        </div>
         @if(!$commented)
 
             <div class="m-5">
@@ -35,7 +58,7 @@
 
                     <div class="form-group">
                         <div class="row mb-1">
-                            <textarea type="text" rows="4" class="form-control valid-item" id="comment" name="comment"
+                            <textarea type="text" rows="2" class="form-control valid-item" id="comment" name="comment"
 
                             ></textarea>
 
@@ -71,12 +94,8 @@
 @endsection
 
 @section('content')
-
-
-    <div class="col-lg-9 col-md-10 mt-2 ">
-
-        {{--<a href="/"><img class="card-img-top" src="{{$house->images}}" alt=""></a>--}}
-
+    <div class="col-12 col-sm-12 col-lg-8 d-inline-flex  order-first">
+        <div class="col-lg-12 col-md-12 mt-2 offset-1  ">
 
 
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -84,74 +103,56 @@
                 <div class="carousel-inner" role="listbox">
                     @foreach($images as $image)
                         <div class="carousel-item @if($loop->first) active @endif">
-                            <img class="d-block img-fluid" src="{{$image->image_url}}" >
+                            <img class="d-block img-fluid" src="{{$image->image_url}}">
                         </div>
                     @endforeach
 
 
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        <div class="card-body">
-            <form action="{{ url('/') }}/house/{{$house->slugname}}/confirm " method="post">
-                {{ csrf_field() }}
-                <div class="d-inline-flex col-md-push-12 card-group justify-content-around  ">
-                    <div class="col-md-3 offset-md-0 col-6 offset-4">Entrada: <input type="text" class="datepicker" id="entryDate" name="entryDate">
-                    </div>
-                    <div class="col-md-3 offset-md-0 col-6 offset-4">Salida: <input type="text" class="datepicker" id="exitDate" name="exitDate"
-                                                      disabled></div>
-
-                    <p type="hidden" id="location" hidden>{{$house->location}}</p>
-
-
-                    <button type="submit" class="btn   h-100 submit-button mt-3"
-                            id="Create-reserve-submit" disabled>Reservar!
-                    </button>
-
-                    <div id="map"  class="col-10 offset-2 offset-md-0 col-md-12 mt-4">
-                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-            </form>
-
-            <h4 class="card-title">
-                <a class="card-title" href="/">{{$house->name}}</a>
-            </h4>
-            <p class="card-text">{{$house->description}}</p>
-        </div>
-        <div class="card-columns">
-            @foreach($features as $feature)
-                <p class="card-text"><a href="/feature/{{$feature->slugname}}">{{$feature->slugname}}</a></p>
-            @endforeach
-        </div>
-
-        <div class="card-footer content justify-content-between">
-            <div class="d-inline-flex   ">
-                <span class="mr-2">Capacidad Maxima</span>
-                <h5 class="text-nowrap">{{$house->max_users_house}}</h5>
-
             </div>
 
-            <div class="d-inline-flex offset-5">
-                <span class="mr-2"> Precio por persona/noche</span>
-                <h5 class="text-nowrap">{{$house->price_user_night}}</h5>
-                <i class="fa fa-euro-sign ml-2" aria-hidden="true"></i>
+            <div class="card-body">
 
+                <h4 class="card-title">
+                    <a class="card-title" href="/">{{$house->name}}</a>
+                </h4>
+                <p class="card-text">{{$house->description}}</p>
             </div>
 
+
+            <div class="card-columns">
+                @foreach($features as $feature)
+                    <p class="card-text"><a href="/feature/{{$feature->slugname}}">{{$feature->slugname}}</a></p>
+                @endforeach
+            </div>
+            <div class="card-footer content justify-content-between">
+                <div class="d-inline-flex   ">
+                    <span class="mr-2">Capacidad Maxima</span>
+                    <h5 class="text-nowrap">{{$house->max_users_house}}</h5>
+
+                </div>
+
+                <div class="d-inline-flex offset-5">
+                    <span class="mr-2"> Precio por persona/noche</span>
+                    <h5 class="text-nowrap">{{$house->price_user_night}}</h5>
+                    <i class="fa fa-euro-sign ml-2" aria-hidden="true"></i>
+
+                </div>
+
+            </div>
         </div>
     </div>
 
 
-
-
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="{{ asset('js/gmaps.js') }}" ></script>
+    <script src="{{ asset('js/gmaps.js') }}"></script>
     <script src="http://maps.google.com/maps/api/js?key=AIzaSyBNc598QIqguGVbQ3pYeeQAuHxSYgL2508"></script>
 
 

@@ -10,6 +10,7 @@ window.Bootstrap = require('bootstrap/dist/js/bootstrap');
 
 window.$ = window.jQuery = require('jquery/dist/jquery');
 
+window.Dropzone = require('bootstrap4c-dropzone/dist/css/component-dropzone.css');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

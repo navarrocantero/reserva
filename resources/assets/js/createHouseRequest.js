@@ -1,12 +1,11 @@
  let ACTIVE = "active"
 let INVALID = "invalid"
- jQuery(function($){
-     $("#price_user_night").mask("0001");
-     $("#max_users_house").mask("01");
 
- });
 
-$(function () {
+
+ $(function () {
+    // checkErrorClass()
+
     // Create house
     $("#name").on("change", validateFetch);
     $("#location").on("change", validateFetch);
@@ -15,9 +14,9 @@ $(function () {
     $("#max_users_house").on("change", validateFetch);
     $("#features").on("change", validateFetch);
     $("#description").on("change", validateFetch);
+
     // Add comment
     $("#comment").on("change", validateFetch)
-    checkErrorClass()
     $('a[data-toggle="list"]').on('shown.bs.tab', checkErrorClass);
 
     // General

@@ -29,7 +29,7 @@ class HouseController extends Controller
      */
     public function create()
     {
-        return view('house.create');
+        return view('house.test');
     }
 
     public function show(Request $request)
@@ -66,7 +66,7 @@ class HouseController extends Controller
             "house" => $house,
             "images" => $images,
             "comments" => $commentsCustom,
-            "features" => $features,
+                "features" => $features,
             "commented" => $commented
         ]);
     }

@@ -60,30 +60,28 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 38);
+/******/ 	return __webpack_require__(__webpack_require__.s = 43);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 38:
+/***/ 43:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(39);
+module.exports = __webpack_require__(44);
 
 
 /***/ }),
 
-/***/ 39:
+/***/ 44:
 /***/ (function(module, exports) {
 
 var ACTIVE = "active";
 var INVALID = "invalid";
-jQuery(function ($) {
-    $("#price_user_night").mask("0001");
-    $("#max_users_house").mask("01");
-});
 
 $(function () {
+    // checkErrorClass()
+
     // Create house
     $("#name").on("change", validateFetch);
     $("#location").on("change", validateFetch);
@@ -92,9 +90,9 @@ $(function () {
     $("#max_users_house").on("change", validateFetch);
     $("#features").on("change", validateFetch);
     $("#description").on("change", validateFetch);
+
     // Add comment
     $("#comment").on("change", validateFetch);
-    checkErrorClass();
     $('a[data-toggle="list"]').on('shown.bs.tab', checkErrorClass);
 
     // General

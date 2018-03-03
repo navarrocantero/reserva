@@ -19,7 +19,7 @@
 
 <body>
 <!-- Navbar structure -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
     <div class="container">
         <a class="navbar-brand" href="{{url('/')}}">Reserving</a>
 
