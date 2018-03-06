@@ -76,13 +76,15 @@ module.exports = __webpack_require__(52);
 /***/ 52:
 /***/ (function(module, exports) {
 
-
-
 loadProgressBar();
-$("#modal-login").iziModal();
-$("#unete-id").on("click", function () {
-    $('#modal-login').iziModal('open');
-});
+setLoginModal();
+
+function setLoginModal() {
+    $("#modal-login").iziModal();
+    $("#unete-id").on("click", function () {
+        $('#modal-login').iziModal('open');
+    });
+}
 
 /***/ })
 

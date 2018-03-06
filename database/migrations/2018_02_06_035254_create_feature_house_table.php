@@ -18,8 +18,8 @@ class CreateFeatureHouseTable extends Migration
             $table->integer('feature_id')->unsigned();
             $table->primary(['house_id', 'feature_id']);
 
-            $table->foreign('house_id')->references('id')->on('houses');
-            $table->foreign('feature_id')->references('id')->on('features');
+            $table->foreign('house_id')->references('id')->on('houses')->onDelete('cascade');
+            $table->foreign('feature_id')->references('id')->on('features')->onDelete('cascade');
 
         });
     }

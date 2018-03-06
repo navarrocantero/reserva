@@ -12,7 +12,6 @@
 
     @include('layouts.scripts')
 
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Reserving') }}</title>
 </head>
@@ -54,6 +53,7 @@
 
 
 <div class="container">
+    @include('layouts.successerror')
 
     <div class="row mt-3">
         @yield('sidebar')

@@ -198,8 +198,11 @@
                                 {{--<input type="text" class="form-control" id="images" name="images"--}}
                                        {{--value="{{old('images')}}">--}}
 
-                                <div id="images" class="dropzone"></div>
+                                <div id="dropzone" class="dropzone">
 
+                                    <div class="dz-default dz-message"
+                                    ></div>
+                                </div>
                                 <div class="mt-2">
                                     @if($errors->has('images'))
                                         @foreach($errors->get('images') as $message)
@@ -220,12 +223,12 @@
                 <button type="submit" class="btn btn-primary mt-5 mb-5 submit-button" id="Create-house-submit" disabled>Añadir
                 </button>
             </div>
+
         </form>
     </div>
 
-
     <script src="{{ asset('js/dropzone.js') }}" ></script>
 
-    <script src="{{ asset('js/createHouseRequest.js') }}" defer></script>
+    <script src="{{ asset('js/createHouseRequest.js') }}" ></script>
 @endsection
 

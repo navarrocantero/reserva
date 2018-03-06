@@ -18,6 +18,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/pagination.js', 'public/js')
     .js('resources/assets/js/reserveHouse.js', 'public/js')
     .js('resources/assets/js/globalSettings.js', 'public/js')
+    .js('resources/assets/js/updateUserPassword.js', 'public/js')
 
 
 

@@ -78,11 +78,41 @@ module.exports = __webpack_require__(44);
 
 var ACTIVE = "active";
 var INVALID = "invalid";
+window.Dropzone.autoDiscover = false;
+// let urlName = window.location.href + "/uploadImage"
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 
 $(function () {
-    // checkErrorClass()
+    setInputField();
 
+    var dropzone = $("#dropzone").dropzone({
+        url: "/add/uploadImage",
+        addRemoveLinks: true,
+        method: 'get',
+        withCredentials: false,
+        dictDefaultMessage: '<span class="text-center"><span class="font-lg visible-xs-block visible-sm-block visible-lg-block"><span class="font-lg"><i class="fa fa-caret-right text-danger"></i> Drop files <span class="font-xs">to upload</span></span><span>&nbsp&nbsp<h4 class="display-inline"> (Or Click)</h4></span>',
+        dictResponseError: 'Error uploading file!',
+        headers: {
+            'X-CSRFToken': $('meta[name="csrf-token"]').attr('content')
+        },
+        allowExt: '|gif|jpg|jpeg|png|bmp|',
+        maxFileSize: 3242880,
+        maxFiles: 5,
+        showProgress: false,
+        success: function success(file, response) {
+            console.log(response);
+        }
+
+    });
+});
+
+function setInputField() {
     // Create house
+
     $("#name").on("change", validateFetch);
     $("#location").on("change", validateFetch);
     $("#direction").on("change", validateFetch);
@@ -94,15 +124,13 @@ $(function () {
     // Add comment
     $("#comment").on("change", validateFetch);
     $('a[data-toggle="list"]').on('shown.bs.tab', checkErrorClass);
-
-    // General
-    // $(".submit-button").on("click", validarFormularioFetch);
-});
+}
 
 function validateFetch(parameter) {
     var myHeaders = new Headers();
     myHeaders.append("X-CSRF-TOKEN", $('meta[name="csrf-token"]').attr('content'));
     var form = new FormData();
+
     var inputTargetName = parameter.currentTarget.name;
     var finaInputTargetName = $("#" + inputTargetName);
     form.append(inputTargetName, finaInputTargetName.val());
@@ -113,7 +141,7 @@ function validateFetch(parameter) {
         body: form,
         credentials: "same-origin"
     };
-    var urlName = window.location.href + "/validate";
+    var urlName = window.location.href + "/profile/delete";
 
     fetch(urlName, configuracion).then(function (response) {
 

@@ -32,13 +32,11 @@
 
 
                 @foreach($comment as $value)
-
                     @if ($loop -> first)
                         <h5 class="h5 mt-2 card-header"><a href={{url('/user/'.$value)}}>{{$value}} </a></h5>
                     @else
-                        <span class="mb-2 text-justify card-body text-wrap mb-5">{{$value}} </span>
+                        <span class="mb-2 text-justify card-body text-wrap mb-5 text-truncate">{{$value}}<a href={{url('/user/'.$value)}}>... </a> </span>
                     @endif
-
                 @endforeach
 
         @empty
@@ -94,8 +92,16 @@
 @endsection
 
 @section('content')
+
     <div class="col-12 col-sm-12 col-lg-8 d-inline-flex  order-first">
         <div class="col-lg-12 col-md-12 mt-2 offset-1  ">
+            <div class="jumbotron">
+                <div class="card-columns">
+                    @foreach($features as $feature)
+                        <p class="card-text"><a href="/feature/{{$feature->slugname}}">{{$feature->slugname}}</a></p>
+                    @endforeach
+                </div>
+            </div>
 
 
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -124,15 +130,13 @@
                 <h4 class="card-title">
                     <a class="card-title" href="/">{{$house->name}}</a>
                 </h4>
-                <p class="card-text">{{$house->description}}</p>
+                <div class="card-body">
+                    <p class="card-text">{{$house->description}}</p>
+                </div>
+
             </div>
 
 
-            <div class="card-columns">
-                @foreach($features as $feature)
-                    <p class="card-text"><a href="/feature/{{$feature->slugname}}">{{$feature->slugname}}</a></p>
-                @endforeach
-            </div>
             <div class="card-footer content justify-content-between">
                 <div class="d-inline-flex   ">
                     <span class="mr-2">Capacidad Maxima</span>

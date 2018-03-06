@@ -109,7 +109,7 @@
             </div>
         </div>
             <div class="small-12 columns">
-                <button type="submit" class="button" hidden >Actualizar</button>
+                <button type="submit" class="button" hidden id="submit">Actualizar</button>
             </div>
         </form>
     </div>

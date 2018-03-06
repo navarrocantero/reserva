@@ -126,7 +126,6 @@ class UserController extends Controller
     {
         $user = (User::where('slugname', $slugname)->firstOrFail());
 
-
         if ($user == null) {
             return view('user.error', [
                 "user" => $user
@@ -152,7 +151,6 @@ class UserController extends Controller
         ];
 
         $uploadImg = $this->imgur->api('image')->upload($imageData);
-        dd($uploadImg);
         $houses = House::where('user_id', $user->id)->paginate(9);
         return view('user.profile', [
             "user" => $user,
@@ -164,5 +162,13 @@ class UserController extends Controller
     public function profile()
     {
         return view('user.profile');
+    }
+
+    public function destroy()
+    {
+
+        $this->user->delete();
+
+        return redirect()->route('home')->with('error', 'Cuenta eliminada con exito');;
     }
 }

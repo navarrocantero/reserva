@@ -19,7 +19,7 @@ class CreateUserImagesTable extends Migration
             $table->string('image_id');
             $table->string('image_url');
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

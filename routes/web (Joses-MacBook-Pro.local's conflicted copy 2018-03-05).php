@@ -10,44 +10,8 @@
 |
 */
 
-Route::group(['middleware' => 'auth'], function () {
-
-    // Profile Routes
-    Route::post('/profile', 'UserController@update');
-    Route::get('/profile', 'UserController@index');
-
-
-    Route::get('/profile/reserves', 'ReserveController@profile');
-
-    Route::post('/profile/password', 'UserController@update');
-    Route::get('/profile/password', 'UserController@profile');
-    Route::delete('/profile/delete', 'UserController@destroy');
-
-
-
-    // HOUSE routes
-    Route::get('/add', "HouseController@create");
-    Route::post('/add', "HouseController@store");
-    Route::get('/add/uploadImage', 'HouseController@uploadImage');
-
-    Route::get('house/{slugname}', "HouseController@show");
-
-    // RESERVE routes
-    Route::post('house/{slugname}/reserve', "ReserveController@validateAjax");
-    Route::post('house/{slugname}/confirm', "ReserveController@store");
-
-    // COMMENTS routes
-    Route::post('/house/{slugname}/validate', "CommentController@validateAjax");
-    Route::post('/house/{slugname}/comment', "CommentController@store");
-
-    // Asynchronus Validation Routes
-    Route::post('/add/validate', "HouseController@validateAjax");
-});
-
-
 // HOME route
-Route::get('/', "PagesController@index")->name('home');
-
+Route::get('/', "PagesController@index");
 
 Route::get('/asyncLoad', 'PagesController@asyncLoad');
 
@@ -61,3 +25,34 @@ Route::get('/user/{slugname}', 'UserController@index');
 
 // Auth Routes
 Auth::routes();
+
+Route::group(['middleware' => 'auth'], function () {
+
+    // Profile Routes
+    Route::post('/profile', 'UserController@update');
+    Route::get('/profile', 'UserController@index');
+
+    Route::get('/profile/reserves', 'ReserveController@profile');
+
+    Route::post('/profile/password', 'UserController@update');
+    Route::get('/profile/password', 'UserController@profile');
+
+
+
+
+    // HOUSE routes
+    Route::get('/add', "HouseController@create");
+    Route::post('/add', "HouseController@store");
+    Route::get('house/{slugname}', "HouseController@show");
+
+    // RESERVE routes
+    Route::post('house/{slugname}/reserve', "ReserveController@validateAjax");
+    Route::post('house/{slugname}/confirm', "ReserveController@store");
+
+    // COMMENTS routes
+    Route::post('/house/{slugname}/validate', "CommentController@validateAjax");
+    Route::post('/house/{slugname}/comment', "CommentController@store");
+
+    // Asynchronus Validation Routes
+    Route::post('/add/validate', "HouseController@validateAjax");
+});

@@ -21,8 +21,8 @@ class CreateReservesTable extends Migration
             $table->timestamp('entry_date')->nullable();
             $table->timestamp('exit_date')->nullable();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('house_id')->references('id')->on('houses');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('house_id')->references('id')->on('houses')->onDelete('cascade');
 
         });
     }

@@ -115,5 +115,8 @@ class HouseController extends Controller
         return array();
     }
 
+    public function uploadImage(){
 
+        return json_encode($_GET);
+    }
 }
