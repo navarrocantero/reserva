@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Login;
 use App\user;
 Use Imgur\Client;
 use Illuminate\Support\Facades\Auth;
@@ -73,7 +74,6 @@ class UserController extends Controller
 
         $path = $request->path();
         $user = $this->user;
-
 
         if ($path === 'profile') {
 
@@ -150,7 +150,7 @@ class UserController extends Controller
             'type' => 'url',
         ];
 
-        $uploadImg = $this->imgur->api('image')->upload($imageData);
+//        $uploadImg = $this->imgur->api('image')->upload($imageData);
         $houses = House::where('user_id', $user->id)->paginate(9);
         return view('user.profile', [
             "user" => $user,
@@ -170,5 +170,18 @@ class UserController extends Controller
         $this->user->delete();
 
         return redirect()->route('home')->with('error', 'Cuenta eliminada con exito');;
+    }
+
+    public function login(Request $request)
+    {
+        $ip = $request->ip();
+        $userId = $this->user->id;
+        $agent = ($request->server->getHeaders())['USER_AGENT'];
+        Login::create([
+            'user_ip' => $ip,
+            'user_id' => $userId,
+            'user_agent' => $agent
+        ]);
+        return redirect()->route('home');
     }
 }

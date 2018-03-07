@@ -4,11 +4,9 @@
 
     </div>
     <div class="card-body">
-        {{--<input type="text" id="email" name="email" placeholder="{{ $user->username }}"--}}
-        {{--class="{{ $errors->has('email') ? 'is-invalid-input' : ''}}">--}}
 
         <form action="{{ url('/profile')}}" method="POST">
-            {{--{{ method_field('PUT') }}--}}
+            {{ method_field('PATCH') }}
             {{ csrf_field() }}
 
             @if( $errors->has('username') )

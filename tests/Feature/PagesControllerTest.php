@@ -16,7 +16,7 @@ class PagesControllerTest extends TestCase
     public function testIndex()
     {
         $response = $this->get('/');
-        $response->assertStadtus(200);
+        $response->assertStatus(200);
         $response->assertSee('Reserving');
     }
 

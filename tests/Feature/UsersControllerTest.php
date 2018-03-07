@@ -11,14 +11,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class UsersControllerTest extends TestCase
 {
 
-    public function testIndexPublic()
-    {
-        $user = factory(User::class, 1)->create()->first();
-        $response = $this->get('/user/' . $user->slugname);
-        $response->assertStatus(200);
-        $response->assertSee('Perfil Publico');
-
-    }
+//    public function testIndexPublic()
+//    {
+//        $user = factory(User::class, 1)->create()->first();
+//        $response = $this->get('/user/' . $user->slugname);
+//        $response->assertStatus(200);
+//        $response->assertSee('Perfil Publico');
+//    }
 
     public function testIndexPrivate()
     {

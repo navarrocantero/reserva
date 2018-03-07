@@ -13,7 +13,7 @@
 Route::group(['middleware' => 'auth'], function () {
 
     // Profile Routes
-    Route::post('/profile', 'UserController@update');
+    Route::patch('/profile', 'UserController@update');
     Route::get('/profile', 'UserController@index');
 
 
@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/profile/password', 'UserController@update');
     Route::get('/profile/password', 'UserController@profile');
     Route::delete('/profile/delete', 'UserController@destroy');
-
+    Route::get('/user/login', 'UserController@login');
 
 
     // HOUSE routes
@@ -61,3 +61,5 @@ Route::get('/user/{slugname}', 'UserController@index');
 
 // Auth Routes
 Auth::routes();
+ 
+
