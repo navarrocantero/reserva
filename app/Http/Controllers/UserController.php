@@ -174,14 +174,16 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
+
         $ip = $request->ip();
         $userId = $this->user->id;
         $agent = ($request->server->getHeaders())['USER_AGENT'];
         Login::create([
             'user_ip' => $ip,
             'user_id' => $userId,
-            'user_agent' => $agent
+            'user_agent' => $agent,
+            'created_at'=> now()
         ]);
-        return redirect()->route('home');
+        return redirect()->back();
     }
 }

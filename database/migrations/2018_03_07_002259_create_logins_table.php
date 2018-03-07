@@ -19,7 +19,8 @@ class CreateLoginsTable extends Migration
             $table->text('user_ip');
             $table->text('user_agent');
             $table->integer('user_id')->unsigned();
-            $table->timestamps();
+            $table->timestamp('created_at');
+
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
