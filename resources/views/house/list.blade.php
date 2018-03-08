@@ -8,9 +8,9 @@
 
         @endforelse
 
-        <div class="col-12 text-center p-5">
-            {{$houses->links('pagination')}}
-        </div>
+            <div class="col-12 text-center p-5">
+                {{$houses->links('pagination')}}
+            </div>
     </div>
 
 

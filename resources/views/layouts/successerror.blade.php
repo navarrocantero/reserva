@@ -1,7 +1,8 @@
-@if( session('exito') )
+@if( session('success') )
     <div class="mt-2">
         <div class="alert alert-success" role="alert">
-            <h5>Actualizacion correcta !</h5>
+            <h5>{{  session('success') }}</h5>
+            {{--<h5>Actualizacion correcta !</h5>--}}
         </div>
     </div>
 @elseif( session('error'))

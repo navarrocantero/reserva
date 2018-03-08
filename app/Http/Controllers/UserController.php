@@ -27,22 +27,21 @@ class UserController extends Controller
 
         $this->middleware(function ($request, $next) {
 
+
+            if (isset($_SESSION['token'])) {
+                $this->setAccessToken($_SESSION['token']);
+
+                if ($this->imgur->checkAccessTokenExpired()) {
+                    $this->imgur->refreshToken();
+                }
+            } elseif (isset($_GET['code'])) {
+
+                $this->imgur->requestAccessToken($_GET['code']);
+                $_SESSION['token'] = $this->imgur->getAccessToken();
+            }
             $this->user = auth()->user();
             return $next($request);
         });
-
-        if (isset($_SESSION['token'])) {
-            $this->setAccessToken($_SESSION['token']);
-
-            if ($this->imgur->checkAccessTokenExpired()) {
-                $this->imgur->refreshToken();
-            }
-        } elseif (isset($_GET['code'])) {
-
-            $this->imgur->requestAccessToken($_GET['code']);
-            $_SESSION['token'] = $this->imgur->getAccessToken();
-        }
-        $this->user = auth()->user();
     }
 
     /**
@@ -98,7 +97,7 @@ class UserController extends Controller
         $user->save();
         return redirect()
             ->back()
-            ->with('exito', 'Datos actualizados');
+            ->with('success', 'Datos actualizados');
 
     }
 
@@ -125,7 +124,6 @@ class UserController extends Controller
     public function showPublic(String $slugname)
     {
         $user = (User::where('slugname', $slugname)->firstOrFail());
-
         if ($user == null) {
             return view('user.error', [
                 "user" => $user
@@ -159,17 +157,21 @@ class UserController extends Controller
         ]);
     }
 
-    public function profile()
+    public function profile(Request $request)
     {
-        return view('user.profile');
+        $user = $request->user();
+        return view('user.profile',
+            [
+                'user' => $user
+            ]
+        );
     }
 
     public function destroy()
     {
-
         $this->user->delete();
 
-        return redirect()->route('home')->with('error', 'Cuenta eliminada con exito');;
+        return redirect()->route('home')->with('success', 'Cuenta eliminada con exito');;
     }
 
     public function login(Request $request)
@@ -182,7 +184,7 @@ class UserController extends Controller
             'user_ip' => $ip,
             'user_id' => $userId,
             'user_agent' => $agent,
-            'created_at'=> now()
+            'created_at' => now()
         ]);
         return redirect()->back();
     }

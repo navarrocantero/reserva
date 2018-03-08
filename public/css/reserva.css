@@ -2,6 +2,14 @@
 /*custom font*/
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
+.inputfield{
+    height: 100px;
+    width: 300px;
+}
+.avatar{
+
+    width: 4px;
+}
 
 body {
     font-family: montserrat, arial, verdana;

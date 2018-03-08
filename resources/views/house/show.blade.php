@@ -94,7 +94,7 @@
 @section('content')
 
     <div class="col-12 col-sm-12 col-lg-8 d-inline-flex  order-first">
-        <div class="col-lg-12 col-md-12 mt-2 offset-1  ">
+        <div class="col-lg-12 col-md-12 mt-2  ">
             <div class="jumbotron">
                 <div class="card-columns">
                     @foreach($features as $feature)

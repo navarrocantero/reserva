@@ -60,45 +60,75 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 47);
+/******/ 	return __webpack_require__(__webpack_require__.s = 55);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 47:
+/***/ 55:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(48);
+module.exports = __webpack_require__(56);
 
 
 /***/ }),
 
-/***/ 48:
+/***/ 56:
 /***/ (function(module, exports) {
 
-$(function () {
-    asociarEventoAsincrono();
-});
 
-function validateAxio() {
-    event.preventDefault();
-
-    var enlace = $(event.target);
-    var valor = parseInt(enlace.text());
-
-    $(event.target).addClass("active");
-    axios.get('/asyncLoad?page=' + valor).then(function (response) {
-
-        $("#housePaginationAjaxList").html(response.data);
-        asociarEventoAsincrono();
-    }).catch(function (error) {
-        console.log(error);
+setPasswordConfirmModal();
+function setPasswordConfirmModal() {
+    $("#delete-confirm").iziModal({
+        title: 'Esta accion no se puede deshacer',
+        subtitle: 'Continuar ?',
+        headerColor: '#b92734',
+        icon: null,
+        iconText: null,
+        iconColor: '',
+        rtl: false,
+        top: true,
+        borderBottom: true,
+        padding: 0,
+        radius: 0,
+        zindex: 999,
+        iframe: false,
+        iframeHeight: 400,
+        iframeURL: null,
+        focusInput: true,
+        group: '',
+        loop: false,
+        arrowKeys: true,
+        navigateCaption: true,
+        navigateArrows: true, // Boolean, 'closeToModal', 'closeScreenEdge'
+        history: false,
+        restoreDefaultContent: false,
+        autoOpen: 0, // Boolean, Number
+        bodyOverflow: true,
+        fullscreen: true,
+        openFullscreen: false,
+        closeOnEscape: true,
+        closeButton: true,
+        appendTo: 'body', // or false
+        appendToOverlay: 'body', // or false
+        overlay: true,
+        overlayClose: true,
+        overlayColor: 'rgba(0, 0, 0, 0.4)',
+        transitionIn: 'comingIn',
+        transitionOut: 'comingOut',
+        transitionInOverlay: 'fadeIn',
+        transitionOutOverlay: 'fadeOut',
+        onFullscreen: function onFullscreen() {},
+        onResize: function onResize() {},
+        onOpening: function onOpening() {},
+        onOpened: function onOpened() {},
+        onClosing: function onClosing() {},
+        onClosed: function onClosed() {},
+        afterRender: function afterRender() {}
     });
-    window.scrollTo(0, 0);
-}
-
-function asociarEventoAsincrono() {
-    $(".pagination > li > a").on("click", validateAxio);
+    $(".delete_house").on("click", function () {
+        $('#delete-confirm').iziModal('open');
+    });
 }
 
 /***/ })

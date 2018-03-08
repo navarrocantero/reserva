@@ -18,11 +18,11 @@ class Comment extends Model
 
     public function user()
     {
-        return $this->hasOne('App\User');
+        return $this->belongsTo(User::class);
     }
 
     public function house ()
     {
-        return $this->hasOne('App\House');
+        return $this->belongsTo(House::class);
     }
 }

@@ -25,8 +25,25 @@ class User extends Authenticatable
     ];
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function image(){
+    public function image()
+    {
         return $this->hasOne(UserImage::class);
+    }
+
+    public function isMe(User $user)
+    {
+        return $this->slugname === $user->slugname;
+    }
+
+    public function houses()
+    {
+
+        return $this->hasMany(House::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
 }

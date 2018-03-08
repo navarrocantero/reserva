@@ -11,7 +11,7 @@ class Reserve extends Model
 
     public function house()
     {
-        return $this->hasMany(House::class);
+        return $this->belongsTo(House::class);
     }
 
     public function user()

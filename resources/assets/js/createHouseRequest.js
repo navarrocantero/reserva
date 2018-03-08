@@ -66,7 +66,7 @@ function validateFetch(parameter) {
         body: form,
         credentials: "same-origin"
     };
-    let urlName = window.location.href + "/profile/delete"
+    let urlName = window.location.href + "/validate"
 
     fetch(urlName, configuracion).then(function (response) {
 

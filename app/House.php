@@ -26,4 +26,8 @@ class House extends Model
         return $this->hasMany(HouseImage::class);
     }
 
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
 }

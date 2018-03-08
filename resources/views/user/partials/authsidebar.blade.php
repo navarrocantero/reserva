@@ -12,11 +12,11 @@
 
         <div class="card-text">
 
-            <a href="" class="list-group-item">Alquileres</a>
+            <a href="{{url('profile/houses')}}" class="list-group-item">Casas</a>
         </div>
         <div class="card-text">
 
-            <a href="" class="list-group-item">Comentarios</a>
+            <a href="{{url('profile/comments')}}" class="list-group-item">Comentarios</a>
         </div>
         <div class="card-text">
 

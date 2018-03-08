@@ -7,6 +7,9 @@ use App\House;
 use App\Http\Requests\CreateCommentAjaxRequest;
 use App\Http\Requests\CreateCommentRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
+
 
 class CommentController extends Controller
 {
@@ -25,7 +28,7 @@ class CommentController extends Controller
     public function store(CreateCommentRequest $request)
     {
         $userId = $request->user()->id;
-        $houseSlugNameUrl = str_replace(["house/","/comment" ], "", $request->path());
+        $houseSlugNameUrl = str_replace(["house/", "/comment"], "", $request->path());
 
         $houseId = (House::where('slugname', $houseSlugNameUrl)->first())->id;
 
@@ -42,5 +45,59 @@ class CommentController extends Controller
 
 
         return array();
+    }
+
+    public function destroy(Request $request)
+    {
+        $user = Auth::user();
+        $commentID = $_POST['comment-id'];
+        $comment = Comment::where(['id' => $commentID])->firstOrFail();
+        if ($comment->user_id === $user->id) {
+            $comment->delete();
+            return redirect()->back()->with('success', 'Comentario eliminada con exito');;
+        } else {
+            return redirect()->back()->with('error', 'No se ha eliminado el comentario');;
+
+        }
+    }
+
+    public function profile(Request $request)
+    {
+        $user = $request->user();
+
+        $comments = Comment::where('user_id', $user->id)->get();
+        return view('user.profile',
+            [
+                'comments' => $comments,
+                'user' => $user
+            ]
+        );
+    }
+
+    public function edit(Request $request)
+    {
+
+        $user = $request->user();
+        $commentID = $_GET['id'];
+        $comment = Comment::where(['id' => $commentID])->firstOrFail();
+        if ($comment->user_id === $user->id) {
+            return View::make('comment.edit', ['comment' => $comment])->render();
+        }
+    }
+
+    public function update(Request $request)
+    {
+        $user = $request->user();
+        $commentID = $_POST['comment-id'];
+        $commentSlug = $_POST['comment'];
+        $comment = Comment::where(['id' => $commentID])->firstOrFail();
+        if ($comment->user()->firstOrFail()->id === $user->id) {
+            $comment->update(
+                ['comment' => $commentSlug]
+            );
+            return redirect()
+                ->back()
+                ->with('success', 'Datos actualizados');
+        }
     }
 }

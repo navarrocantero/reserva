@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\House;
+
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CreateReserveRequest;
 use App\Reserve;
 use Carbon\Carbon;
@@ -15,13 +17,21 @@ class ReserveController extends Controller
         $user = $request->user();
         $houseNameUrl = str_replace(["house/", "/confirm"], "", $request->path());
         $house = House::where('slugname', $houseNameUrl)->first();
-        Reserve::create([
-            'user_id' => $user->id,
-            'house_id' => $house->id,
-            'entry_date' => Carbon::parse(request()->input('entryDate')),
-            'exit_date' => Carbon::parse(request()->input('exitDate'))
-        ]);
-        return back();
+        $entryDate = ($_POST['entryDate']);
+        $exitDate = ($_POST['exitDate']);
+
+        $checkActualReserve = $house->reserves()->where('entry_date', '>=', $entryDate)
+            ->where('entry_date', '<', $exitDate)->get();
+        if ($checkActualReserve !== 0) {
+            Reserve::create([
+                'user_id' => $user->id,
+                'house_id' => $house->id,
+                'entry_date' => Carbon::parse($entryDate),
+                'exit_date' => Carbon::parse($exitDate)
+            ]);
+            return back()->with('success', 'Reserva realizada con exito');
+
+        }
     }
 
     /**Coje el nombre de la casa por la URL y comprueba que no este ocupada entre las fechas introducidas por el
@@ -54,6 +64,7 @@ class ReserveController extends Controller
     public function profile(Request $request)
     {
         $user = $request->user();
+
         $reserves = Reserve::where('user_id', $user->id)->get();
         return view('user.profile',
             [
@@ -61,5 +72,20 @@ class ReserveController extends Controller
                 'user' => $user
             ]
         );
+    }
+
+    public function destroy(Request $request)
+    {
+        $user = Auth::user();
+        $reserveId = str_replace("profile/reserves/delete/", "", $request->path());
+        $reserve = Reserve::where(['id' => $reserveId])->firstOrFail();
+
+        if ($reserve->user()->first()->id === $user->id) {
+            $reserve->delete();
+            return redirect()->back()->with('success', 'Reserva eliminada con exito');;
+        } else {
+            return redirect()->back()->with('error', 'No se ha eliminado la reserva');;
+
+        }
     }
 }

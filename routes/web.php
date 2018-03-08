@@ -12,36 +12,41 @@
 
 Route::group(['middleware' => 'auth'], function () {
 
+    Route::post('/add/validate', "HouseController@validateAjax"); // Ruta para validar casaas async
     // Profile Routes
-    Route::patch('/profile', 'UserController@update');
-    Route::get('/profile', 'UserController@index');
+    Route::patch('/profile', 'UserController@update');    // Actualiza la entidad usuario
+    Route::post('/profile/password', 'UserController@update');       // Actualiza los datos de acceso
 
+    Route::get('/profile', 'UserController@index');      // Muestra el perfil privado de usuario
+    Route::get('/profile/reserves', 'ReserveController@profile');   // Muestra las reservas del usuario
+    Route::get('/profile/comments', 'CommentController@profile');  // Muestra los comentarios del usuario
+    Route::get('/profile/password', 'UserController@profile');   // Muestra los datos de acceso
+    Route::get('/profile/houses', 'HouseController@profile');   // Muestra los datos de acceso
 
-    Route::get('/profile/reserves', 'ReserveController@profile');
-
-    Route::post('/profile/password', 'UserController@update');
-    Route::get('/profile/password', 'UserController@profile');
-    Route::delete('/profile/delete', 'UserController@destroy');
-    Route::get('/user/login', 'UserController@login');
+    Route::delete('/profile/houses/delete/{slugname}', 'HouseController@destroy'); // Destruye la entidad casa
+    Route::delete('/profile/reserves/delete/{id}', 'ReserveController@destroy'); // Destruye la entidad casa
+    Route::delete('/profile/delete', 'UserController@destroy'); // Destruye la entidad usuario
+    Route::delete('/profile/comment/delete', 'CommentController@destroy'); // Destruye la entidad comentario
+    Route::get('/user/login', 'UserController@login');   // Metodo usado para redireccionar tras login
 
 
     // HOUSE routes
-    Route::get('/add', "HouseController@create");
-    Route::post('/add', "HouseController@store");
-    Route::get('/add/uploadImage', 'HouseController@uploadImage');
-
-    Route::get('house/{slugname}', "HouseController@show");
+    Route::get('/add', "HouseController@create"); // Muestra el menu de añadir casa
+    Route::post('/add', "HouseController@store"); // Crear casa
+    Route::get('/add/uploadImage', 'HouseController@uploadImage'); // Ruta para subir imagenes async
+    Route::get('house/{slugname}', "HouseController@show"); //Muestra la entidad casa
 
     // RESERVE routes
-    Route::post('house/{slugname}/reserve', "ReserveController@validateAjax");
-    Route::post('house/{slugname}/confirm', "ReserveController@store");
+    Route::post('house/{slugname}/reserve', "ReserveController@validateAjax");  // Ruta para validar reservas async
+    Route::post('house/{slugname}/confirm', "ReserveController@store"); // Crea reserva
 
     // COMMENTS routes
-    Route::post('/house/{slugname}/validate', "CommentController@validateAjax");
-    Route::post('/house/{slugname}/comment', "CommentController@store");
+    Route::post('/house/{slugname}/validate', "CommentController@validateAjax"); // Ruta para validar comentarios async
+    Route::post('/house/{slugname}/comment', "CommentController@store"); // Crea comentario
+    Route::get('/comment/edit', "CommentController@edit"); // Edita comentario
+    Route::post('/comment/update', "CommentController@update"); // Actualiza comentario
 
-    // Asynchronus Validation Routes
-    Route::post('/add/validate', "HouseController@validateAjax");
+
 });
 
 
@@ -49,14 +54,14 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/', "PagesController@index")->name('home');
 
 
-Route::get('/asyncLoad', 'PagesController@asyncLoad');
+Route::get('/asyncLoad', 'PagesController@asyncLoad'); // Ruta para paginar async
 
 
 // FEATURES routes
-Route::get('/feature/{slugname}', "FeatureController@index");
+Route::get('/feature/{slugname}', "FeatureController@index"); // Muestra la entidad caracteristica
 
 // Profile Routes
-Route::get('/user/{slugname}', 'UserController@index');
+Route::get('/user/{slugname}', 'UserController@index'); // Muestra el perfil publico de usuario
 
 
 // Auth Routes

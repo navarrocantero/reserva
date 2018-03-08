@@ -1,7 +1,7 @@
-<div class="card-body">
+<div class="card mt-2">
     {{--<input type="text" id="email" name="email" placeholder="{{ $user->username }}"--}}
     {{--class="{{ $errors->has('email') ? 'is-invalid-input' : ''}}">--}}
-
+<div class="card-header">
     <form action="{{ url('/profile/password') }}" method="POST">
         {{ csrf_field() }}
         {{--{{ method_field('PUT') }}--}}
@@ -51,11 +51,13 @@
                 <span class="input-group-text "><i class="fas fa-key"></i></span>
             </div>
         </div>
-
+</div>
+        <div class="card-footer">
    <div class="btn btn-danger mt-5" id="delete-user">Borrar Cuenta</div>
 
         <div class="small-12 columns">
             <button type="submit" class="button" hidden>Actualizar</button>
+        </div>
         </div>
     </form>
 
@@ -82,5 +84,5 @@
     </form>
 </div>
 </div>
-<script src="{{ asset('js/updateUserPassword.js') }}" defer></script>
+<script src="{{ asset('js/userupdate/updateUserPassword.js') }}" defer></script>
 

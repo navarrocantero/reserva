@@ -9,6 +9,7 @@ use App\Http\Requests\CreateHouseRequest;
 use App\Http\Requests\CreateHouseAjaxRequest;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HouseController extends Controller
 {
@@ -31,6 +32,22 @@ class HouseController extends Controller
     {
         return view('house.test');
     }
+
+    public function destroy(Request $request)
+    {
+        $user = Auth::user();
+        $houseSlugNameUrl = str_replace("profile/houses/delete/", "", $request->path());
+        $house = House::where(['slugname' => $houseSlugNameUrl])->firstOrFail();
+
+        if ($house->user_id === $user->id) {
+            $house->delete();
+            return redirect()->back()->with('success', 'Casa eliminada con exito');;
+        }else{
+            return redirect()->back()->with('error', 'No se ha eliminado la casa');;
+
+        }
+    }
+
 
     public function show(Request $request)
     {
@@ -66,7 +83,7 @@ class HouseController extends Controller
             "house" => $house,
             "images" => $images,
             "comments" => $commentsCustom,
-                "features" => $features,
+            "features" => $features,
             "commented" => $commented
         ]);
     }
@@ -115,8 +132,21 @@ class HouseController extends Controller
         return array();
     }
 
-    public function uploadImage(){
+    public function uploadImage()
+    {
 
         return json_encode($_GET);
+    }
+
+    public function profile(Request $request)
+    {
+        $user = $request->user();
+        $houses = $user->houses()->get();
+        return view('user.profile',
+            [
+                'user' => $user,
+                'houses' => $houses
+            ]
+        );
     }
 }

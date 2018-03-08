@@ -1,12 +1,14 @@
-<div class="card mt-2">
+<div class="card">
     <div class="card-header align-items-center ">
         <img class="imagen " src="{{$avatar}}">
 
     </div>
-    <div class="card-footer">
+    <div class="card-body">
+        {{--<input type="text" id="email" name="email" placeholder="{{ $user->username }}"--}}
+        {{--class="{{ $errors->has('email') ? 'is-invalid-input' : ''}}">--}}
 
         <form action="{{ url('/profile')}}" method="POST">
-            {{ method_field('PATCH') }}
+            {{--{{ method_field('PUT') }}--}}
             {{ csrf_field() }}
 
             @if( $errors->has('username') )
@@ -111,4 +113,5 @@
             </div>
         </form>
     </div>
+</div>
 </div>

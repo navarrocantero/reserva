@@ -13,14 +13,20 @@
         @elseif(Request::is('profile/password'))
             @include('user.partials.password')
 
+        @elseif(Request::is('profile/comments'))
+            @include('user.partials.comments')
+
+        @elseif(Request::is('profile/houses'))
+            @include('user.partials.houses')
+
         @endif
     </div>
 @endsection
 
 @section('sidebar')
-    @if(!@auth)
-        @include('user.partials.sidebar')
-    @elseif(@auth)
+    @if(Auth::check() && Auth::user()->isMe($user))
         @include('user.partials.authsidebar')
+    @else
+        @include('user.partials.sidebar')
     @endif
 @endsection

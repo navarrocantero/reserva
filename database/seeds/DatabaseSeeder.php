@@ -13,13 +13,11 @@ class DatabaseSeeder extends Seeder
     {
         $users = factory(App\User::class, mt_rand(0, 1000))->create()->each(function (App\User $user) {
             factory(\App\UserImage::class, 1)->create(['user_id' => $user->id]);
+            factory(\App\Login::class,  mt_rand(0, 100))->create(['user_id' => $user->id]);
 
         });
-//        $houseImages = factory(\App\HouseImage::class, 1)->create()->each(function (App\HouseImage $houseImage) {
-//        });;
-
-
         $houses = [];
+
 
         for ($i = 0; $i < sizeof($users); $i++) {
             $houses[$i] = factory(App\House::class, mt_rand(0, 2))->create(['user_id' => $users[$i]->id])
