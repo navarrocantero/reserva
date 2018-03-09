@@ -9,21 +9,20 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class PagesControllerTest extends TestCase
 {
     /**
-     * Test de la pagina principal '/'
-     * @test
-     * @return void
+     * Route::get '/'
+     * PagesController@index
      */
     public function testIndex()
     {
         $response = $this->get('/');
         $response->assertStatus(200);
         $response->assertSee('Reserving');
+
     }
 
     /**
-     * Test de la pagina  '/asyncLoad'
-     * @test
-     * @return void
+     * Route::get /asyncLoad
+     * PagesController@asyncLoad
      */
     public function testAsyncLoad()
     {

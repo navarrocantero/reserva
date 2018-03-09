@@ -6,6 +6,8 @@ use App\Comment;
 use App\House;
 use App\Http\Requests\CreateCommentAjaxRequest;
 use App\Http\Requests\CreateCommentRequest;
+use App\Http\Requests\UpdateCommentRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
@@ -85,19 +87,21 @@ class CommentController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function update(UpdateCommentRequest $request)
     {
-        $user = $request->user();
-        $commentID = $_POST['comment-id'];
-        $commentSlug = $_POST['comment'];
-        $comment = Comment::where(['id' => $commentID])->firstOrFail();
+        $user = Auth::user();
+        $commentId = str_replace(["comment/update/"], "", $request->path());
+        $comment = Comment::where(['id' => $commentId])->firstOrFail();
+
         if ($comment->user()->firstOrFail()->id === $user->id) {
             $comment->update(
-                ['comment' => $commentSlug]
+                ['comment' => $request->input('comment')]
             );
             return redirect()
                 ->back()
                 ->with('success', 'Datos actualizados');
+        } else {
+            return redirect()->back();
         }
     }
 }

@@ -76,7 +76,8 @@ module.exports = __webpack_require__(60);
 /***/ 60:
 /***/ (function(module, exports) {
 
-setPasswordConfirmModal();
+setDeleteModal();
+setEditModal();
 
 function validateFetch() {
     event.preventDefault();
@@ -90,7 +91,7 @@ function validateFetch() {
     });
 }
 
-function setPasswordConfirmModal() {
+function setDeleteModal() {
 
     $("#delete-confirm").iziModal({
         title: 'Esta accion no se puede deshacer',
@@ -139,13 +140,26 @@ function setPasswordConfirmModal() {
         onClosed: function onClosed() {},
         afterRender: function afterRender() {}
     });
-    $("#edit-comment").iziModal({});
+    $("#edit-comment").iziModal({
+        onOpened: function onOpened() {
+            setEditModal();
+        }
+
+    });
 
     $(".delete_comment").on("click", function () {
         $('#delete-confirm').iziModal('open');
     });
 
     $(".edit_comment").on("click", validateFetch);
+}
+
+function setEditModal() {
+    console.log("ok");
+    console.log($("#comment"));
+    $("#comment-submit").click(function () {
+        "sdf";
+    });
 }
 
 /***/ })

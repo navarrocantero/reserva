@@ -10,9 +10,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class FeaturesControllerTest extends TestCase
 {
     /**
-     * Test de la ruta '/feature/{Slugname}'
-     * @test
-     * @return void
+     * Route::get /feature/{slugname}
+     * FeatureController@index
      */
     public function testIndex()
     {

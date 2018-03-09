@@ -28,9 +28,7 @@
         <td> hay</td>
         <td> datos</td>
         <td> para</td>
-        <td> mostrar</td>
-        <td> !</td>
-
+        <td> mostrar !</td>
     @endforelse
     </tbody>
 </table>

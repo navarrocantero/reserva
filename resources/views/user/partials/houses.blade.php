@@ -16,7 +16,7 @@
 
             <tr>
                 <th> {{$house->id}}</th>
-                <td><a href="/house/{{$house->slugname}}"></a>{{$house->name}}</td>
+                <td><a href="/house/{{$house->slugname}}">{{$house->name}}</a></td>
                 <td>{{$house->price_user_night}}</td>
                 <td>{{$house->direction}}</td>
                 <td><a href=""><i class="fas fa-pencil-alt"></i>

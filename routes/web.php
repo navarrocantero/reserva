@@ -44,7 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/house/{slugname}/validate', "CommentController@validateAjax"); // Ruta para validar comentarios async
     Route::post('/house/{slugname}/comment', "CommentController@store"); // Crea comentario
     Route::get('/comment/edit', "CommentController@edit"); // Edita comentario
-    Route::post('/comment/update', "CommentController@update"); // Actualiza comentario
+    Route::patch('/comment/update/{id}', "CommentController@update")->name('comment.patch'); // Actualiza comentario
 
 
 });

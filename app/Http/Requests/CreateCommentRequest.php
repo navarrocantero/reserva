@@ -37,7 +37,7 @@ class CreateCommentRequest extends FormRequest
 
     protected function validateAddComment()
     {
-        return 'min:50|required';
+        return 'min:50|required|max:500';
 
     }
 
@@ -45,6 +45,7 @@ class CreateCommentRequest extends FormRequest
     {
         $messages = array();
         $messages["comment.min"] = "Longitud minima de 50";
+        $messages["comment.max"] = "Longitud maxima de 500";
         $messages["comment.required"] = "El comentario es obligatorio";
         return $messages;
     }

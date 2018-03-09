@@ -1,10 +1,10 @@
-setPasswordConfirmModal()
-
+setDeleteModal()
+setEditModal()
 
 function validateFetch() {
     event.preventDefault();
     let id = $(this).attr('id');
-    axios.get('/comment/edit?id='+id).then(function (response) {
+    axios.get('/comment/edit?id=' + id).then(function (response) {
         $("#comment-container").html(response.data);
 
     }).catch(function (error) {
@@ -14,7 +14,7 @@ function validateFetch() {
     });
 }
 
-function setPasswordConfirmModal() {
+function setDeleteModal() {
 
     $("#delete-confirm").iziModal({
         title: 'Esta accion no se puede deshacer',
@@ -70,7 +70,12 @@ function setPasswordConfirmModal() {
         afterRender: function () {
         }
     });
-    $("#edit-comment").iziModal({});
+    $("#edit-comment").iziModal({
+        onOpened: function () {
+            setEditModal()
+        }
+
+    });
 
     $(".delete_comment").on("click", function () {
         $('#delete-confirm').iziModal('open');
@@ -78,4 +83,13 @@ function setPasswordConfirmModal() {
     });
 
     $(".edit_comment").on("click", validateFetch);
+}
+
+function setEditModal() {
+    console.log("ok")
+    console.log($("#comment"))
+    $("#comment-submit").click( function () {
+        "sdf"
+    });
+
 }

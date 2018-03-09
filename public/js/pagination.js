@@ -88,7 +88,6 @@ function validateAxio() {
 
     $(event.target).addClass("active");
     axios.get('/asyncLoad?page=' + valor).then(function (response) {
-
         $("#housePaginationAjaxList").html(response.data);
         asociarEventoAsincrono();
     }).catch(function (error) {

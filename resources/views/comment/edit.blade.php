@@ -1,7 +1,7 @@
 <div class="col-12 mt-2 mb-2">
-    <form action="{{ url('/comment/update')}}" method="POST">
+    <form action="{{ url('/comment/update/'.$comment->id)}}" method="POST" enctype="multipart/form-data">
 
-        {{--{{ method_field('PATCH') }}--}}
+        {{ method_field('PATCH') }}
         {{ csrf_field() }}
 
 
@@ -15,7 +15,8 @@
         </div>
         <div class=" d-inline-flex justify-content-between w-100">
             <button class="btn btn-danger   " data-izimodal-close=""> Cancelar</button>
-            <button class="btn btn-success" type="submit"> Actualizar</button>
+
+            <button class="btn btn-success" type="submit" id="comment-submit"> Actualizar</button>
         </div>
 
     </form>
