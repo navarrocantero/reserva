@@ -10,7 +10,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class UsersControllerTest extends Helper
+class UsersControllerTest extends TestCase
 {
     /**
      * Muestra el perfil publico de usuario

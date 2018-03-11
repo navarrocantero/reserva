@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class PagesControllerTest extends Helper
+class PagesControllerTest extends TestCase
 {
     /**
      * Ruta raiz
