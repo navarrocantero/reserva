@@ -94,6 +94,12 @@
     PUSHER_APP_CLUSTER=mt1
 
 
+- En la carpeta del proyecto instala las dependencias de composer con el comando 
+
+  ```
+  composer install
+  ```
+
 
     ```
 
@@ -101,11 +107,6 @@
 
       vagrant -up --provision
 
-- En la carpeta del proyecto instala las dependencias de composer con el comando 
-
-  ```
-  composer install
-  ```
 
 - Ya esta lista la aplicación para funcionar 
 
