@@ -21,6 +21,8 @@
 
 - Instala Composer siguiendo el siguiente  [tutorial](https://getcomposer.org/download/) : 
 
+- Instala Phpunit siguiente el siguiente [tutorial](https://akrabat.com/global-installation-of-php-tools-with-composer/) :
+
 - Una vez tengas la maquina virtual funcionando localiza el archivo **Homestead.yaml**
 
 - Clona  o descarga el proyecto en tu directorio y editas el archivo **Homestead.yaml** así :
