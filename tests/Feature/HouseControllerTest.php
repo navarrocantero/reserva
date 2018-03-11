@@ -20,24 +20,19 @@ class HouseControllerTest extends TestCase
      */
     public function testShow()
     {
-        $user = factory(User::class, 1)->create()->first();
+        $user = $this->logNewUser();
         $house = factory(House::class, 1)->create(['user_id' => $user->id])->first();
+        $noImageUrl = House::$NO_IMAGE_LINK;
+
+        factory(HouseImage::class, 1)->create(
+            ['house_id' => $house->id,
+                'image_url' => $noImageUrl]
+        );
         $response = $this->actingAs($user)->get('/house/' . $house->slugname);
         $response->assertStatus(200);
         $response->assertSee(' <form class="mt-5" action="http://reserva.test/house/');
-    }
+        $user->delete();
 
-    /**
-     * Funcion  interna que crea, logea y devuelve a un usuario
-     */
-    private function logNewUser()
-    {
-        $user = factory(User::class, 1)->create()->first();
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'secret',
-        ]);
-        return $user;
     }
 
     /**
@@ -52,7 +47,7 @@ class HouseControllerTest extends TestCase
         $streetName = $faker->streetName;
 
 
-        $user = $this->logNewUser(new User());
+        $user = $this->logNewUser();
         $response = $this->actingAs($user)->post('/add', [
             'user_id' => $user->id,
             'location' => ($faker->latitude . "/" . $faker->longitude),
@@ -63,11 +58,13 @@ class HouseControllerTest extends TestCase
             'rating' => intval(rand(0, 10)),
             'max_users_house' => rand(1, 9),
             'description' => $faker->realText(200),
-            'features'=> 'wifi, bar, television, juegos, playa, montaña , coches, masajes'
-        ]) ;
+            'features' => 'wifi, bar, television, juegos, playa, montaña , coches, masajes'
+        ]);
         $this->assertDatabaseHas('houses', [
             'user_id' => $user->id,
         ]);
+        $user->delete();
+
     }
 
     /**
@@ -78,10 +75,11 @@ class HouseControllerTest extends TestCase
     public function testAdd()
     {
 
-        $user = $this->logNewUser(new User());
+        $user = $this->logNewUser();
         $response = $this->actingAs($user)->get('/add');
         $response->assertSee('Añadir nueva casa');
 
+        $user->delete();
 
     }
 
@@ -92,14 +90,17 @@ class HouseControllerTest extends TestCase
      */
     public function testDelete()
     {
-        $user = $this->logNewUser(new User());
+        $user = $this->logNewUser();
         $house = factory(House::class)->create(['user_id' => $user->id])->first();
+        $noImageUrl = House::$NO_IMAGE_LINK;
 
-        $response = ($this->actingAs($user)->delete('/houses/delete/'.$house->slugname));
+
+        $response = ($this->actingAs($user)->delete('profile/houses/delete/' . $house->slugname));
         $this->assertDatabaseMissing('houses', [
             'user_id' => $user->id,
             'id' => $house->id
         ]);
+        $user->delete();
 
     }
 
@@ -108,12 +109,21 @@ class HouseControllerTest extends TestCase
      * Route::get /profiles/houses
      * HouseController@profile
      */
-    public function testProfile(){
-        $user = $this->logNewUser(new User());
-        $house = factory(House::class,1)->create(['user_id' => $user->id])->first();
+    public function testProfile()
+    {
+        $user = $this->logNewUser();
+        $house = factory(House::class, 1)->create(['user_id' => $user->id])->first();
+        $noImageUrl = House::$NO_IMAGE_LINK;
+
+        factory(HouseImage::class, 1)->create(
+            ['house_id' => $house->id,
+                'image_url' => $noImageUrl]
+        );
         $response = ($this->actingAs($user)->get('/profile/houses/'));
         $response->assertStatus(200);
         $response->assertSee($house->slugname);
+        $user->delete();
+
     }
 
     /**
@@ -123,21 +133,29 @@ class HouseControllerTest extends TestCase
      */
     public function testUpdate()
     {
-        $user = $this->logNewUser(new User());
+
+        $user = $this->logNewUser();
         $userId = $user->id;
         $house = factory(House::class, 1)->create(
             ['user_id' => $userId,]
         )->first();
+        $noImageUrl = House::$NO_IMAGE_LINK;
 
+        factory(HouseImage::class, 1)->create(
+            ['house_id' => $house->id,
+                'image_url' => $noImageUrl]
+        );
 
         $this->patch('/house/update/' . $house->id, [
-       'price_user_night' =>19.90
+            'price_user_night' => 19.90
         ]);
 
         $this->assertDatabaseHas('houses', [
             'id' => $house->id,
-            'price_user_night' =>19.90
+            'price_user_night' => 19.90
         ]);
+        $user->delete();
+
     }
 
     /**
@@ -146,20 +164,37 @@ class HouseControllerTest extends TestCase
      * HouseController@edit
      */
     public function testEdit()
-    {        gc_collect_cycles();
+    {
+        gc_collect_cycles();
+        $noImageUrl = House::$NO_IMAGE_LINK;
 
 
-        $user = $this->logNewUser(new User());
+        $user = $this->logNewUser();
         $house = factory(House::class, 1)->create(
             ['user_id' => $user->id,]
         )->first();
-        $image = factory(HouseImage::class,1)->create(
-            ['house_id'=> $house->id]
+        $image = factory(HouseImage::class, 1)->create(
+            ['house_id' => $house->id,
+                'image_url' => $noImageUrl]
         );
 
         $response = $this->actingAs($user)
-            ->get('house/edit/'.$house->id);
+            ->get('house/edit/' . $house->id);
         $response->assertSee($house->name);
+        $user->delete();
 
+    }
+
+    /**
+     * Funcion  interna que crea, logea y devuelve a un usuario
+     */
+    protected function logNewUser()
+    {
+        $user = factory(User::class, 1)->create()->first();
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'secret',
+        ]);
+        return $user;
     }
 }

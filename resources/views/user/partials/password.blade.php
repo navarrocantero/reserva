@@ -1,4 +1,4 @@
-<div class="card mt-2"> -
+<div class="card mt-2">
 <div class="card-header">
     <form action="{{ url('/profile/password') }}" method="POST">
         {{ method_field('PATCH') }}

@@ -17,26 +17,21 @@ use Illuminate\Support\Facades\View;
 
 class HouseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Devuelve la vista para crear una casa
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
         return view('house.test');
     }
 
+    /**
+     *  Metodo para borrar una casa solo si pertenece al usuario Auth
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(Request $request)
     {
         $user = Auth::user();
@@ -52,6 +47,11 @@ class HouseController extends Controller
         }
     }
 
+    /**
+     * Muestra en detalle una casa, sus comentarios, sus reservas, sus imagenes
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Request $request)
     {
         $houseSlugNameUrl = str_replace("house/", "", $request->path());
@@ -92,26 +92,22 @@ class HouseController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * Crea una nueva casa, con sus caracteristicas e imagen
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
         $noImageUrl = "https://vignette3.wikia.nocookie.net/lego/images/a/ac/No-Image-Basic.png";
 
-        if( $image = $request->file('image') ){
-            $url = $image->store('images','public');
-        }else{
+        if ($image = $request->file('image')) {
+            $url = $image->store('images', 'public');
+        } else {
             $url = $noImageUrl;
         }
 
         $user = $request->user();
         $features = (explode(',', $request->input('features')));
-
-
-        $feature = $request->input('features');
 
         $house = House::create([
             'user_id' => $user->id,
@@ -125,7 +121,7 @@ class HouseController extends Controller
             'description' => $request->input('description'),
         ]);
 
-        $createImage = HouseImage::create([
+        HouseImage::create([
             'image_url' => $url,
             'image_id' => mt_rand(0, 3000),
             'house_id' => $house->id,
@@ -142,7 +138,7 @@ class HouseController extends Controller
     }
 
     /**
-     * @param $results
+     * Funcion interna para borrar campos que no interesan en array asociativo
      */
     public function eraseFields($results): array
     {
@@ -152,6 +148,11 @@ class HouseController extends Controller
         return $results;
     }
 
+    /**
+     * Metodo para validar async la creacion de una casa
+     * @param CreateHouseAjaxRequest $request
+     * @return array
+     */
     protected function validateAjax(CreateHouseAjaxRequest $request)
     {
 
@@ -159,12 +160,22 @@ class HouseController extends Controller
         return array();
     }
 
+    /**
+     * WIP
+     * @param Request $request
+     * @return string
+     */
     public function uploadImage(Request $request)
     {
 
         return json_encode($request->file());
     }
 
+    /**
+     * Muestra las casas de un usuario, en el menu de su perfil
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function profile(Request $request)
     {
         $user = $request->user();
@@ -177,6 +188,11 @@ class HouseController extends Controller
         );
     }
 
+    /**
+     * Edita los atributos de una casa dentro del menu del perfil
+     * @param Request $request
+     * @return mixed
+     */
     public function edit(Request $request)
     {
 
@@ -191,10 +207,15 @@ class HouseController extends Controller
         }
     }
 
+    /**
+     * Actualiza una casa de un usuario
+     * @param UpdateHouseRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(UpdateHouseRequest $request)
     {
 
-        $results =  $this->eraseFields(array_filter($request->input()));
+        $results = $this->eraseFields(array_filter($request->input()));
         $file = $request->file('image');
         $user = Auth::user();
         $houseId = str_replace(["house/update/"], "", $request->path());
@@ -202,9 +223,9 @@ class HouseController extends Controller
         if ($house->user()->firstOrFail()->id === $user->id) {
             $house->update($results);
 
-            if($request->file('image')){
+            if ($request->file('image')) {
 
-                $url = $file->store('images','public');
+                $url = $file->store('images', 'public');
                 $house->images()->first()->update([
                     'image_url' => $url
                 ]);

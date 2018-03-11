@@ -24,7 +24,12 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         $path = $this->path();
-        if (strpos($path, 'profile') === 0) {
+        if (strpos($path, '/password')) {
+            $rules = [
+                'current_password' => 'required|min:6',
+                'password' => 'required|min:6|confirmed',
+            ];
+        } elseif (strpos($path, 'profile') === 0) {
             $rules = [
                 'username' => $this->validateUserName(),
                 'name' => $this->validateLastname(),
@@ -34,11 +39,7 @@ class UpdateUserRequest extends FormRequest
                 'city' => $this->validateCity(),
                 'email' => $this->validateEmail(),
             ];
-        } elseif (strpos($path, 'password')) {
-            $rules = [
-                'current_password' => 'required|string|min:6',
-                'password' => 'required|min:6|confirmed',
-            ];
+
         }
         return $rules;
     }

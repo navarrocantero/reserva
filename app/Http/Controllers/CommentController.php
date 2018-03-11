@@ -18,15 +18,19 @@ class CommentController extends Controller
 
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Devuelve la vista para crear comentario
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
         return view('comment.create');
     }
 
+    /**
+     * Funcion para crear comentario
+     * @param CreateCommentRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(CreateCommentRequest $request)
     {
         $userId = $request->user()->id;
@@ -42,6 +46,11 @@ class CommentController extends Controller
         return back();
     }
 
+    /**
+     *  Funcion para validar async
+     * @param CreateCommentAjaxRequest $request
+     * @return array
+     */
     protected function validateAjax(CreateCommentAjaxRequest $request)
     {
 
@@ -49,6 +58,12 @@ class CommentController extends Controller
         return array();
     }
 
+    /**
+     * Metodo para eliminar un comentario de un usuario.
+     * Solo si el comentario le pertenece
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(Request $request)
     {
         $user = Auth::user();
@@ -63,6 +78,11 @@ class CommentController extends Controller
         }
     }
 
+    /**
+     * Muestra comentarios hechos por el usuario
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function profile(Request $request)
     {
         $user = $request->user();
@@ -76,6 +96,11 @@ class CommentController extends Controller
         );
     }
 
+    /**
+     * Edita un comentario de un usuario
+     * @param Request $request
+     * @return mixed
+     */
     public function edit(Request $request)
     {
 
@@ -87,6 +112,11 @@ class CommentController extends Controller
         }
     }
 
+    /**
+     * Actualiza un comentario del usuario
+     * @param UpdateCommentRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(UpdateCommentRequest $request)
     {
         $user = Auth::user();

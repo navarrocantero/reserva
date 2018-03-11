@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\View;
 
 class PagesController extends Controller
 {
+    /**
+     * Pagina principal de la aplicacion con la lista de casas
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     protected function index()
     {
         $features = Feature::take('10')->get();
@@ -23,15 +27,17 @@ class PagesController extends Controller
         );
     }
 
-    protected function home(){
-        return view('title');
-    }
+
 
     protected function auth()
     {
         return view('auth');
     }
 
+    /**
+     * Metodo para paginar asincronamente
+     * @return array
+     */
     public function asyncLoad()
     {
 

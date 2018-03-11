@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class House extends Model
 {
+      static $NO_IMAGE_LINK = "https://vignette3.wikia.nocookie.net/lego/images/a/ac/No-Image-Basic.png";
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
@@ -33,14 +34,13 @@ class House extends Model
 
 
     public static function getImageExtension($image){
-        if( starts_with($image, ["https://", "http://"] )){
+        if( starts_with($image, ["https://" , "http://"] )){
             return $image;
         }
         return  Storage::disk('public')->url($image);
 
     }
     public static function getFirstImage(House $house){
-
     $image = $house->images()->first()->image_url;
     return House::getImageExtension($image);
 

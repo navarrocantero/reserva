@@ -10,7 +10,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class UsersControllerTest extends TestCase
+class UsersControllerTest extends Helper
 {
     /**
      * Muestra el perfil publico de usuario
@@ -24,6 +24,7 @@ class UsersControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Perfil Publico');
         gc_collect_cycles();
+        $user->delete();
 
     }
 
@@ -39,6 +40,7 @@ class UsersControllerTest extends TestCase
         $this->assertAuthenticatedAs($user);
         $response = $this->get('/profile/' . $user->slugname);
         $response->assertSee('Mi perfil');
+        $user->delete();
 
 
     }
@@ -56,20 +58,8 @@ class UsersControllerTest extends TestCase
         $response = $this->get('/user/login');
         $assert = Login::where(['user_id' => $userId])->first();
         $this->assertTrue(isset($assert));
+        $user->delete();
 
-    }
-
-    /**
-     * Funcion  interna que crea, logea y devuelve a un usuario
-     */
-    private function logNewUser()
-    {
-        $user = factory(User::class, 1)->create()->first();
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'secret',
-        ]);
-        return $user;
     }
 
     /**
@@ -82,6 +72,7 @@ class UsersControllerTest extends TestCase
         $user = $this->logNewUser(new User());
         $response = $this->get('/profile/password');
         $response->assertSee('Borrar Cuenta');
+        $user->delete();
 
     }
 
@@ -95,6 +86,7 @@ class UsersControllerTest extends TestCase
         $user = $this->logNewUser(new User());
         $response = ($this->delete('/profile/delete'));
         $response->assertStatus(302);
+        $user->delete();
 
     }
 
@@ -116,6 +108,8 @@ class UsersControllerTest extends TestCase
         ]);
 
         $this->assertTrue(Hash::check($newPass, $user->password));
+        $user->delete();
+
     }
 
     /**
@@ -143,6 +137,20 @@ class UsersControllerTest extends TestCase
             'lastname' => $lastname,
 
         ]);
+        $user->delete();
+
     }
 
+    /**
+     * Funcion  interna que crea, logea y devuelve a un usuario
+     */
+    protected function logNewUser()
+    {
+        $user = factory(User::class, 1)->create()->first();
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'secret',
+        ]);
+        return $user;
+    }
 }

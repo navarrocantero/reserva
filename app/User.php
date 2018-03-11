@@ -30,6 +30,11 @@ class User extends Authenticatable
         return $this->hasOne(UserImage::class);
     }
 
+    public function login()
+    {
+        return $this->hasMany(Login::class);
+    }
+
     public function isMe(User $user)
     {
         return $this->slugname === $user->slugname;

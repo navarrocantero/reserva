@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\House;
 use App\Reserve;
+use App\HouseImage;
 use App\User;
 use Carbon\Carbon as Carbon;
 use Faker;
@@ -24,6 +25,12 @@ class ReservesControllerTest extends TestCase
 
         $user = $this->logNewUser();
         $house = factory(House::class)->create(['user_id' => $user->id]);
+        $noImageUrl = House::$NO_IMAGE_LINK;
+
+        factory(HouseImage::class, 1)->create(
+            ['house_id' => $house->id,
+                'image_url' => $noImageUrl]
+        );
         $date1 = Carbon::createFromTimestamp(now()->getTimestamp());
         $date2 = Carbon::createFromTimestamp($date1->addDays(20)->getTimestamp());
 
@@ -41,20 +48,8 @@ class ReservesControllerTest extends TestCase
             'entry_date' => $date1,
             'exit_date' => $date2,
         ]);
+        $user->delete();
 
-    }
-
-    /**
-     * Funcion  interna que crea, logea y devuelve a un usuario
-     */
-    private function logNewUser()
-    {
-        $user = factory(User::class, 1)->create()->first();
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'secret',
-        ]);
-        return $user;
     }
 
     /**
@@ -71,6 +66,12 @@ class ReservesControllerTest extends TestCase
 
         $user = $this->logNewUser(new User());
         $house = factory(House::class, 1)->create(['user_id' => $user->id])->first();
+        $noImageUrl = House::$NO_IMAGE_LINK;
+
+        factory(HouseImage::class, 1)->create(
+            ['house_id' => $house->id,
+                'image_url' => $noImageUrl]
+        );
         $comment = factory(Reserve::class, 1)->create([
             'user_id' => $user->id,
             'house_id' => $house->id,
@@ -80,6 +81,8 @@ class ReservesControllerTest extends TestCase
         $response = ($this->actingAs($user)->get('/profile/reserves'));
         $response->assertStatus(200);
         $response->assertSee($house->slugname);
+        $user->delete();
+
     }
 
     /**
@@ -91,6 +94,12 @@ class ReservesControllerTest extends TestCase
     {
         $user = $this->logNewUser(new User());
         $house = factory(House::class)->create(['user_id'=>$user->id])->first();
+        $noImageUrl = House::$NO_IMAGE_LINK;
+
+        factory(HouseImage::class, 1)->create(
+            ['house_id' => $house->id,
+                'image_url' => $noImageUrl]
+        );
         $reserve = factory(Reserve::class)->create([
             'user_id'=>$user->id,
             'house_id'=>$house->id
@@ -101,6 +110,19 @@ class ReservesControllerTest extends TestCase
             'user_id'=>$user->id,
             'id'=> $reserve->id
         ]);
+        $user->delete();
+    }
 
+    /**
+     * Funcion  interna que crea, logea y devuelve a un usuario
+     */
+    protected function logNewUser()
+    {
+        $user = factory(User::class, 1)->create()->first();
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'secret',
+        ]);
+        return $user;
     }
 }
