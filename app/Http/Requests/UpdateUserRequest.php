@@ -37,7 +37,7 @@ class UpdateUserRequest extends FormRequest
         } elseif (strpos($path, 'password')) {
             $rules = [
                 'current_password' => 'required|string|min:6',
-                'password' => 'required|string|min:6|confirmed',
+                'password' => 'required|min:6|confirmed',
             ];
         }
         return $rules;

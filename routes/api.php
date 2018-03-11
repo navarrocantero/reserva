@@ -1,7 +1,9 @@
 <?php
+
 use Illuminate\Http\Request;
 use App\House;
 use App\Reserve;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,7 +17,10 @@ use App\Reserve;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('houses', function () {
+Route::get('/houses', function () {
     return House::all();
 });
 Route::get('/reserves', 'ReserveController@api');
+
+
+Route::get('/features', 'FeatureController@api');

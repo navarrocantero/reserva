@@ -6,17 +6,19 @@ use App\Comment;
 use App\House;
 use App\User;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+
 
 class CommentControllerTest extends TestCase
 {
+
     /**
+     * Actualiza comentario
      * Route::patch '/comment/update'
      * CommentController@update
      */
     public function testUpdate()
-    {
+    {        gc_collect_cycles();
+
         $user = $this->logNewUser(new User());
         $userId = $user->id;
         $house = factory(House::class, 1)->create(
@@ -41,6 +43,7 @@ class CommentControllerTest extends TestCase
     }
 
     /**
+     * Edita comentario
      * Route::get comment/edit
      * CommentController@edit
      */
@@ -55,20 +58,7 @@ class CommentControllerTest extends TestCase
     }
 
     /**
-     * Funcion  interna que crea, logea y devuelve a un usuario
-     */
-    private function logNewUser()
-    {
-        $user = factory(User::class, 1)->create()->first();
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'secret',
-        ]);
-        return $user;
-    }
-
-
-    /**
+     *  Crea comentario
      *  Route::post /house/{slugname}/comment
      *  CommentController@store
      */
@@ -89,22 +79,60 @@ class CommentControllerTest extends TestCase
             ojkhsojsdiofjsodifjsdoifjjkhsojsdiofjsodifjsdoifj'
         ]);
     }
+//
+    /**
+     * Funcion  interna que crea, logea y devuelve a un usuario
+     */
+    private function logNewUser()
+    {
+        $user = factory(User::class, 1)->create()->first();
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'secret',
+        ]);
+        return $user;
+    }
 
     /**
-     *  Route::post /house/{slugname}/validate
-     *  CommentController@validateAjax
+     * Destruye la entidad comentario
+     * Route::delete /profile/comment/delete/{id}
+     * CommentController@destroy
      */
-    public function testValidateAjax()
+    public function testDelete()
     {
         $user = $this->logNewUser(new User());
-        $house = factory(House::class)->create(['user_id' => $user->id]);
-
-        $response = $this->actingAs($user)->post('/house/' . $house->slugname . '/comment/validate', [
-            'user_id' => $user->id,
-            'comment' => 'ojkhsojsdiofjsodifjsdoifjojkhsojsdiofjsodifjsdoifjojkhsojsdiofjsodifjsdoifjo
-            ojkhsojsdiofjsodifjsdoifjjkhsojsdiofjsodifjsdoifj'
-
+        $house = factory(House::class)->create(['user_id'=>$user->id])->first();
+        $comment = factory(Comment::class)->create([
+            'user_id'=>$user->id,
+            'house_id'=>$house->id
         ]);
-        dd($response);
+        $response = ($this->actingAs($user)->delete('/profile/comment/delete',[
+            'comment-id'=>$comment->id
+        ]));
+        $this->assertDatabaseMissing('comments', [
+            'user_id'=>$user->id,
+            'id'=> $comment->id
+        ]);
+
     }
+
+    /**
+     * Muestra las comentarios del usuario
+     * Route::get /profiles/comments
+     * CommentController@profile
+     */
+    public function testProfile()
+    {
+        $user = $this->logNewUser(new User());
+        $house = factory(House::class, 1)->create(['user_id' => $user->id])->first();
+        $comment = factory(Comment::class, 1)->create([
+            'user_id' => $user->id,
+            'house_id' => $house->id
+        ])->first();
+        $response = ($this->actingAs($user)->get('/profile/comments/'));
+        $response->assertStatus(200);
+        $response->assertSee($house->slugname);
+    }
+
+
 }

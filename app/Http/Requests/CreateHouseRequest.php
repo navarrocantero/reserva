@@ -29,8 +29,8 @@ class CreateHouseRequest extends FormRequest
         $rules['direction'] = $this->validateDirection();
         $rules['price_user_night'] = $this->validatePriceUserNight();
         $rules['max_users_house'] = $this->validateMaxUsersHouse();
-        $rules['features'] = $this->validateFeatures();
         $rules['description'] = $this->validateDescription();
+        $rules['features'] = $this->validateFeatures();
 
         return $rules;
 
@@ -45,32 +45,32 @@ class CreateHouseRequest extends FormRequest
         $direction = $this->messagesDirection();
         $price_user_night = $this->messagesPriceUserNight();
         $max_users_house = $this->messagesMaxUsersHouse();
-        $features = $this->messagesFeatures();
         $description = $this->messagesDescription();
+        $features = $this->messagesFeatures();
 
         return array_merge($name, $location, $direction, $price_user_night,
-            $max_users_house, $features,  $description);
+            $max_users_house,   $description, $features);
 
     }
 
     public function validateName()
     {
-        return 'required|min:3|alpha|max:100';
+        return 'required|min:3|string|max:100';
     }
 
     protected function validateLocation()
     {
-        return 'min:5|required|max:100';
+        return 'required|min:5|max:100';
     }
 
     protected function validateDirection()
     {
-        return 'min:5|required|max:100';
+        return 'required|min:5|max:100';
     }
 
     protected function validatePriceUserNight()
     {
-        return 'numeric|required|min:1|max:1000';
+        return 'required|numeric|min:1|max:1000';
     }
 
     protected function validateMaxUsersHouse()
@@ -83,10 +83,6 @@ class CreateHouseRequest extends FormRequest
         return 'required|min:50|max:300';
     }
 
-    protected function validateFeatures()
-    {
-        return 'required|min:50|max:300';
-    }
 
     protected function validateDescription()
     {
@@ -99,7 +95,7 @@ class CreateHouseRequest extends FormRequest
         $messages["name.required"] = "El nombre es requerido";
         $messages["name.min"] = 'Longitud minima de 3';
         $messages["name.max"] = 'Longitud mmaxima de 100';
-        $messages["name.alpha"] = 'Solo caracteres alfabeticos';
+        $messages["name.string"] = 'Solo caracteres alfabeticos';
         return $messages;
     }
 
@@ -145,14 +141,7 @@ class CreateHouseRequest extends FormRequest
         return $messages;
     }
 
-    protected function messagesFeatures()
-    {
-        $messages = array();
-        $messages["features.required"] = "Las caracteristicas son  obligatorias";
-        $messages["features.min"] = "Longitud minima de 50";
-        $messages["features.max"] = "Longitud maxima de 300";
-        return $messages;
-    }
+
 
     protected function messagesDescription()
     {
@@ -160,6 +149,20 @@ class CreateHouseRequest extends FormRequest
         $messages["description.required"] = "La descripcion es  obligatorias";
         $messages["description.max"] = "Longitud  maxima de 300";
         $messages["description.min"] = "Longitud minima de 50";
+        return $messages;
+    }
+
+    protected function validateFeatures()
+    {
+        return 'required|min:50|max:300';
+    }
+
+    protected function messagesFeatures()
+    {
+        $messages = array();
+        $messages["features.required"] = "Las caracteristicas son obligatorias";
+        $messages["features.max"] = "Longitud  maxima de 300";
+        $messages["features.min"] = "Longitud minima de 50";
         return $messages;
     }
 

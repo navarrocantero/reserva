@@ -58,7 +58,7 @@
     <div class="modal" id="edit-comment">
         <div id="comment-container">
 
-    </div>
+        </div>
     </div>
     <script src="{{ asset('js/userupdate/updateUserComment.js') }}" defer></script>
 @endif

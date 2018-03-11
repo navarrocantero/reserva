@@ -11,7 +11,6 @@ $factory->define(App\House::class, function (Faker $faker) {
 
     return [
         'location' => ($faker->latitude."/".$faker->longitude),
-//        'location' => ($faker->city . $faker->citySuffix. $faker->countryCode),
         'direction' => $faker->streetAddress,
         'name' => $streetName,
         'slugname' => str_slug($streetName),

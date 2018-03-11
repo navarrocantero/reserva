@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Feature;
 use App\House;
+use App\HouseImage;
 use App\Http\Requests\CreateHouseRequest;
 use App\Http\Requests\CreateHouseAjaxRequest;
+use App\Http\Requests\UpdateHouseRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+
 
 class HouseController extends Controller
 {
@@ -42,12 +46,11 @@ class HouseController extends Controller
         if ($house->user_id === $user->id) {
             $house->delete();
             return redirect()->back()->with('success', 'Casa eliminada con exito');;
-        }else{
+        } else {
             return redirect()->back()->with('error', 'No se ha eliminado la casa');;
 
         }
     }
-
 
     public function show(Request $request)
     {
@@ -97,6 +100,9 @@ class HouseController extends Controller
     public function store(CreateHouseRequest $request)
     {
         $user = $request->user();
+        $features = (explode(',', $request->input('features')));
+
+
         $noImageUrl = "http://www.hotelsandholiday.com/wp-content/themes/hotel-holiday/images/no-image.jpg";
         $feature = $request->input('features');
         $image = ($request->input('images') ?? $noImageUrl);
@@ -113,16 +119,29 @@ class HouseController extends Controller
             'description' => $request->input('description'),
         ]);
 
-        $feature = Feature::create([
-            'slugname' => $feature,
-            'user_id' => $house->user_id,
-            'house_id' => $house->id
+        $createImage = HouseImage::create([
+            'image_url' => $image,
+            'image_id' => mt_rand(0, 3000),
+            'house_id' => $house->id,
         ]);
 
-        $house->features()->sync($feature);
-
+        foreach ($features as $feature) {
+            $feature = Feature::firstOrCreate([
+                'slugname' => $feature,
+            ]);
+            $house->features()->attach($feature);
+        }
 
         return redirect('/');
+    }
+
+    /**
+     * @param $results
+     */
+    public function eraseFields($results): void
+    {
+        unset($results{"_method"});
+        unset($results{"_token"});
     }
 
     protected function validateAjax(CreateHouseAjaxRequest $request)
@@ -132,10 +151,10 @@ class HouseController extends Controller
         return array();
     }
 
-    public function uploadImage()
+    public function uploadImage(Request $request)
     {
 
-        return json_encode($_GET);
+        return json_encode($request->file());
     }
 
     public function profile(Request $request)
@@ -148,5 +167,37 @@ class HouseController extends Controller
                 'houses' => $houses
             ]
         );
+    }
+
+    public function edit(Request $request)
+    {
+
+        $user = $request->user();
+
+        $houseId = str_replace("house/edit/", "", $request->path());
+
+        $house = House::where(['id' => $houseId])->firstOrFail();
+
+        if ($house->user_id === $user->id) {
+            return View::make('house.edit', ['house' => $house])->render();
+        }
+    }
+
+    public function update(UpdateHouseRequest $request)
+    {
+        $results = array_filter($request->input());
+        $this->eraseFields($results);
+        $user = Auth::user();
+        $houseId = str_replace(["house/update/"], "", $request->path());
+        $house = House::where(['id' => $houseId])->firstOrFail();
+
+        if ($house->user()->firstOrFail()->id === $user->id) {
+            $house->update($results);
+            return redirect()
+                ->back()
+                ->with('success', 'Datos actualizados');
+        } else {
+            return redirect()->back();
+        }
     }
 }

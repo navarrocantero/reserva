@@ -52,7 +52,7 @@ class CommentController extends Controller
     public function destroy(Request $request)
     {
         $user = Auth::user();
-        $commentID = $_POST['comment-id'];
+        $commentID = $request->input('comment-id');
         $comment = Comment::where(['id' => $commentID])->firstOrFail();
         if ($comment->user_id === $user->id) {
             $comment->delete();

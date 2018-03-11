@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class FeaturesControllerTest extends TestCase
 {
     /**
+     * Muestra la entidad caracteristica
      * Route::get /feature/{slugname}
      * FeatureController@index
      */
@@ -19,5 +20,7 @@ class FeaturesControllerTest extends TestCase
         $response = $this->get('/feature/'.$feature->slugname);
         $response->assertStatus(200);
         $response->assertSee('Categoria');
+        gc_collect_cycles();
+
     }
 }

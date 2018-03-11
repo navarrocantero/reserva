@@ -73,26 +73,23 @@ class UserController extends Controller
 
         $path = $request->path();
         $user = $this->user;
-
         if ($path === 'profile') {
-
             $data = array_filter($request->all());
             $user = User::findOrFail($user->id);
             $user->fill($data);
         } elseif ($path === 'profile/password') {
 
-
-            if (!Hash::check($request->get('current_password'), $user->password)) {
+            if (!Hash::check($request->input('current_password'), $user->password)) {
                 return redirect()->back()->with('error', 'La constraseña actual no es correcta');
             }
-            if (strcmp($request->get('current_password'), $request->get('password')) == 0) {
+            if (strcmp($request->input('current_password'), $request->get('password')) == 0) {
                 return redirect()->back()->with('error', 'La nueva contraseña debe ser diferente de la antigua.');
             }
-            if (strcmp($request->get('password'), $request->get('password_confirmation')) !== 0) {
+            if (strcmp($request->input('password'), $request->get('password_confirmation')) !== 0) {
                 return redirect()->back()->with('error', 'Las contraseña de confirmarcion no coincide.');
             }
 
-            $user->password = bcrypt($request->get('password'));
+            $user->password = bcrypt($request->input('password'));
         }
         $user->save();
         return redirect()

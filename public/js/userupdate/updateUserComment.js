@@ -76,8 +76,7 @@ module.exports = __webpack_require__(60);
 /***/ 60:
 /***/ (function(module, exports) {
 
-setDeleteModal();
-setEditModal();
+setModal();
 
 function validateFetch() {
     event.preventDefault();
@@ -91,7 +90,7 @@ function validateFetch() {
     });
 }
 
-function setDeleteModal() {
+function setModal() {
 
     $("#delete-confirm").iziModal({
         title: 'Esta accion no se puede deshacer',
@@ -141,9 +140,7 @@ function setDeleteModal() {
         afterRender: function afterRender() {}
     });
     $("#edit-comment").iziModal({
-        onOpened: function onOpened() {
-            setEditModal();
-        }
+        onOpened: function onOpened() {}
 
     });
 
@@ -152,14 +149,6 @@ function setDeleteModal() {
     });
 
     $(".edit_comment").on("click", validateFetch);
-}
-
-function setEditModal() {
-    console.log("ok");
-    console.log($("#comment"));
-    $("#comment-submit").click(function () {
-        "sdf";
-    });
 }
 
 /***/ })

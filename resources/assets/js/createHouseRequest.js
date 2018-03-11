@@ -8,16 +8,20 @@ $.ajaxSetup({
     }
 });
 
-
 $(function () {
     setInputField()
+    loadAutocomplete()
 
     let dropzone = $("#dropzone").dropzone({
         url: "/add/uploadImage",
         addRemoveLinks: true,
         method: 'get',
         withCredentials: false,
-        dictDefaultMessage: '<span class="text-center"><span class="font-lg visible-xs-block visible-sm-block visible-lg-block"><span class="font-lg"><i class="fa fa-caret-right text-danger"></i> Drop files <span class="font-xs">to upload</span></span><span>&nbsp&nbsp<h4 class="display-inline"> (Or Click)</h4></span>',
+        dictDefaultMessage: '<span class="text-center">' +
+        '<span class="font-lg visible-xs-block visible-sm-block visible-lg-block">' +
+        '<span class="font-lg"><i class="fa fa-caret-right text-danger">' +
+        '</i> Drop files <span class="font-xs">to upload</span>' +
+        '</span><span>&nbsp&nbsp<h4 class="display-inline"> (Or Click)</h4></span>',
         dictResponseError: 'Error uploading file!',
         headers: {
             'X-CSRFToken': $('meta[name="csrf-token"]').attr('content')
@@ -26,12 +30,71 @@ $(function () {
         maxFileSize: 3242880,
         maxFiles: 5,
         showProgress: false,
-        success: function(file, response){
+        success: function (file, response) {
             console.log(response);
         }
 
     });
 });
+
+
+
+function loadSelects(tags) {
+    var availableTags = tags
+    function split( val ) {
+        console.log(val.split( /,\s*/ ))
+        return val.split( /,\s*/ );
+
+    }
+    function extractLast( term ) {
+        return split( term ).pop();
+    }
+
+    $( "#features" )
+    // don't navigate away from the field on tab when selecting an item
+        .on( "keydown", function( event ) {
+            if ( event.keyCode === $.ui.keyCode.TAB &&
+                $( this ).autocomplete( "instance" ).menu.active ) {
+                event.preventDefault();
+            }
+        })
+        .autocomplete({
+            minLength: 2,
+            source: function( request, response ) {
+                // delegate back to autocomplete, but extract the last term
+                response( $.ui.autocomplete.filter(
+                    availableTags, extractLast( request.term ) ) );
+            },
+            focus: function() {
+                // prevent value inserted on focus
+                return false;
+            },
+            select: function( event, ui ) {
+                var terms = split( this.value );
+                // remove the current input
+                terms.pop();
+                // add the selected item
+                terms.push( ui.item.value );
+                // add placeholder to get the comma-and-space at the end
+                terms.push( "" );
+                this.value = terms.join( ", " );
+                return false;
+            }
+        });
+}
+
+function loadAutocomplete() {
+    let tags = [];
+    axios.get('/api/features').then(function (response) {
+        for(data of response.data){
+            tags.push(data['slugname'])
+        }
+        if(tags.length === response.data.length){
+            loadSelects(tags)}
+    })
+
+}
+
 
 function setInputField() {
     // Create house

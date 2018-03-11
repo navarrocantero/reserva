@@ -1,0 +1,336 @@
+Last login: Fri Mar  9 23:43:13 on ttys000
+You have new mail.
+--- PhpStorm/reserva ‹master* M› » cd
+--- ~ » cd Homestead 
+--- ~/Homestead » vagrant up
+Bringing machine 'homestead-7' up with 'virtualbox' provider...
+==> homestead-7: Checking if box 'laravel/homestead' is up to date...
+==> homestead-7: A newer version of the box 'laravel/homestead' is available! You currently
+==> homestead-7: have version '5.0.1'. The latest is version '5.1.0'. Run
+==> homestead-7: `vagrant box update` to update.
+==> homestead-7: Clearing any previously set forwarded ports...
+==> homestead-7: Clearing any previously set network interfaces...
+==> homestead-7: Preparing network interfaces based on configuration...
+    homestead-7: Adapter 1: nat
+    homestead-7: Adapter 2: hostonly
+==> homestead-7: Forwarding ports...
+    homestead-7: 80 (guest) => 8000 (host) (adapter 1)
+    homestead-7: 443 (guest) => 44300 (host) (adapter 1)
+    homestead-7: 3306 (guest) => 33060 (host) (adapter 1)
+    homestead-7: 4040 (guest) => 4040 (host) (adapter 1)
+    homestead-7: 5432 (guest) => 54320 (host) (adapter 1)
+    homestead-7: 8025 (guest) => 8025 (host) (adapter 1)
+    homestead-7: 27017 (guest) => 27017 (host) (adapter 1)
+    homestead-7: 22 (guest) => 2222 (host) (adapter 1)
+==> homestead-7: Running 'pre-boot' VM customizations...
+==> homestead-7: Booting VM...
+==> homestead-7: Waiting for machine to boot. This may take a few minutes...
+    homestead-7: SSH address: 127.0.0.1:2222
+    homestead-7: SSH username: vagrant
+    homestead-7: SSH auth method: private key
+    homestead-7: Warning: Connection reset. Retrying...
+    homestead-7: Warning: Remote connection disconnect. Retrying...
+==> homestead-7: Machine booted and ready!
+==> homestead-7: Checking for guest additions in VM...
+    homestead-7: The guest additions on this VM do not match the installed version of
+    homestead-7: VirtualBox! In most cases this is fine, but in rare cases it can
+    homestead-7: prevent things such as shared folders from working properly. If you see
+    homestead-7: shared folder errors, please make sure the guest additions within the
+    homestead-7: virtual machine match the version of VirtualBox you have installed on
+    homestead-7: your host and reload your VM.
+    homestead-7: 
+    homestead-7: Guest Additions Version: 5.0.18_Ubuntu r106667
+    homestead-7: VirtualBox Version: 5.2
+==> homestead-7: Setting hostname...
+==> homestead-7: Configuring and enabling network interfaces...
+==> homestead-7: Mounting shared folders...
+    homestead-7: /vagrant => /Users/navarrocantero/Homestead
+    homestead-7: /home/vagrant/code => /Users/navarrocantero/Dropbox/ides/PhpStorm/reserva
+==> homestead-7: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> homestead-7: flag to force provisioning. Provisioners marked to run always will still run.
+--- ~/Homestead » 
+  [Restored 10 Mar 2018 at 01:36:40]
+Last login: Sat Mar 10 01:36:39 on ttys000
+You have new mail.
+--- ~/Homestead » vagrant up
+Bringing machine 'homestead-7' up with 'virtualbox' provider...
+==> homestead-7: Checking if box 'laravel/homestead' is up to date...
+==> homestead-7: A newer version of the box 'laravel/homestead' is available! You currently
+==> homestead-7: have version '5.0.1'. The latest is version '5.1.0'. Run
+==> homestead-7: `vagrant box update` to update.
+==> homestead-7: Clearing any previously set forwarded ports...
+==> homestead-7: Clearing any previously set network interfaces...
+==> homestead-7: Preparing network interfaces based on configuration...
+    homestead-7: Adapter 1: nat
+    homestead-7: Adapter 2: hostonly
+==> homestead-7: Forwarding ports...
+    homestead-7: 80 (guest) => 8000 (host) (adapter 1)
+    homestead-7: 443 (guest) => 44300 (host) (adapter 1)
+    homestead-7: 3306 (guest) => 33060 (host) (adapter 1)
+    homestead-7: 4040 (guest) => 4040 (host) (adapter 1)
+    homestead-7: 5432 (guest) => 54320 (host) (adapter 1)
+    homestead-7: 8025 (guest) => 8025 (host) (adapter 1)
+    homestead-7: 27017 (guest) => 27017 (host) (adapter 1)
+    homestead-7: 22 (guest) => 2222 (host) (adapter 1)
+==> homestead-7: Running 'pre-boot' VM customizations...
+==> homestead-7: Booting VM...
+==> homestead-7: Waiting for machine to boot. This may take a few minutes...
+    homestead-7: SSH address: 127.0.0.1:2222
+    homestead-7: SSH username: vagrant
+    homestead-7: SSH auth method: private key
+    homestead-7: Warning: Connection reset. Retrying...
+    homestead-7: Warning: Remote connection disconnect. Retrying...
+==> homestead-7: Machine booted and ready!
+==> homestead-7: Checking for guest additions in VM...
+    homestead-7: The guest additions on this VM do not match the installed version of
+    homestead-7: VirtualBox! In most cases this is fine, but in rare cases it can
+    homestead-7: prevent things such as shared folders from working properly. If you see
+    homestead-7: shared folder errors, please make sure the guest additions within the
+    homestead-7: virtual machine match the version of VirtualBox you have installed on
+    homestead-7: your host and reload your VM.
+    homestead-7: 
+    homestead-7: Guest Additions Version: 5.0.18_Ubuntu r106667
+    homestead-7: VirtualBox Version: 5.2
+==> homestead-7: Setting hostname...
+==> homestead-7: Configuring and enabling network interfaces...
+==> homestead-7: Mounting shared folders...
+    homestead-7: /vagrant => /Users/navarrocantero/Homestead
+    homestead-7: /home/vagrant/code => /Users/navarrocantero/Dropbox/ides/PhpStorm/reserva
+==> homestead-7: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> homestead-7: flag to force provisioning. Provisioners marked to run always will still run.
+--- ~/Homestead » vagrant ssh
+Welcome to Ubuntu 16.04.3 LTS (GNU/Linux 4.4.0-101-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+0 packages can be updated.
+0 updates are security updates.
+
+
+vagrant@homestead:~$ ls
+code
+vagrant@homestead:~$ cd code/
+vagrant@homestead:~/code$ cd ..
+vagrant@homestead:~$ cd ..
+vagrant@homestead:/home$ ls
+vagrant
+vagrant@homestead:/home$ cd ..
+vagrant@homestead:/$ ls
+bin   etc         initrd.img.old  lost+found  opt   run   srv  usr      vmlinuz
+boot  home        lib             media       proc  sbin  sys  vagrant  vmlinuz.old
+dev   initrd.img  lib64           mnt         root  snap  tmp  var
+vagrant@homestead:/$ ls -la
+total 93
+drwxr-xr-x  24 root    root     4096 Jan 26 02:47 .
+drwxr-xr-x  24 root    root     4096 Jan 26 02:47 ..
+drwxr-xr-x   2 root    root     4096 Dec  1 00:51 bin
+drwxr-xr-x   4 root    root     1024 Dec  1 01:05 boot
+drwxr-xr-x  19 root    root     3840 Mar 10 00:40 dev
+drwxr-xr-x 117 root    root     4096 Mar 10 00:40 etc
+drwxr-xr-x   3 root    root     4096 Dec  1 00:38 home
+lrwxrwxrwx   1 root    root       33 Dec  1 00:41 initrd.img -> boot/initrd.img-4.4.0-101-generic
+lrwxrwxrwx   1 root    root       32 Dec  1 00:35 initrd.img.old -> boot/initrd.img-4.4.0-87-generic
+drwxr-xr-x  22 root    root     4096 Dec  1 00:40 lib
+drwxr-xr-x   2 root    root     4096 Dec  1 00:35 lib64
+drwx------   2 root    root    16384 Dec  1 00:34 lost+found
+drwxr-xr-x   3 root    root     4096 Dec  1 00:35 media
+drwxr-xr-x   2 root    root     4096 Aug  1  2017 mnt
+drwxr-xr-x   3 root    root     4096 Dec  1 00:41 opt
+dr-xr-xr-x 137 root    root        0 Mar 10 00:40 proc
+drwx------   2 root    root     4096 Jan 26 02:47 root
+drwxr-xr-x  32 root    root     1140 Mar 10 02:59 run
+drwxr-xr-x   2 root    root    12288 Dec  1 00:50 sbin
+drwxr-xr-x   2 root    root     4096 Apr 29  2017 snap
+drwxr-xr-x   2 root    root     4096 Aug  1  2017 srv
+dr-xr-xr-x  13 root    root        0 Mar 10 00:40 sys
+drwxrwxrwt   9 root    root     4096 Mar 10 03:00 tmp
+drwxr-xr-x  11 root    root     4096 Dec  1 00:56 usr
+drwxr-xr-x   1 vagrant vagrant   960 Feb 18 21:15 vagrant
+drwxr-xr-x  14 root    root     4096 Dec  1 01:04 var
+lrwxrwxrwx   1 root    root       30 Dec  1 00:41 vmlinuz -> boot/vmlinuz-4.4.0-101-generic
+lrwxrwxrwx   1 root    root       29 Dec  1 00:35 vmlinuz.old -> boot/vmlinuz-4.4.0-87-generic
+vagrant@homestead:/$ sudo nano /etc/php/
+vagrant@homestead:/$ cd /etc
+vagrant@homestead:/etc$ ls
+acpi                           gshadow          memcached.conf           resolv.conf
+adduser.conf                   gshadow-         mime.types               rmt
+alternatives                   gss              mke2fs.conf              rpc
+apache2                        gtk-2.0          modprobe.d               rsyslog.conf
+apm                            gtk-3.0          modules                  rsyslog.d
+apparmor                       hdparm.conf      modules-load.d           samba
+apparmor.d                     host.conf        mtab                     sane.d
+apport                         hostname         mysql                    screenrc
+apt                            hosts            nanorc                   securetty
+at.deny                        hosts.allow      netconfig                security
+at-spi2                        hosts.deny       network                  selinux
+bash.bashrc                    idmapd.conf      networks                 sensors3.conf
+bash_completion                ImageMagick-6    newt                     sensors.d
+bash_completion.d              init             nginx                    services
+bindresvport.blacklist         init.d           nsswitch.conf            sgml
+binfmt.d                       initramfs-tools  ntp.conf                 shadow
+blackfire                      inputrc          opt                      shadow-
+byobu                          insserv          os-release               shells
+ca-certificates                insserv.conf     overlayroot.conf         skel
+ca-certificates.conf           insserv.conf.d   pam.conf                 sos.conf
+ca-certificates.conf.dpkg-old  iproute2         pam.d                    ssh
+calendar                       iscsi            papersize                ssl
+chromium-browser               issue            passwd                   subgid
+console-setup                  issue.net        passwd-                  subgid-
+cron.d                         kbd              perl                     subuid
+cron.daily                     kernel           php                      subuid-
+cron.hourly                    kernel-img.conf  pki                      sudoers
+cron.monthly                   ldap             pm                       sudoers.d
+crontab                        ld.so.cache      polkit-1                 supervisor
+cron.weekly                    ld.so.conf       popularity-contest.conf  sysctl.conf
+crypttab                       ld.so.conf.d     postgresql               sysctl.d
+dbus-1                         legal            postgresql-common        sysstat
+debconf.conf                   libaudit.conf    ppp                      systemd
+debian_version                 libnl-3          profile                  terminfo
+default                        libpaper.d       profile.d                timezone
+deluser.conf                   locale.alias     protocols                tmpfiles.d
+depmod.d                       locale.gen       python                   ucf.conf
+dhcp                           localtime        python2.7                udev
+dkms                           logcheck         python3                  ufw
+dpkg                           login.defs       python3.5                updatedb.conf
+drirc                          logrotate.conf   rc0.d                    update-manager
+emacs                          logrotate.d      rc1.d                    update-motd.d
+environment                    lsb-release      rc2.d                    update-notifier
+fonts                          ltrace.conf      rc3.d                    vim
+fstab                          lvm              rc4.d                    vmware-tools
+fuse.conf                      machine-id       rc5.d                    vtrgb
+gai.conf                       magic            rc6.d                    wgetrc
+gconf                          magic.mime       rc.local                 X11
+ghostscript                    mailcap          rcS.d                    xdg
+groff                          mailcap.order    redis                    xml
+group                          mailname         request-key.conf         zsh
+group-                         manpath.config   request-key.d            zsh_command_not_found
+grub.d                         mdadm            resolvconf
+vagrant@homestead:/etc$ cd php5
+-bash: cd: php5: No such file or directory
+vagrant@homestead:/etc$ php
+exit
+^C^
+vagrant@homestead:/etc$ sudo nano /etc/php5/apache2/php.ini
+vagrant@homestead:/etc$ php --ini
+Configuration File (php.ini) Path: /etc/php/7.2/cli
+Loaded Configuration File:         /etc/php/7.2/cli/php.ini
+Scan for additional .ini files in: /etc/php/7.2/cli/conf.d
+Additional .ini files parsed:      /etc/php/7.2/cli/conf.d/10-mysqlnd.ini,
+/etc/php/7.2/cli/conf.d/10-opcache.ini,
+/etc/php/7.2/cli/conf.d/10-pdo.ini,
+/etc/php/7.2/cli/conf.d/15-xml.ini,
+/etc/php/7.2/cli/conf.d/20-bcmath.ini,
+/etc/php/7.2/cli/conf.d/20-calendar.ini,
+/etc/php/7.2/cli/conf.d/20-ctype.ini,
+/etc/php/7.2/cli/conf.d/20-curl.ini,
+/etc/php/7.2/cli/conf.d/20-dom.ini,
+/etc/php/7.2/cli/conf.d/20-exif.ini,
+/etc/php/7.2/cli/conf.d/20-fileinfo.ini,
+/etc/php/7.2/cli/conf.d/20-ftp.ini,
+/etc/php/7.2/cli/conf.d/20-gd.ini,
+/etc/php/7.2/cli/conf.d/20-gettext.ini,
+/etc/php/7.2/cli/conf.d/20-iconv.ini,
+/etc/php/7.2/cli/conf.d/20-igbinary.ini,
+/etc/php/7.2/cli/conf.d/20-imap.ini,
+/etc/php/7.2/cli/conf.d/20-intl.ini,
+/etc/php/7.2/cli/conf.d/20-json.ini,
+/etc/php/7.2/cli/conf.d/20-mbstring.ini,
+/etc/php/7.2/cli/conf.d/20-msgpack.ini,
+/etc/php/7.2/cli/conf.d/20-mysqli.ini,
+/etc/php/7.2/cli/conf.d/20-pdo_mysql.ini,
+/etc/php/7.2/cli/conf.d/20-pdo_pgsql.ini,
+/etc/php/7.2/cli/conf.d/20-pdo_sqlite.ini,
+/etc/php/7.2/cli/conf.d/20-pgsql.ini,
+/etc/php/7.2/cli/conf.d/20-phar.ini,
+/etc/php/7.2/cli/conf.d/20-posix.ini,
+/etc/php/7.2/cli/conf.d/20-readline.ini,
+/etc/php/7.2/cli/conf.d/20-shmop.ini,
+/etc/php/7.2/cli/conf.d/20-simplexml.ini,
+/etc/php/7.2/cli/conf.d/20-soap.ini,
+/etc/php/7.2/cli/conf.d/20-sockets.ini,
+/etc/php/7.2/cli/conf.d/20-sqlite3.ini,
+/etc/php/7.2/cli/conf.d/20-sysvmsg.ini,
+/etc/php/7.2/cli/conf.d/20-sysvsem.ini,
+/etc/php/7.2/cli/conf.d/20-sysvshm.ini,
+/etc/php/7.2/cli/conf.d/20-tokenizer.ini,
+/etc/php/7.2/cli/conf.d/20-wddx.ini,
+/etc/php/7.2/cli/conf.d/20-xmlreader.ini,
+/etc/php/7.2/cli/conf.d/20-xmlwriter.ini,
+/etc/php/7.2/cli/conf.d/20-xsl.ini,
+/etc/php/7.2/cli/conf.d/20-zip.ini,
+/etc/php/7.2/cli/conf.d/25-memcached.ini,
+/etc/php/7.2/cli/conf.d/90-blackfire.ini
+
+vagrant@homestead:/etc$ nano /etc/php/7.2/cli/conf.d/20-intl.ini,
+vagrant@homestead:/etc$ nano /etc/php/7.2/cli/conf.d/20-intl.ini
+vagrant@homestead:/etc$ cd /etc/php
+vagrant@homestead:/etc/php$ ls
+5.6  7.0  7.1  7.2
+vagrant@homestead:/etc/php$ cd 5.6/
+vagrant@homestead:/etc/php/5.6$ ls
+cli  fpm  mods-available
+vagrant@homestead:/etc/php/5.6$ cd ..
+vagrant@homestead:/etc/php$ ls
+5.6  7.0  7.1  7.2
+vagrant@homestead:/etc/php$ cd 7.0
+vagrant@homestead:/etc/php/7.0$ ls
+cli  fpm  mods-available
+vagrant@homestead:/etc/php/7.0$ cd cli/
+vagrant@homestead:/etc/php/7.0/cli$ ls
+conf.d  php.ini
+vagrant@homestead:/etc/php/7.0/cli$ cd ph
+-bash: cd: ph: No such file or directory
+vagrant@homestead:/etc/php/7.0/cli$ php -v
+PHP 7.2.0-1+ubuntu16.04.1+deb.sury.org+1 (cli) (built: Nov 30 2017 13:58:33) ( NTS )
+Copyright (c) 1997-2017 The PHP Group
+Zend Engine v3.2.0, Copyright (c) 1998-2017 Zend Technologies
+    with Zend OPcache v7.2.0-1+ubuntu16.04.1+deb.sury.org+1, Copyright (c) 1999-2017, by Zend Technologies
+    with blackfire v1.18.0~linux-x64-non_zts72, https://blackfire.io, by SensioLabs
+vagrant@homestead:/etc/php/7.0/cli$ cd ..
+vagrant@homestead:/etc/php/7.0$ cd 7.2
+-bash: cd: 7.2: No such file or directory
+vagrant@homestead:/etc/php/7.0$ ls
+cli  fpm  mods-available
+vagrant@homestead:/etc/php/7.0$ cd cli/
+vagrant@homestead:/etc/php/7.0/cli$ ls
+conf.d  php.ini
+vagrant@homestead:/etc/php/7.0/cli$ sudo nano php.ini
+
+  GNU nano 2.5.3                     File: php.ini                                                 
+
+;   and you cannot use both "ob_gzhandler" and "zlib.output_compression".
+; Note: output_handler must be empty if this is set 'On' !!!!
+;   Instead you must use zlib.output_handler.
+; http://php.net/output-handler
+;output_handler =
+
+; Transparent output compression using the zlib library
+; Valid values for this option are 'off', 'on', or a specific buffer size
+; to be used for compression (default is 4KB)
+; Note: Resulting chunk size may vary due to nature of compression. PHP
+;   outputs chunks that are few hundreds bytes each as a result of
+;   compression. If you prefer a larger chunk size for better
+;   performance, enable output_buffering in addition.
+; Note: You need to use zlib.output_handler instead of the standard
+;   output_handler, or otherwise the output will be corrupted.
+; http://php.net/zlib.output-compression
+zlib.output_compression = Off
+
+; http://php.net/zlib.output-compression-level
+;zlib.output_compression_level = -1
+
+; You cannot specify additional output handlers if zlib.output_compression
+; is activated here. This setting does the same as output_handler but in
+; a different order.
+; http://php.net/zlib.output-handler
+;zlib.output_handler =
+
+; Implicit flush tells PHP to tell the output layer to flush itself
+; automatically after every output block.  This is equivalent to calling the
+; PHP function flush() after each and every call to print() or echo() and each
+; and every HTML block.  Turning this option on has serious performance
+
+^G Get Help     ^O Write Out    ^W Where Is     ^K Cut Text     ^J Justify      ^C Cur Pos
+^X Exit         ^R Read File    ^\ Replace      ^U Uncut Text   ^T To Spell     ^_ Go To Line

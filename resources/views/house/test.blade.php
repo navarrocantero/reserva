@@ -123,14 +123,14 @@
 
                         <div class="tab-pane tab-pane-one fade w-100" id="list-features">
 
-                            <div class="col-sm-12 pb-3">
+                            <div class="col-sm-12 pb-3 ui-widget">
                                 <label for="features">Caracteristicas</label>
-                                <textarea type="text" class="form-control area valid-item pane-two
+                                <input size="4" class="form-control area valid-item pane-two
                     @if($errors->get('features'))
                                         is-invalid
                             @endif" id="features"
                                           name="features"
-                                >{{old('features')}}</textarea>
+                                >{{old('features')}}</input>
 
 
                                 <div class="mt-2">

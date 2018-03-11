@@ -1,10 +1,8 @@
-<div class="card mt-2">
-    {{--<input type="text" id="email" name="email" placeholder="{{ $user->username }}"--}}
-    {{--class="{{ $errors->has('email') ? 'is-invalid-input' : ''}}">--}}
+<div class="card mt-2"> -
 <div class="card-header">
     <form action="{{ url('/profile/password') }}" method="POST">
+        {{ method_field('PATCH') }}
         {{ csrf_field() }}
-        {{--{{ method_field('PUT') }}--}}
         @if( $errors->has('current_password') )
             <div class="mb-2">
                 <span class="badge badge-pill badge-danger">
@@ -51,7 +49,6 @@
                 <span class="input-group-text "><i class="fas fa-key"></i></span>
             </div>
         </div>
-</div>
         <div class="card-footer">
    <div class="btn btn-danger mt-5" id="delete-user">Borrar Cuenta</div>
 

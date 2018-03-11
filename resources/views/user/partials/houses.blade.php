@@ -19,7 +19,7 @@
                 <td><a href="/house/{{$house->slugname}}">{{$house->name}}</a></td>
                 <td>{{$house->price_user_night}}</td>
                 <td>{{$house->direction}}</td>
-                <td><a href=""><i class="fas fa-pencil-alt"></i>
+                <td><a href="void:" class="edit_house" id="{{$house->id}}"><i class="fas fa-pencil-alt"></i>
                     </a></td>
                 <td><a href="void:" class="delete_house"><i class="fas fa-trash-alt"></i>
                     </a></td>
@@ -52,6 +52,11 @@
                 <button class="btn btn-danger" type="submit"> Borrar</button>
 
             </form>
+        </div>
+    </div>
+    <div class="modal" id="edit-house">
+        <div id="house-container">
+
         </div>
     </div>
     <script src="{{ asset('js/userupdate/updateUserHouse.js') }}" defer></script>

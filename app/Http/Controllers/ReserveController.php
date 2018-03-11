@@ -16,10 +16,11 @@ class ReserveController extends Controller
     {
         $user = $request->user();
         $houseNameUrl = str_replace(["house/", "/confirm"], "", $request->path());
-        $house = House::where('slugname', $houseNameUrl)->first();
-        $entryDate = ($_POST['entryDate']);
-        $exitDate = ($_POST['exitDate']);
 
+        $house = House::where('slugname', $houseNameUrl)->first();
+
+        $entryDate = ($request->input('entryDate'));
+        $exitDate = ($request->input('exitDate'));
         $checkActualReserve = $house->reserves()->where('entry_date', '>=', $entryDate)
             ->where('entry_date', '<', $exitDate)->get();
         if ($checkActualReserve !== 0) {

@@ -77,8 +77,9 @@ module.exports = __webpack_require__(56);
 /***/ (function(module, exports) {
 
 
-setPasswordConfirmModal();
-function setPasswordConfirmModal() {
+setModal();
+
+function setModal() {
     $("#delete-confirm").iziModal({
         title: 'Esta accion no se puede deshacer',
         subtitle: 'Continuar ?',
@@ -128,6 +129,21 @@ function setPasswordConfirmModal() {
     });
     $(".delete_house").on("click", function () {
         $('#delete-confirm').iziModal('open');
+    });
+    $("#edit-house").iziModal({});
+    $(".edit_house").on("click", validateFetch);
+}
+
+function validateFetch() {
+    event.preventDefault();
+    var id = $(this).attr('id');
+    axios.get('/house/edit/' + id).then(function (response) {
+        $("#house-container").html(response.data);
+    }).catch(function (error) {
+        console.log(error);
+    }).then(function () {
+
+        $("#edit-house").iziModal('open');
     });
 }
 

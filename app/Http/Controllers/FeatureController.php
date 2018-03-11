@@ -21,4 +21,13 @@ class FeatureController extends Controller
        );
 
    }
+
+    /**
+     * Devuelve todos los nombres de caracteristicas
+     * @return string
+     */
+   public function api(){
+       $feature = Feature::all(['slugname']);
+       return json_encode($feature);
+   }
 }
