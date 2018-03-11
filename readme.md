@@ -4,8 +4,6 @@
 
 # Reserving
 
-- Web de reservas de casas
-
 ### Tecnologias Utilizadas
 
 - Laravel 5.5
@@ -94,12 +92,6 @@
     PUSHER_APP_CLUSTER=mt1
 
 
-- En la carpeta del proyecto instala las dependencias de composer con el comando 
-
-  ```
-  composer install
-  ```
-
 
     ```
 
@@ -107,6 +99,11 @@
 
       vagrant -up --provision
 
+- En la carpeta del proyecto instala las dependencias de composer con el comando 
+
+  ```
+  composer install
+  ```
 
 - Ya esta lista la aplicación para funcionar 
 
@@ -116,3 +113,164 @@
     - **Nota** Si se ejecuta sin la opcion **—seed** no cargara datos de prueba.
     - **Nota** Si el comando falla reintentarlo hasta que no de fallos
       - ![Screenshot 2018-03-11 21.17.29](https://i.imgur.com/RJxQOUj.png)	.
+
+
+
+## Esquema Global Bases De Datos
+
+![img](https://i.imgur.com/SUtazk5.png)
+
+## Tabla Users (Usuarios)
+
+|                    |                                  |
+| ------------------ | -------------------------------- |
+| **id**             | int(10) unsigned **PK**          |
+|                    |                                  |
+| **name**           | varchar(255)                     |
+| **lastname**       | varchar(255)                     |
+| **username**       | varchar(255)                     |
+| **slugname**       | varchar(255)                     |
+| **email**          | varchar(255)                     |
+| **telephone**      | varchar(255)                     |
+| **website**        | varchar(255)                     |
+| **about**          | varchar(255)                     |
+| **avatar**         | varchar(255)                     |
+| **sex**            | enum (male , female , other)     |
+| **city**           | varchar(255)                     |
+| **zip_code**       | varchar(255)                     |
+| **password**       | varchar(255)                     |
+| **status**         | enum (active , inactive , other) |
+| **remember_token** | varchar(100)                     |
+| **created_at**     | Timestamp                        |
+| **updated_at**     | Timestamp                        |
+
+- 1 Usuario tiene N Comentarios **1-N**
+
+- 1 Usuario tiene N Casas **1-N**
+
+- 1 Usuario tiene N Reservas **1-N**
+
+- 1 Usuario tiene 1 foto **1-1**
+
+- 1 Usuario tiene N logins **1-N**
+
+  ​
+
+  ​
+
+## Tabla User_images
+
+|               |                                               |
+| ------------- | --------------------------------------------- |
+| **id**        | int(10) unsigned **PK**                       |
+|               |                                               |
+| **user_id**   | int(10) unsigned  **FK** references **Users** |
+| **image_id**  | varchar(255)                                  |
+| **image_url** | varchar(255)                                  |
+
+- 1 Foto pertenece a 1 Usuario **1-1**
+
+## Tabla Features (Caracteristicas)
+
+|                |                         |
+| -------------- | ----------------------- |
+| **id**         | int(10) unsigned **PK** |
+|                |                         |
+| **slugname**   | varchar(256)            |
+| **created_at** | Timestamp               |
+| **updated_at** | Timestamp               |
+
+- N Caracteristicas pertenecen a N Casas **N-N**
+
+## Tabla Feature_house (Por la relación **N-N**)
+
+|                         |                                                  |
+| ----------------------- | ------------------------------------------------ |
+| **house_id_feature_id** | **PK**                                           |
+|                         |                                                  |
+| **house_id**            | int(10) unsigned  **FK** references **Houses**   |
+| **features_id**         | int(10) unsigned  **FK** references **Features** |
+
+## Tabla Houses (Casas)
+
+|                      |                                               |
+| -------------------- | --------------------------------------------- |
+| **id**               | int(10) unsigned **PK**                       |
+|                      |                                               |
+| **user_id**          | int(10) unsigned  **FK** references **Users** |
+| **location**         | varchar(255)                                  |
+| **direction**        | varchar(255)                                  |
+| **images**           | varchar(255)                                  |
+| **name**             | varchar(255)                                  |
+| **slugname**         | varchar(255)                                  |
+| **price_user_night** | double                                        |
+| **rating**           | tinyInt(4)                                    |
+| **max_users_house**  | tinyInt(4)                                    |
+| **description**      | Text                                          |
+
+- N Casas pertenecen a 1 Usuario **N-1**
+
+- N Casas tienen N Caracteristicas **N-N**
+
+- 1 Casa tiene N Reservas **1-N**
+
+- 1 Casa tiene N Fotos **1-N**
+
+- 1 Casa tiene N Comentarios **1-N**
+
+  ​
+
+## Tabla House_images
+
+|               |                                                |
+| ------------- | ---------------------------------------------- |
+| **id**        | int(10) unsigned **PK**                        |
+|               |                                                |
+| **house_id**  | int(10) unsigned  **FK** references **Houses** |
+| **image_id**  | varchar(255)                                   |
+| **image_url** | varchar(255)                                   |
+
+- 1 Foto pertenece a 1 Casa **1-1**
+
+## Tabla Reserves(Reservas)
+
+|                |                                                |
+| -------------- | ---------------------------------------------- |
+| **id**         | int(10) unsigned **PK**                        |
+|                |                                                |
+| **house_id**   | int(10) unsigned  **FK** references **Houses** |
+| **user_id**    | int(10) unsigned  **FK** references **Users**  |
+| **created_at** | Timestamp                                      |
+| **updated_at** | Timestamp                                      |
+
+- N Reservas pertenecen a 1 Usuario  **N-1**
+- 1 Reserva pertenece a 1 Casa **1-1**
+
+## Tabla Comments(Comentarios)
+
+|                |                                                |
+| -------------- | ---------------------------------------------- |
+| **id**         | int(10) unsigned **PK**                        |
+|                |                                                |
+| **house_id**   | int(10) unsigned  **FK** references **Houses** |
+| **user_id**    | int(10) unsigned  **FK** references **Users**  |
+| **comment**    | text                                           |
+| **created_at** | Timestamp                                      |
+| **updated_at** | Timestamp                                      |
+
+- N Comentarios pertenecen a 1 Usuario **N-1**
+- 1 Comentario pertenece a 1 Casa **1-1**
+
+## Tabla Logins
+
+|                |                                               |
+| -------------- | --------------------------------------------- |
+| **id**         | int(10) unsigned **PK**                       |
+|                |                                               |
+| **agent**      | varchar(255)                                  |
+| **ip**         | bigInt(20)                                    |
+| **user_id**    | int(10) unsigned  **FK** references **Users** |
+| **created_at** | Timestamp                                     |
+| **updated_at** | Timestamp                                     |
+
+- N Logins pertenecen a 1 usuario **N-1**
