@@ -30,7 +30,7 @@ class HouseControllerTest extends TestCase
         );
         $response = $this->actingAs($user)->get('/house/' . $house->slugname);
         $response->assertStatus(200);
-        $response->assertSee(' <form class="mt-5" action="http://reserva.test/house/');
+        $response->assertSee($house->slugname);
         $user->delete();
 
     }

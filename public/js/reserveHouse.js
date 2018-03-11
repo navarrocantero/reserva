@@ -1,1 +1,383 @@
-!function(e){var t={};function n(a){if(t[a])return t[a].exports;var o=t[a]={i:a,l:!1,exports:{}};return e[a].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=e,n.c=t,n.d=function(e,t,a){n.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:a})},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=49)}({49:function(e,t,n){e.exports=n(50)},50:function(e,t){var n=void 0,a=void 0,o=$("#Create-reserve-submit"),r=[],i=0;function l(e,t,n){if(null!==(e=$.datepicker.formatDate("yy-mm-dd",e)))return t.prop("disabled",!0),n.prop("disabled",!1),e}function d(e){var t,n,a,o;return o=Math.floor(e/1e3),a=Math.floor(o/60),o%=60,n=Math.floor(a/60),a%=60,t=Math.floor(n/24),n%=24,t}function s(e){var t=new Headers;t.append("X-CSRF-TOKEN",$('meta[name="csrf-token"]').attr("content"));var n=new FormData,a=e.currentTarget.name,o=$("#"+a);n.append(a,o.val()),n.append("type",a);var r={method:"POST",headers:t,body:n,credentials:"same-origin"},i=window.location.href+"/validate";fetch(i,r).then(function(e){return e.json()}).then(function(e){var t=e[a];0===e.length&&(t=[]),function(e,t){var n=!1,a=e.next();if(a.html(""),e.removeClass("is-valid is-invalid"),0===t.length){e.addClass("is-valid");var o=$(".valid-item"),r=$(".is-valid"),i=$(".submit-button");o.length===r.length&&i.prop("disabled")}else{n=!0,e.addClass("is-invalid");var l=!0,d=!1,s=void 0;try{for(var c,u=t[Symbol.iterator]();!(l=(c=u.next()).done);l=!0){var f=c.value;a.append('<div class="alert alert-danger" role="alert" >'+f+"</div>")}}catch(e){d=!0,s=e}finally{try{!l&&u.return&&u.return()}finally{if(d)throw s}}}}(o,t)}).catch(function(e){console.log("error"+e)})}function c(e){e=d(e);for(var t=0;t<r.length;t++)if(e>=r[t].entry_date&&e<r[t].exit_date)return[!1,"bg-danger"];return[!0,""]}$(function(){var e;e="/api/reserves?houseId="+window.location.pathname.toString().replace("/house/",""),axios.get(e).then(function(e){for(var t=0;t<e.data.length;t++)r.push({entry_date:d(new Date(e.data[t].entry_date)),exit_date:d(new Date(e.data[t].exit_date)),reserve_id:e.data[t].id,days:Math.floor((Date.parse(new Date(e.data[t].exit_date))-Date.parse(new Date(e.data[t].entry_date)))/864e5)})}).catch(function(e){console.log(e)}),function(){for(var e=$("#location").text(),t=e.indexOf("/"),n="",a="",o=0;o<t;o++)n+=e[o];isNaN(n)&&(n=0);for(var r=t+1;r<e.length;r++)a+=e[r];isNaN(a)&&(a=0);new GMaps({el:"#map",lat:n,lng:a})}(),$(".modal").iziModal({title:"",subtitle:"",headerColor:"#21b911",background:"#b92734",theme:"",icon:null,iconText:null,iconColor:"",rtl:!1,width:200,top:!0,bottom:1,borderBottom:!0,padding:0,radius:100,zindex:999,iframe:!1,iframeHeight:400,iframeURL:null,focusInput:!0,group:"",loop:!1,arrowKeys:!0,navigateCaption:!0,navigateArrows:!0,history:!1,restoreDefaultContent:!1,autoOpen:0,bodyOverflow:!1,fullscreen:!1,openFullscreen:!1,closeOnEscape:!0,closeButton:!0,appendTo:"body",appendToOverlay:"body",overlay:!0,overlayClose:!0,overlayColor:"rgba(0, 0, 0, 0.4)",timeout:5e3,timeoutProgressbar:!0,pauseOnHover:!1,timeoutProgressbarColor:"rgba(255,255,255,0.5)",transitionIn:"comingIn",transitionOut:"comingOut",transitionInOverlay:"fadeIn",transitionOutOverlay:"fadeOut",onFullscreen:function(){},onResize:function(){},onOpening:function(){},onOpened:function(){},onClosing:function(){},onClosed:function(){},afterRender:function(){}}),$("#modal-reserve-fail").iziModal(),$("#comment").on("change",s);var t={minDate:i,maxDate:"+100D",beforeShowDay:c,dayNames:["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"],dayNamesMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],monthNames:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],monthNamesShort:["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dec"]},u=$("#entryDate").datepicker(t),f=$("#exitDate").datepicker(t);u.on("change",function(){n=l(n=u.datepicker("getDate"),u,f);var e=d(new Date(n));i=e-d(new Date),f.datepicker("option","minDate",i+1)}),f.on("change",function(){a=l(a=f.datepicker("getDate"),f,u),f.prop("disabled",!1),function(e,t){var n=new Headers;n.append("X-CSRF-TOKEN",$('meta[name="csrf-token"]').attr("content"));var a=new FormData;a.append("entryDate",e),a.append("exitDate",t);var r={method:"POST",headers:n,body:a,credentials:"same-origin"},i=window.location.href+"/reserve";fetch(i,r).then(function(e){return e.json()}).then(function(e){o.removeClass("btn-success btn-danger"),0===e.length?(o.prop("disabled",!1),o.addClass("btn-success")):(o.prop("disabled",!0),o.addClass("btn-danger"),$("#modal-reserve-fail").iziModal("open"))}).catch(function(e){console.log("error"+e)})}(n,a)})})}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 49);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 49:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(50);
+
+
+/***/ }),
+
+/***/ 50:
+/***/ (function(module, exports) {
+
+var entryDate = void 0;
+var exitDate = void 0;
+var entry = void 0;
+var exit = void 0;
+var reserveButton = $('#Create-reserve-submit');
+var dates = [];
+var minDate = 0;
+
+$(function () {
+    getBlackOutDates();
+    setMap();
+    $(".modal").iziModal({
+        title: '',
+        subtitle: '',
+        headerColor: '#21b911',
+        background: '#b92734',
+        theme: '', // light
+        icon: null,
+        iconText: null,
+        iconColor: '',
+        rtl: false,
+        width: 200,
+        top: true,
+        bottom: 1,
+        borderBottom: true,
+        padding: 0,
+        radius: 100,
+        zindex: 999,
+        iframe: false,
+        iframeHeight: 400,
+        iframeURL: null,
+        focusInput: true,
+        group: '',
+        loop: false,
+        arrowKeys: true,
+        navigateCaption: true,
+        navigateArrows: true, // Boolean, 'closeToModal', 'closeScreenEdge'
+        history: false,
+        restoreDefaultContent: false,
+        autoOpen: 0, // Boolean, Number
+        bodyOverflow: false,
+        fullscreen: false,
+        openFullscreen: false,
+        closeOnEscape: true,
+        closeButton: true,
+        appendTo: 'body', // or false
+        appendToOverlay: 'body', // or false
+        overlay: true,
+        overlayClose: true,
+        overlayColor: 'rgba(0, 0, 0, 0.4)',
+        timeout: 5000,
+        timeoutProgressbar: true,
+        pauseOnHover: false,
+        timeoutProgressbarColor: 'rgba(255,255,255,0.5)',
+        transitionIn: 'comingIn',
+        transitionOut: 'comingOut',
+        transitionInOverlay: 'fadeIn',
+        transitionOutOverlay: 'fadeOut',
+        onFullscreen: function onFullscreen() {},
+        onResize: function onResize() {},
+        onOpening: function onOpening() {},
+        onOpened: function onOpened() {},
+        onClosing: function onClosing() {},
+        onClosed: function onClosed() {},
+        afterRender: function afterRender() {}
+    });
+    $("#modal-reserve-fail").iziModal();
+
+    // Validacion asincrona de añadir comentario
+    $("#comment").on("change", validateFetch);
+
+    //Opciones generales de Datepicker
+    var datePickerOptions = {
+        minDate: minDate,
+        maxDate: "+100D",
+        beforeShowDay: isThisDayAvalible,
+        dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
+        dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+        monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+        monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec"]
+    };
+    var entry = $("#entryDate").datepicker(datePickerOptions);
+    var exit = $("#exitDate").datepicker(datePickerOptions);
+
+    entry.on("change", function () {
+        entryDate = entry.datepicker("getDate");
+        entryDate = dateForm(entryDate, entry, exit);
+        var entryDateUnixStamp = convertMs(new Date(entryDate));
+        minDate = entryDateUnixStamp - convertMs(new Date());
+        exit.datepicker("option", "minDate", minDate + 1);
+    });
+
+    exit.on("change", function () {
+        exitDate = exit.datepicker("getDate");
+        exitDate = dateForm(exitDate, exit, entry);
+        exit.prop("disabled", false);
+        validateReserve(entryDate, exitDate);
+    });
+});
+
+function dateForm(date, inputToDisable, inputToEnable) {
+
+    date = $.datepicker.formatDate("yy-mm-dd", date);
+    if (date !== null) {
+        inputToDisable.prop("disabled", true);
+        inputToEnable.prop("disabled", false);
+        return date;
+    }
+}
+
+function validateReserve(entryDate, exitDate) {
+    var myHeaders = new Headers();
+    myHeaders.append("X-CSRF-TOKEN", $('meta[name="csrf-token"]').attr('content'));
+    var form = new FormData();
+
+    form.append("entryDate", entryDate);
+    form.append("exitDate", exitDate);
+
+    var configuracion = {
+        method: 'POST',
+        headers: myHeaders,
+        body: form,
+        credentials: "same-origin"
+    };
+    var urlName = window.location.href + "/reserve";
+    fetch(urlName, configuracion).then(function (response) {
+
+        return response.json();
+    }).then(function (data) {
+        reserveButton.removeClass("btn-success btn-danger");
+
+        if (data.length === 0) {
+            reserveButton.prop("disabled", false);
+            reserveButton.addClass("btn-success");
+        } else {
+            reserveButton.prop("disabled", true);
+            reserveButton.addClass("btn-danger");
+            $('#modal-reserve-fail').iziModal('open');
+        }
+    }).catch(function (err) {
+        console.log("error" + err);
+    });
+}
+
+function convertMs(milliseconds) {
+    var day, hour, minute, seconds;
+    seconds = Math.floor(milliseconds / 1000);
+    minute = Math.floor(seconds / 60);
+    seconds = seconds % 60;
+    hour = Math.floor(minute / 60);
+    minute = minute % 60;
+    day = Math.floor(hour / 24);
+    hour = hour % 24;
+    // return {
+    //     day: day,
+    //     hour: hour,
+    //     minute: minute,
+    //     seconds: seconds
+    // };
+    return day;
+}
+
+function validateFetch(parameter) {
+    var myHeaders = new Headers();
+    myHeaders.append("X-CSRF-TOKEN", $('meta[name="csrf-token"]').attr('content'));
+    var form = new FormData();
+    var inputTargetName = parameter.currentTarget.name;
+    var finaInputTargetName = $("#" + inputTargetName);
+    form.append(inputTargetName, finaInputTargetName.val());
+    form.append("type", inputTargetName);
+    var configuracion = {
+        method: 'POST',
+        headers: myHeaders,
+        body: form,
+        credentials: "same-origin"
+    };
+    var urlName = window.location.href + "/validate";
+
+    fetch(urlName, configuracion).then(function (response) {
+
+        return response.json();
+    }).then(function (data) {
+
+        var errors = data[inputTargetName];
+
+        if (data.length === 0) {
+            errors = [];
+        }
+
+        gestionarErrores(finaInputTargetName, errors);
+    }).catch(function (err) {
+        console.log("error" + err);
+    });
+}
+
+function gestionarErrores(input, errores) {
+    var hayErrores = false;
+    var divErrores = input.next();
+    divErrores.html("");
+    input.removeClass("is-valid is-invalid");
+
+    // Si array errores es igual se añade la clase correspondiente
+    if (errores.length === 0) {
+        input.addClass("is-valid");
+
+        // Se comprueba si todos los elementos del formulario estan validados
+        var validationItems = $(".valid-item");
+        var validatedItem = $(".is-valid");
+        var submitButton = $(".submit-button");
+
+        if (validationItems.length === validatedItem.length) {
+            submitButton.prop("disabled");
+        }
+    } else {
+        hayErrores = true;
+        input.addClass("is-invalid");
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+            for (var _iterator = errores[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var error = _step.value;
+
+                divErrores.append("<div class=\"alert alert-danger\" role=\"alert\" >" + error + "</div>");
+            }
+        } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                    _iterator.return();
+                }
+            } finally {
+                if (_didIteratorError) {
+                    throw _iteratorError;
+                }
+            }
+        }
+    }
+    return hayErrores;
+}
+
+function getBlackOutDates() {
+    var urlPath = window.location.pathname.toString();
+    var houseId = urlPath.replace("/house/", "");
+    var urlName = "/api/reserves?houseId=" + houseId;
+    axios.get(urlName).then(function (response) {
+        for (var i = 0; i < response.data.length; i++) {
+            dates.push({
+                "entry_date": convertMs(new Date(response.data[i]['entry_date'])),
+                "exit_date": convertMs(new Date(response.data[i]['exit_date'])),
+                "reserve_id": response.data[i]['id'],
+                "days": Math.floor((Date.parse(new Date(response.data[i]['exit_date'])) - Date.parse(new Date(response.data[i]['entry_date']))) / 86400000)
+            });
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
+function isThisDayAvalible(date) {
+
+    date = convertMs(date);
+
+    for (var i = 0; i < dates.length; i++) {
+
+        if (date >= dates[i].entry_date && date < dates[i].exit_date) {
+            return [false, 'bg-danger'];
+        }
+    }
+    return [true, ''];
+}
+
+function setMap() {
+    var location = $('#location').text();
+    var n = location.indexOf("/");
+    var latitud = "";
+    var longitud = "";
+
+    for (var i = 0; i < n; i++) {
+        latitud += location[i];
+    }
+    if (isNaN(latitud)) {
+        latitud = 0;
+    }
+
+    for (var _i = n + 1; _i < location.length; _i++) {
+        longitud += location[_i];
+    }
+    if (isNaN(longitud)) {
+        longitud = 0;
+    }
+
+    var map = new GMaps({
+        el: '#map',
+        lat: latitud,
+        lng: longitud
+    });
+}
+
+/***/ })
+
+/******/ });
