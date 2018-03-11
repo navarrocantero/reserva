@@ -55,6 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 // HOME route
 Route::get('/', "PagesController@index")->name('home'); // Ruta raiz
+Route::get('/home', "PagesController@index"); // Ruta raiz
 
 
 Route::get('/asyncLoad', 'PagesController@asyncLoad'); // Ruta para paginar async
