@@ -18,6 +18,10 @@ class UserController extends Controller
     private $user;
     private $imgur;
 
+    /**
+     * Se inicializa un usuario autenticado y se le añade un perfil de imgur (para su posterior subida a la nube)
+     * UserController constructor.
+     */
     public function __construct()
     {
         $this->imgur = new \Imgur\Client();
@@ -45,9 +49,8 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Devuelve la vista de registro para un nuevo usuario
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -55,10 +58,8 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * Metodo para crear un usuario
+     * @param Request $request
      */
     public function store(Request $request)
     {
@@ -68,6 +69,11 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * Metodo para actualizar tanto el usuario como sus datos de acceso
+     * @param UpdateUserRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(UpdateUserRequest $request)
     {
         $path = $request->path();
@@ -95,10 +101,9 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\user $user
-     * @return \Illuminate\Http\Response
+     * Muestra la vista del menu del perfil de usuario
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -113,7 +118,11 @@ class UserController extends Controller
         }
     }
 
-//    Public profile info request for ALL users
+    /**
+     * Muestra la vista publica de un usuario
+     * @param String $slugname
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showPublic(String $slugname)
     {
         $user = (User::where('slugname', $slugname)->firstOrFail());
@@ -132,7 +141,11 @@ class UserController extends Controller
 
     }
 
-//    Private profile info request only AUTH users
+    /**
+     * Muestra la vista privada de un usuario
+     * @param user $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showPrivate(User $user)
     {
         $avatar = $user->image()->first()['image_url'];
@@ -150,6 +163,11 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * Muestra el menu privado de un usuario
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function profile(Request $request)
     {
         $user = $request->user();
@@ -160,6 +178,10 @@ class UserController extends Controller
         );
     }
 
+    /**
+     * Destruye un usuario
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy()
     {
         $this->user->delete();
@@ -167,6 +189,11 @@ class UserController extends Controller
         return redirect()->route('home')->with('success', 'Cuenta eliminada con exito');;
     }
 
+    /**
+     * Metodo que se activa tras logearse para guardar su datos de logeo y redireccionarlo
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function login(Request $request)
     {
 

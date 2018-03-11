@@ -7,6 +7,6 @@ use Carbon\Carbon;
 $factory->define(\App\HouseImage::class, function (Faker $faker) {
 
     return [
-        'image_url' => 'https://picsum.photos/700/400/?image=' . mt_rand(0, 100),
+        'image_url' => 'https://picsum.photos/700/400/?image=' . mt_rand(0, 50),
         'image_id'=> mt_rand(0,3000),    ];
 });

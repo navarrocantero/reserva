@@ -35,6 +35,12 @@ class User extends Authenticatable
         return $this->hasMany(Login::class);
     }
 
+    /**
+     * Metodo para saber si es el mismo usuario
+     *
+     * @param User $user
+     * @return bool
+     */
     public function isMe(User $user)
     {
         return $this->slugname === $user->slugname;

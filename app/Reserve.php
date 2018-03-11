@@ -23,4 +23,13 @@ class Reserve extends Model
     {
         return Reserve::where(['house_id' => $id])->get();
     }
+
+    /**
+     * Devuelve todas las reservas de una casa
+     * @param House $house
+     * @return string
+     */
+    public static function getJsonReserve(House $house){
+        return json_encode(Reserve::houseReserves($house->id));
+    }
 }

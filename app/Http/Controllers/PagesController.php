@@ -27,8 +27,6 @@ class PagesController extends Controller
         );
     }
 
-
-
     protected function auth()
     {
         return view('auth');

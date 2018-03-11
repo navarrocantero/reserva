@@ -12,6 +12,13 @@ use Illuminate\Http\Request;
 
 class ReserveController extends Controller
 {
+    /**
+     * Metodo para crear una reserva de una casa solo si:
+     * la fecha de entrada no esta ocupada o si se queda vacia ese dia
+     * la fecha de salida no este ocupada por otro usuario
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $user = $request->user();
@@ -35,7 +42,8 @@ class ReserveController extends Controller
         }
     }
 
-    /**Coje el nombre de la casa por la URL y comprueba que no este ocupada entre las fechas introducidas por el
+    /**
+     * Coje el nombre de la casa por la URL y comprueba que no este ocupada entre las fechas introducidas por el
      * usuario
      * @param Request $request
      * @return array|string
@@ -55,13 +63,22 @@ class ReserveController extends Controller
         }
     }
 
+    /**
+     * Devuelve en formato Json todas las reservas de la casa, para su posterior tratamiento en cliente
+     * @return string
+     */
     public function api()
     {
         $houseId = $_GET['houseId'];
         $house = House::where(['slugname' => $houseId])->first();
-        return json_encode(Reserve::houseReserves($house->id));
+        return Reserve::getJsonReserve($house);
     }
 
+    /**
+     * Devuelve la vista de menu del usuario con todas sus reservas
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function profile(Request $request)
     {
         $user = $request->user();
@@ -75,6 +92,11 @@ class ReserveController extends Controller
         );
     }
 
+    /**
+     * Destruye una reserva de un usuario, solo si le pertenece
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(Request $request)
     {
         $user = Auth::user();
