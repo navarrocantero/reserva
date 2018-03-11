@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\HouseImage;
 use App\User;
 use App\House;
 use Carbon\Carbon;
@@ -118,7 +119,7 @@ class HouseControllerTest extends TestCase
     /**
      * Actualiza casa
      * Route::patch '/house/update/{id}'
-     * CommentController@update
+     * HouseController@update
      */
     public function testUpdate()
     {
@@ -138,15 +139,23 @@ class HouseControllerTest extends TestCase
             'price_user_night' =>19.90
         ]);
     }
+
+    /**
+     * Edita casa
+     * Route::edit '/house/edit/{id}'
+     * HouseController@edit
+     */
     public function testEdit()
     {        gc_collect_cycles();
 
 
         $user = $this->logNewUser(new User());
-        $this->assertAuthenticatedAs($user);
         $house = factory(House::class, 1)->create(
             ['user_id' => $user->id,]
         )->first();
+        $image = factory(HouseImage::class,1)->create(
+            ['house_id'=> $house->id]
+        );
 
         $response = $this->actingAs($user)
             ->get('house/edit/'.$house->id);

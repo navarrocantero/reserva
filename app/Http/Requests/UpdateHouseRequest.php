@@ -44,7 +44,7 @@ class UpdateHouseRequest extends CreateHouseRequest
 
         ]);
 
-        throw new ValidationException($validator, $response);
+//        throw new ValidationException($validator, $response);
     }
 
     private function nullable(String $string)

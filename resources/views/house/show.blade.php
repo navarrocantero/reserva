@@ -98,7 +98,7 @@
             <div class="jumbotron">
                 <div class="card-columns">
                     @foreach($features as $feature)
-                        <p class="card-text"><a href="/feature/{{$feature->slugname}}">{{$feature->slugname}}</a></p>
+                        <p class="card-text text-wrap"><a href="/feature/{{$feature->slugname}}">{{$feature->slugname}}</a></p>
                     @endforeach
                 </div>
             </div>
@@ -109,7 +109,7 @@
                 <div class="carousel-inner" role="listbox">
                     @foreach($images as $image)
                         <div class="carousel-item @if($loop->first) active @endif">
-                            <img class="d-block img-fluid" src="{{$image->image_url}}">
+                            <img class="d-block img-fluid" src={{\App\House::getImageExtension($image->image_url)}}>
                         </div>
                     @endforeach
 

@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-12  form-group-sm">
 
-        <form action="{{ url('/') }}/add" method="post" class="">
+        <form action="{{ url('/') }}/add" method="post" class="" enctype="multipart/form-data">
             {{ csrf_field() }}
 
 
@@ -195,10 +195,8 @@
                         <div class="tab-pane fade  w-100" id="list-images">
                             <div class="col-sm-12 pb-3">
                                 <label for="images">Imagenes</label>
-                                {{--<input type="text" class="form-control" id="images" name="images"--}}
-                                {{--value="{{old('images')}}">--}}
-
                                 <div id="dropzone" class="dropzone">
+                                    <input type="file" id="image" name="image" >
 
                                     <div class="dz-default dz-message"
                                     ></div>
@@ -220,7 +218,7 @@
 
             </div>
             <div class="text-right mb-5">
-                <button type="submit" class="btn btn-primary mt-5 mb-5 submit-button" id="Create-house-submit" disabled>Añadir
+                <button type="submit" class="btn btn-primary mt-5 mb-5 submit-button" id="Create-house-submit"  >Añadir
                 </button>
             </div>
 

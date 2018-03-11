@@ -97,15 +97,21 @@ class HouseController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateHouseRequest $request)
+    public function store(Request $request)
     {
+        $noImageUrl = "https://vignette3.wikia.nocookie.net/lego/images/a/ac/No-Image-Basic.png";
+
+        if( $image = $request->file('image') ){
+            $url = $image->store('images','public');
+        }else{
+            $url = $noImageUrl;
+        }
+
         $user = $request->user();
         $features = (explode(',', $request->input('features')));
 
 
-        $noImageUrl = "http://www.hotelsandholiday.com/wp-content/themes/hotel-holiday/images/no-image.jpg";
         $feature = $request->input('features');
-        $image = ($request->input('images') ?? $noImageUrl);
 
         $house = House::create([
             'user_id' => $user->id,
@@ -120,7 +126,7 @@ class HouseController extends Controller
         ]);
 
         $createImage = HouseImage::create([
-            'image_url' => $image,
+            'image_url' => $url,
             'image_id' => mt_rand(0, 3000),
             'house_id' => $house->id,
         ]);
@@ -138,10 +144,12 @@ class HouseController extends Controller
     /**
      * @param $results
      */
-    public function eraseFields($results): void
+    public function eraseFields($results): array
     {
         unset($results{"_method"});
         unset($results{"_token"});
+        unset($results{"image"});
+        return $results;
     }
 
     protected function validateAjax(CreateHouseAjaxRequest $request)
@@ -185,14 +193,22 @@ class HouseController extends Controller
 
     public function update(UpdateHouseRequest $request)
     {
-        $results = array_filter($request->input());
-        $this->eraseFields($results);
+
+        $results =  $this->eraseFields(array_filter($request->input()));
+        $file = $request->file('image');
         $user = Auth::user();
         $houseId = str_replace(["house/update/"], "", $request->path());
         $house = House::where(['id' => $houseId])->firstOrFail();
-
         if ($house->user()->firstOrFail()->id === $user->id) {
             $house->update($results);
+
+            if($request->file('image')){
+
+                $url = $file->store('images','public');
+                $house->images()->first()->update([
+                    'image_url' => $url
+                ]);
+            }
             return redirect()
                 ->back()
                 ->with('success', 'Datos actualizados');

@@ -1,12 +1,18 @@
 <div class="card mt-2">
 
+    <div class="card-header ">
+        <img src="{{\App\House::getImageExtension(\App\House::getFirstImage($house))}}"  class="avatar img-responsive">
+    </div>
     <div class="card-footer">
 
-        <form action="{{ url('/house/update/'.$house->id)}}" method="POST">
+        <form action="{{ url('/house/update/'.$house->id)}}" method="POST" enctype="multipart/form-data">
             {{ method_field('PATCH') }}
             {{ csrf_field() }}
 
-            @if( $errors->has('location') )
+            <input type="file" id="image" name="image" >
+
+
+        @if( $errors->has('location') )
                 <div class="mb-2">
                 <span class="badge badge-pill badge-danger">
                             {{ $errors->first('location') }}

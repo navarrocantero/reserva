@@ -14,4 +14,6 @@ class HouseImage extends Model
     public function house(){
         return $this->belongsTo(House::class);
     }
+
+
 }

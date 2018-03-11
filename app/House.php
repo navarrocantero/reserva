@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class House extends Model
 {
@@ -28,6 +29,21 @@ class House extends Model
 
     public function comments(){
         return $this->hasMany(Comment::class);
+    }
+
+
+    public static function getImageExtension($image){
+        if( starts_with($image, ["https://", "http://"] )){
+            return $image;
+        }
+        return  Storage::disk('public')->url($image);
+
+    }
+    public static function getFirstImage(House $house){
+
+    $image = $house->images()->first()->image_url;
+    return House::getImageExtension($image);
+
     }
 
 
