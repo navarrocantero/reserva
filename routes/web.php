@@ -46,7 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/house/{slugname}/validate', "CommentController@validateAjax"); // Ruta para validar comentarios async
 
     Route::post('/house/{slugname}/comment', "CommentController@store"); // Crea comentario
-    Route::get('/comment/edit', "CommentController@edit"); // Edita comentario
+    Route::get('/comment/edit/{id}', "CommentController@edit"); // Edita comentario
     Route::patch('/comment/update/{id}', "CommentController@update")->name('comment.patch'); // Actualiza comentario
 
 
@@ -56,7 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
 // HOME route
 Route::get('/', "PagesController@index")->name('home'); // Ruta raiz
 Route::get('/home', "PagesController@index"); // Ruta raiz
-
+Route::get('/500', "PagesController@get500"); // Devuelve el error 500
 
 Route::get('/asyncLoad', 'PagesController@asyncLoad'); // Ruta para paginar async
 

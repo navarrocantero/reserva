@@ -57,11 +57,24 @@ class CommentControllerTest extends TestCase
      */
     public function testEdit()
     {
+        gc_collect_cycles();
+        $user = $this->logNewUser();
+        $house = factory(House::class, 1)->create(
+            ['user_id' => $user->id,]
+        )->first();
+        $noImageUrl = House::$NO_IMAGE_LINK;
 
-        $user = $this->logNewUser(new User());
+        factory(HouseImage::class, 1)->create(
+            ['house_id' => $house->id,
+                'image_url' => $noImageUrl]
+        );
+        $comment = factory(Comment::class, 1)->create([
+                'user_id' => $user->id,
+                'house_id' => $house->id]
+        )->first();
 
-        $response = $this->get('comment/edit');
-        $response->assertSee('Identificador');
+        $response = $this->actingAs($user)->get('/comment/edit/'.$comment->id);
+        $response->assertSee($comment->comment);
         $user->delete();
 
     }
@@ -73,6 +86,7 @@ class CommentControllerTest extends TestCase
      */
     public function testStore()
     {
+
         $user = $this->logNewUser(new User());
         $house = factory(House::class)->create(['user_id' => $user->id]);
         $noImageUrl = House::$NO_IMAGE_LINK;

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\House;
 
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\CreateReserveRequest;
 use App\Reserve;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

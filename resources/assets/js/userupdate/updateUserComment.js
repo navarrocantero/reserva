@@ -3,7 +3,7 @@ setModal()
 function validateFetch() {
     event.preventDefault();
     let id = $(this).attr('id');
-    axios.get('/comment/edit?id=' + id).then(function (response) {
+    axios.get('/comment/edit/' + id).then(function (response) {
         $("#comment-container").html(response.data);
 
     }).catch(function (error) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Feature;
 use App\House;
+use Illuminate\Foundation\Testing\HttpException;
 use Illuminate\Support\Facades\View;
 
 
@@ -45,6 +46,11 @@ class PagesController extends Controller
         }else{
               return array("jose"=>"no");
         }
+
+    }
+
+    public function get500(){
+        return view('errors.500');
 
     }
 }

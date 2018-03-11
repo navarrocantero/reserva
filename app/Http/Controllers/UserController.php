@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 use App\Login;
 use App\user;
 Use Imgur\Client;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UpdateUserRequest;
 use App\House;

@@ -36,9 +36,9 @@ class UsersControllerTest extends TestCase
     public function testIndexPrivate()
     {
 
-        $user = $this->logNewUser(new User());
+        $user = $this->logNewUser();
         $this->assertAuthenticatedAs($user);
-        $response = $this->get('/profile/' . $user->slugname);
+        $response = $this->get('/profile');
         $response->assertSee('Mi perfil');
         $user->delete();
 
