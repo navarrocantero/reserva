@@ -99,7 +99,6 @@ class HouseController extends Controller
     public function store(Request $request)
     {
         $noImageUrl = "https://vignette3.wikia.nocookie.net/lego/images/a/ac/No-Image-Basic.png";
-
         if ($image = $request->file('image')) {
             $url = $image->store('images', 'public');
         } else {

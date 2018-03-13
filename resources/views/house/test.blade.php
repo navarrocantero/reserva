@@ -218,7 +218,7 @@
 
             </div>
             <div class="text-right mb-5">
-                <button type="submit" class="btn btn-primary mt-5 mb-5 submit-button" id="Create-house-submit"  >Añadir
+                <button type="submit" class="btn btn-primary mt-5 mb-5 submit-button" id="Create-house-submit" disabled  >Añadir
                 </button>
             </div>
 
