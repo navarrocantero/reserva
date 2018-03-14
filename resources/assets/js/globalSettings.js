@@ -1,4 +1,4 @@
-// loadProgressBar()
+loadProgressBar()
 setLoginModal()
 
 
