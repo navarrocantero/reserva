@@ -101,10 +101,23 @@
 
       vagrant -up --provision
 
-- En la carpeta del proyecto instala las dependencias de composer con el comando 
+- En la carpeta del proyecto instala las dependencias de composer y npm con los comandos 
 
   ```
   composer install
+  ```
+
+
+  ```
+  npm install
+  ```
+  
+  
+- Crea las hojas de estilo con el comando 
+
+
+  ```
+  npm run dev
   ```
 
 - Ya esta lista la aplicación para funcionar 
