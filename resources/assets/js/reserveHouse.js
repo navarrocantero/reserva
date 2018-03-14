@@ -5,10 +5,45 @@ let exit;
 let reserveButton = $('#Create-reserve-submit');
 let dates = [];
 let minDate = 0;
+let spin;
+import {Spinner} from 'spin.js';
+
+
+function setSpinner() {
+    var opts = {
+        lines: 20, // The number of lines to draw
+        length: 0, // The length of each line
+        width: 2, // The line thickness
+        radius: 1, // The radius of the inner circle
+        scale: 4, // Scales overall size of the spinner
+        corners: 1, // Corner roundness (0..1)
+        color: '#3097D1', // CSS color or array of colors
+        fadeColor: 'transparent', // CSS color or array of colors
+        opacity: 0, // Opacity of the lines
+        rotate: 0, // The rotation offset
+        direction: 1, // 1: clockwise, -1: counterclockwise
+        speed: 0.5, // Rounds per second
+        trail: 44, // Afterglow percentage
+        fps: 20, // Frames per second when using setTimeout() as a fallback in IE 9
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        className: 'spinner', // The CSS class to assign to the spinner
+        top: '40%', // Top position relative to parent
+        position: 'absolute' // Element positioning
+
+    };
+
+     spin = $('#spin').html(new Spinner(opts).spin().el);
+    spin.hide()
+
+}
+
 
 $(function () {
     getBlackOutDates()
     setMap();
+
+
+    setSpinner();
     $(".modal").iziModal({
         title: '',
         subtitle: '',
@@ -118,6 +153,9 @@ function dateForm(date, inputToDisable, inputToEnable) {
 }
 
 function validateReserve(entryDate, exitDate) {
+    spin.show()
+
+
     var myHeaders = new Headers();
     myHeaders.append("X-CSRF-TOKEN", $('meta[name="csrf-token"]').attr('content'));
     var form = new FormData();
@@ -137,11 +175,12 @@ function validateReserve(entryDate, exitDate) {
 
         return response.json();
     }).then(function (data) {
+        spin.hide()
         reserveButton.removeClass("btn-success btn-danger")
 
         if (data.length === 0) {
             reserveButton.prop("disabled", false);
-            reserveButton.addClass("btn-success");
+            reserveButton.addClass("btn-success ");
         } else {
             reserveButton.prop("disabled", true);
             reserveButton.addClass("btn-danger");
@@ -187,6 +226,7 @@ function validateFetch(parameter) {
     };
     let urlName = window.location.href + "/validate"
 
+    console.log(urlName);
     fetch(urlName, configuracion).then(function (response) {
 
         return response.json();

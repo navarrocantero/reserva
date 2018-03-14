@@ -29,10 +29,6 @@ class CreateHouseAjaxRequest extends CreateHouseRequest
                 $rules['direction'] = $this->validateDirection();
                 return $rules;
 
-            case 'images':
-                $rules['images'] = $this->validateImages();
-                return $rules;
-
             case 'price_user_night':
                 $rules['price_user_night'] = $this->validatePriceUserNight();
                 return $rules;

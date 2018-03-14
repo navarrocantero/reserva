@@ -224,7 +224,7 @@
 
         </form>
     </div>
-
+<div id="spin"></div>
     <script src="{{ asset('js/dropzone.js') }}" ></script>
 
     <script src="{{ asset('js/createHouseRequest.js') }}" ></script>

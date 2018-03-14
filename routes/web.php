@@ -44,6 +44,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/add/uploadImage', 'HouseController@uploadImage'); // Ruta para subir imagenes async
     Route::post('house/{slugname}/reserve', "ReserveController@validateAjax");  // Ruta para validar reservas async
     Route::post('/house/{slugname}/validate', "CommentController@validateAjax"); // Ruta para validar comentarios async
+    Route::post('/profile/comments/async', "CommentController@validateAjax"); // Ruta para validar comentarios del usuario async
+    Route::post('/profile/comments/async/update', "CommentController@updateAjax"); // Ruta para actualicar comentarios del usuario async
 
     Route::post('/house/{slugname}/comment', "CommentController@store"); // Crea comentario
     Route::get('/comment/edit/{id}', "CommentController@edit"); // Edita comentario

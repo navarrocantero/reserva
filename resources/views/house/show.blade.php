@@ -17,11 +17,14 @@
 
             <p type="hidden" id="location" hidden>{{$house->location}}</p>
 
+            <div class="d-inline-flex">
 
             <button type="submit" class="btn   offset-1 submit-button mt-3"
                     id="Create-reserve-submit" disabled>Reserva ya!
             </button>
 
+                <div id="spin" class=" offset-1 col-1" ></div>
+            </div>
 
         </form>
         <div class="card-title">
@@ -59,7 +62,6 @@
                             <textarea type="text" rows="2" class="form-control valid-item" id="comment" name="comment"
 
                             ></textarea>
-
                             <div class="mt-2">
                                 @if($errors->has('comment'))
                                     @foreach($errors->get('comment') as $message)
@@ -72,7 +74,7 @@
                         </div>
                         <div>
                             <button type="submit" class="btn btn-primary mt-5  mb-5 submit-button"
-                                    id="Create-comment-submit">Añadir
+                                    id="Create-comment-submit">Dejanos tu comentario !
                             </button>
                         </div>
                     </div>

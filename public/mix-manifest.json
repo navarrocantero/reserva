@@ -1,11 +1,11 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/bootstrap.js": "/js/bootstrap.js",
+    "/js/reserveHouse.js": "/js/reserveHouse.js",
     "/js/userupdate/updateUserReserve.js": "/js/userupdate/updateUserReserve.js",
     "/js/userupdate/updateUserPassword.js": "/js/userupdate/updateUserPassword.js",
     "/js/userupdate/updateUserHouse.js": "/js/userupdate/updateUserHouse.js",
     "/js/userupdate/updateUserComment.js": "/js/userupdate/updateUserComment.js",
-    "/js/reserveHouse.js": "/js/reserveHouse.js",
     "/js/pagination.js": "/js/pagination.js",
     "/js/globalSettings.js": "/js/globalSettings.js",
     "/js/createHouseRequest.js": "/js/createHouseRequest.js",

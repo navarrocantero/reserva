@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateCommentRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
+use function MongoDB\BSON\toJSON;
 
 
 class CommentController extends Controller
@@ -53,8 +54,20 @@ class CommentController extends Controller
     protected function validateAjax(CreateCommentAjaxRequest $request)
     {
 
-
         return array();
+    }
+
+    /**
+     * Actualiza un comentario y devuelve la informacion actualizada
+     * @param CreateCommentAjaxRequest $request
+     */
+    protected function updateAjax(UpdateCommentRequest $request)
+    {
+        $comment = Comment::where('id', $request->input('comment-id'))->first();
+        $comment->update(
+            ['comment' => $request->input('comment')]
+        );
+        return ($comment->toJSON());
     }
 
     /**
