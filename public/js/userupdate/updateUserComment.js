@@ -65,7 +65,7 @@
 /************************************************************************/
 /******/ ({
 
-/***/ 51:
+/***/ 40:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -339,7 +339,7 @@ module.exports = __webpack_require__(61);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_spin_js__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_spin_js__ = __webpack_require__(40);
 var spin = void 0;
 var tooltips = void 0;
 setModal();

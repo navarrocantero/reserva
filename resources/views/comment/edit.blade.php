@@ -1,6 +1,5 @@
 <div class="col-12 mt-2 mb-2">
-    <form action="" method="POST"  onsubmit="validateComment()"enctype="multipart/form-data">
-    {{--<form action="{{ url('/comment/update/'.$comment->id)}}" method="POST" enctype="multipart/form-data">--}}
+    <form action="" method="POST"   enctype="multipart/form-data">
 
         {{ method_field('PATCH') }}
         {{ csrf_field() }}

@@ -63,23 +63,19 @@
 </div>
 
 <div class="modal" id="delete-confirm">
-    <div class="input-group ml-1 mr-1 mt-3 mb-3">
-        <input type="password" class="form-control" placeholder="Introduzca su contraseña actual  " id="delete_password"
-               name="delete_password">
-        <div class="input-group-append">
-            <span class="input-group-text"><i class="fas fa-key"></i></span>
-        </div>
-    </div>
 <div class="d-inline-flex w-100 justify-content-around mb-2">
     <button class="btn btn-primary   " data-izimodal-close="" > Cancelar </button>
-    <form action="{{ '/profile/delete' }}" method="POST">
+    <div id="tooltips"></div>
+
+    <form  method="POST">
         {{ method_field('DELETE') }}
         {{ csrf_field() }}
 
-        <button class="btn btn-danger" type="submit"> Borrar </button>
+        <button class="btn btn-danger" type="button"> Borrar </button>
 
     </form>
 </div>
 </div>
 <script src="{{ asset('js/userupdate/updateUserPassword.js') }}" defer></script>
 
+</div>

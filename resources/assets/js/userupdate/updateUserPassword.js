@@ -1,8 +1,36 @@
-
-setPasswordConfirmModal()
-
+let spin;
+let tooltips;
+setModal()
+import {Spinner} from 'spin.js';
 $("#delete_password").on("change", validateFetch);
 
+function setSpinner() {
+    var opts = {
+        lines: 20, // The number of lines to draw
+        length: 0, // The length of each line
+        width: 2, // The line thickness
+        radius: 1, // The radius of the inner circle
+        scale: 4, // Scales overall size of the spinner
+        corners: 1, // Corner roundness (0..1)
+        color: '#3097D1', // CSS color or array of colors
+        fadeColor: 'transparent', // CSS color or array of colors
+        opacity: 0, // Opacity of the lines
+        rotate: 0, // The rotation offset
+        direction: 1, // 1: clockwise, -1: counterclockwise
+        speed: 0.5, // Rounds per second
+        trail: 44, // Afterglow percentage
+        fps: 20, // Frames per second when using setTimeout() as a fallback in IE 9
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        className: 'spinner', // The CSS class to assign to the spinner
+        top: '40%', // Top position relative to parent
+        position: 'absolute' // Element positioning
+
+    };
+
+    spin = $('#spin').html(new Spinner(opts).spin().el);
+    spin.hide()
+
+}
 function validateFetch(parameter) {
     var myHeaders = new Headers();
     myHeaders.append("X-CSRF-TOKEN", $('meta[name="csrf-token"]').attr('content'));
@@ -36,7 +64,7 @@ function validateFetch(parameter) {
         console.log("error" + err);
     });
 }
-function setPasswordConfirmModal() {
+function setModal() {
     $("#delete-confirm").iziModal({
         title: 'Esta accion no se puede deshacer',
         subtitle: 'Continuar ?',

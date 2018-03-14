@@ -76,7 +76,7 @@ module.exports = __webpack_require__(53);
 /***/ 53:
 /***/ (function(module, exports) {
 
-// loadProgressBar()
+loadProgressBar();
 setLoginModal();
 
 function setLoginModal() {
