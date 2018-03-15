@@ -18,7 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/houses', function () {
-    return House::all();
+    $houses = House::with('images')->get();
+    return $houses;
 });
 Route::get('/reserves', 'ReserveController@api');
 
